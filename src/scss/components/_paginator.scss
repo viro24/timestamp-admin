@@ -1,0 +1,7 @@
+@mixin superus-paginator {
+	.mat-paginator .mat-paginator-range-actions button {
+		width: 2em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

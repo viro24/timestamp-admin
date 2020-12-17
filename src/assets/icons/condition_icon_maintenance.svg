@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -263.13)">
+  <g transform="matrix(2.2069 0 0 2.2069 -141.97 162.4)">
+   <path d="m72.004 45.647c-0.86954 3.1899-1.3927 4.8675-2.9561 6.7896-0.80989 0.99571-1.7832 2.1598-1.8064 3.7517 0 2.6412 2.129 4.7828 4.7625 4.8035v1e-3c2.6335-0.02072 4.7625-2.1623 4.7625-4.8035-0.0232-1.5919-0.99656-2.756-1.8064-3.7517-1.5635-1.9223-2.0863-3.6001-2.9561-6.7906z" fill="#242424" style="paint-order:stroke markers fill"/>
+   <ellipse transform="rotate(45)" cx="92.893" cy="-11.128" rx=".83022" ry="1.2453" fill="#fff" style="paint-order:stroke markers fill"/>
+  </g>
+ </g>
+</svg>

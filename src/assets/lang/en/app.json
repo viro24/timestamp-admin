@@ -1,0 +1,21 @@
+{
+	"welcome": "Welcome",
+	"welcomeText": "This application is designed to help develope and test Angular components.\n\nPlease choose a Component from the navigation to the left.",
+	"pageLoaded": "Page loaded",
+	"fontScale": "Font Scale",
+	"margin": "Margin",
+	"width": "Width",
+	"height": "Height",
+	"fitSize": "Fit Size",
+	
+	"firstname": "First Name",
+	"lastname": "Last Name",
+	
+	"test_form": "Form Test",
+	"test_form_contextMenuText": "I've got a context menu.",
+	"test_message": "Message Test",
+	"test_config": "Configuration",
+
+	"user_role_CALENDAR_READER": "Read Factory Calendar",
+	"user_role_CALENDAR_WRITER": "Edit Factory Calendar"
+}

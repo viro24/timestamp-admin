@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" version="1.1" viewBox="0 0 21.167 21.167" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <clipPath id="clipPath1285">
+   <path d="m-153.38 37.627a1.444 1.4669 0 0 1 1.4076 1.4665v2.5668h7.2199a1.444 1.4669 0 0 1 1.4436 1.4665v3.6672a1.444 1.4669 0 0 1-1.4436 1.4665h-7.2199v2.5668a1.444 1.4669 0 0 1-2.2443 1.2208l-8.6634-5.8672a1.444 1.4669 0 0 1 0-2.4409l8.6634-5.8672a1.444 1.4669 0 0 1 0.8367-0.24565zm-1.4802 4.2072-4.6165 3.1258 4.6165 3.1265v-1.2925a1.444 1.4669 0 0 1 1.4442-1.4671h7.2192v-0.73289h-7.2192a1.444 1.4669 0 0 1-1.4442-1.4671z" color="#000000" color-rendering="auto" display="none" dominant-baseline="auto" fill="#fff" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stop-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;paint-order:markers stroke fill;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+   <path class="powerclip" d="m-157.92 28.35h29.715v33.468h-29.715zm4.5366 9.2776a1.444 1.4669 0 0 0-0.8367 0.24565l-8.6634 5.8672a1.444 1.4669 0 0 0 0 2.4409l8.6634 5.8672a1.444 1.4669 0 0 0 2.2443-1.2208v-2.5668h7.2199a1.444 1.4669 0 0 0 1.4436-1.4665v-3.6672a1.444 1.4669 0 0 0-1.4436-1.4665h-7.2199v-2.5668a1.444 1.4669 0 0 0-1.4076-1.4665zm-1.4802 4.2072-4.6165 3.1258 4.6165 3.1265v-1.2925a1.444 1.4669 0 0 1 1.4442-1.4671h7.2192v-0.73289h-7.2192a1.444 1.4669 0 0 1-1.4442-1.4671z" color="#000000" color-rendering="auto" display="block" dominant-baseline="auto" fill="#fff" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stop-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;paint-order:markers stroke fill;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+  </clipPath>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-129.33 -109.91)">
+  <g transform="matrix(.25 0 0 .25 43.852 95.178)">
+   <g transform="matrix(-2.9319 0 0 2.8862 -48.618 -28.84)" clip-path="url(#clipPath1285)" fill="#fff">
+    <path d="m-137.66 40.236a3.4841 5.8485 36.181 0 0-4.4525 6.8775 2.6643 4.4724 36.181 0 1 3.4046-5.2451 2.6643 4.4724 36.181 0 1 3.4054 1.6935 2.6643 4.4724 36.181 0 1-3.4054 5.3051 2.6643 4.4724 36.181 0 1-3.4049-1.6649 3.4841 5.8485 36.181 0 0 4.4528 2.1859 3.4841 5.8485 36.181 0 0 4.4528-6.9372 3.4841 5.8485 36.181 0 0-4.4528-2.2149z" style="paint-order:markers stroke fill"/>
+    <path d="m-145.21 33.351c-2.6685-0.0182-5.3326 0.18118-6.4857 0.67638-0.60099 0.22115-1.166 0.55555-1.2164 1.2111-3e-3 0.0437-5e-3 0.0893-3e-3 0.13619l0.0572 1.9674c-0.16927 5.8069 0.11362 10.328 0.43167 14.749l0.0858 2.9316c3e-3 0.0932 0.0134 0.18225 0.0312 0.26692 0.0179 0.0846 0.0434 0.16407 0.0751 0.23968v9.3e-4c0.18994 0.45459 0.61299 0.74653 1.1127 0.83979 1.5148 0.2926 3.5708 0.43164 5.6421 0.44305 0.11447 9.3e-4 0.22586 5e-3 0.3405 5e-3 0.0207-3e-5 0.0411-4.7e-4 0.0617-9.3e-4 0.0206 2.3e-4 0.041 9.3e-4 0.0617 9.3e-4 0.11464-2e-4 0.22692-5e-3 0.3414-5e-3 2.0713-0.0114 4.1263-0.15045 5.6412-0.44305 0.49969-0.0933 0.92364-0.3852 1.1136-0.83979v-9.3e-4c0.0317-0.0756 0.0563-0.15513 0.0742-0.23968 0.0179-0.0847 0.0283-0.1737 0.0313-0.26692l0.0858-2.9343c0.318-4.4204 0.6019-8.9412 0.43256-14.748l0.0572-1.9656c2e-3 -0.0468-4.5e-4 -0.0925-4e-3 -0.13619-0.0503-0.65557-0.61447-0.98997-1.2155-1.2111-1.1532-0.4952-3.8182-0.69457-6.4866-0.67638-0.0411-2.7e-4 -0.0823 8e-5 -0.12334 0-6e-3 5e-5 -0.0131-1e-5 -0.0197 0-0.041 8e-5 -0.0823-2.7e-4 -0.12333 0z" style="paint-order:markers stroke fill"/>
+   </g>
+   <path d="m401.19 83.99v11.642h-25.4v10.583h25.4v11.642l25.4-16.933z" fill="#d4563f" style="paint-order:markers stroke fill"/>
+  </g>
+ </g>
+</svg>

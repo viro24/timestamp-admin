@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -263.13)">
+  <g transform="matrix(2 0 0 2 -25.4 231.11)" fill="#fff">
+   <path transform="matrix(.13229 0 0 .13229 12.7 16.012)" d="m10.957 0c-6.0699 0-10.957 4.8871-10.957 10.957v106.09c0 6.0699 4.8871 10.957 10.957 10.957h106.09c6.0699 0 10.957-4.8871 10.957-10.957v-106.09c0-6.0699-4.8871-10.957-10.957-10.957zm8.957 12h88.172c5.4918 0 7.9141 2.4222 7.9141 7.9141v88.172c0 5.4918-2.4222 7.9141-7.9141 7.9141h-88.172c-5.4918 0-7.9141-2.4222-7.9141-7.9141v-88.172c0-5.4918 2.4222-7.9141 7.9141-7.9141z" style="paint-order:stroke markers fill"/>
+   <path d="m16.326 30.381 2.7427-2.7427v1.4394h1.4999v-4h-4v1.4999h1.4394l-2.7427 2.7427z" style="paint-order:markers fill stroke"/>
+   <path d="m26.008 18.578-2.7427 2.7427v-1.4394h-1.4999v4h4v-1.4999h-1.4394l2.7427-2.7427z" style="paint-order:markers fill stroke"/>
+  </g>
+ </g>
+</svg>

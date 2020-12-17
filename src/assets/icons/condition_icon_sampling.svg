@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -263.13)">
+  <g transform="matrix(1.7138 0 0 1.7138 3.6539 -212.1)">
+   <g display="none">
+    <g transform="matrix(1 .50953 0 1 -7.7557 -.47013)">
+     <rect x="8.3605" y="274.1" width="6.35" height="6.35" fill="#d05844" style="paint-order:markers stroke fill"/>
+     <rect x="14.71" y="274.1" width="6.35" height="6.35" fill="#970a2c" style="paint-order:markers stroke fill"/>
+     <rect x="14.71" y="280.45" width="6.35" height="6.35" fill="#6fb26f" style="paint-order:markers stroke fill"/>
+     <rect x="8.3605" y="280.45" width="6.35" height="6.35" fill="#e8bb4d" style="paint-order:markers stroke fill"/>
+     <ellipse cx="14.049" cy="283.62" rx="1.1906" ry="1.3229" fill="#6fb26f" style="paint-order:markers stroke fill"/>
+     <ellipse cx="15.372" cy="277.27" rx="1.1906" ry="1.3229" fill="#d05844" style="paint-order:markers stroke fill"/>
+     <ellipse transform="rotate(90)" cx="279.79" cy="-11.535" rx="1.1906" ry="1.3229" fill="#e8bb4d" style="paint-order:markers stroke fill"/>
+     <ellipse transform="rotate(90)" cx="281.11" cy="-17.886" rx="1.1906" ry="1.3229" fill="#970a2c" style="paint-order:markers stroke fill"/>
+    </g>
+    <g transform="matrix(1 .50953 0 1 -7.7557 -.47013)">
+     <path d="m22.648 272.7-1.5875 1.3985v6.35l1.5875-1.3985z" fill="#970a2c" style="paint-order:markers stroke fill"/>
+     <path d="m22.648 279.05-1.5875 1.3985v6.35l1.5875-1.3985z" fill="#6fb26f" style="paint-order:markers stroke fill"/>
+    </g>
+    <g transform="matrix(1 .50953 0 1 -7.7557 -.47013)">
+     <path d="m8.3605 274.1h6.35l1.5875-1.399h-6.35z" fill="#d05844" style="paint-order:markers stroke fill"/>
+     <path d="m14.71 274.1h6.35l1.5875-1.3989h-6.35z" fill="#970a2c" style="paint-order:markers stroke fill"/>
+    </g>
+   </g>
+   <path transform="matrix(.15438 0 0 .15438 -2.1321 277.3)" d="m28.01 0-10.283 3.8223v41.131l41.133 20.957v-41.131l10.281-3.8223z" fill="#d05844" style="paint-order:markers stroke fill"/>
+   <path transform="matrix(.15438 0 0 .15438 -2.1321 277.3)" d="m69.141 20.957-10.281 3.8223v41.131l41.131 20.959 10.283-3.8203v-41.131l-10.283 3.8184 10.283-3.8203z" fill="#970a2c" style="paint-order:markers stroke fill"/>
+   <path transform="matrix(.15438 0 0 .15438 -2.1321 277.3)" d="m58.859 65.912v41.131l41.131 20.957 10.283-3.8203v-41.131l-10.283 3.8203z" fill="#6fb26f" style="paint-order:markers stroke fill"/>
+   <rect transform="matrix(.89101 .45399 0 1 0 0)" x=".67874" y="283.93" width="7.1268" height="6.35" fill="#e8bb4d" style="paint-order:markers stroke fill"/>
+   <ellipse transform="matrix(.89101 .45399 0 1 0 0)" cx="7.0631" cy="287.11" rx="1.3363" ry="1.3229" fill="#6fb26f" style="paint-order:markers stroke fill"/>
+   <ellipse transform="matrix(.89101 .45399 0 1 0 0)" cx="8.5479" cy="280.76" rx="1.3363" ry="1.3229" fill="#d05844" style="paint-order:markers stroke fill"/>
+   <ellipse transform="matrix(0 1 -.89101 -.45399 0 0)" cx="283.27" cy="-4.2421" rx="1.1906" ry="1.4847" fill="#e8bb4d" style="paint-order:markers stroke fill"/>
+   <ellipse transform="matrix(0 1 -.89101 -.45399 0 0)" cx="284.59" cy="-11.369" rx="1.1906" ry="1.4847" fill="#970a2c" style="paint-order:markers stroke fill"/>
+  </g>
+ </g>
+</svg>

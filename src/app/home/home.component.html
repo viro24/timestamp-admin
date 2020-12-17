@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="content">
+    <h1>Personalzeiterfassung</h1>
+    <!-- <div class="image"><img src="assets/stempeluhr-img/logo_red.svg" /></div> -->
+    <div class="sign-in">
+      <h2>Einloggen</h2>
+      <mat-form-field class="name">
+        <mat-label>Name</mat-label>
+        <mat-select [(ngModel)]="inputEmployeeId">
+          <mat-option *ngFor="let e of employees" [value]="e.employeeId">
+            {{ e.firstName }} {{ e.lastName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="password">
+        <input
+          matInput
+          [(ngModel)]="inputPassword"
+          placeholder="Kennwort eingeben"
+          type="password"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="button"
+        *ngIf="!buttonDisabled"
+        (click)="handleClickLogin()"
+      >
+        Anmelden
+      </button>
+      <button mat-button class="button" *ngIf="buttonDisabled" disabled>
+        Anmelden
+      </button>
+      <span
+        class="errorMessage"
+        [style]="{ visibility: errorPassword === true ? 'visible' : 'hidden' }"
+        >{{ message }}</span
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -263.13)">
+  <g>
+   <path transform="matrix(.26458 0 0 .26458 0 263.13)" d="m0 0v128h38v-90h90v-38z" fill="#fff" style="paint-order:markers stroke fill"/>
+   <path d="m0 263.13 10.054 10.054" fill="none" stroke="#bec1c3" stroke-width=".066146"/>
+   <g id="g1338" fill="none" stroke="#848586">
+    <path d="m10.054 273.19v-3.175" fill="none" stroke="#848586" stroke-width=".26458px"/>
+    <path d="m23.812 273.19v-3.175" fill="none" stroke="#848586" stroke-width=".26458px"/>
+    <path d="m11.113 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m12.171 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m13.229 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m14.288 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m15.346 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m16.404 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m17.463 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m18.521 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m19.579 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m20.638 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m21.696 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m22.754 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m24.871 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m25.929 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m26.988 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m28.046 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m29.104 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m30.163 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m31.221 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m32.279 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+    <path d="m33.338 273.19-1e-6 -1.5875" fill="none" stroke="#848586" stroke-width=".13229"/>
+   </g>
+   <use transform="matrix(0 1 1 0 -263.13 263.13)" width="100%" height="100%" xlink:href="#g1338"/>
+  </g>
+ </g>
+</svg>

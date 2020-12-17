@@ -1,0 +1,8 @@
+@import "../colors";
+
+@mixin superus-badge {
+	.mat-badge-success .mat-badge-content {
+		color: mat-contrast($palette-success, 500);
+		background: mat-color($palette-success);
+	}
+}

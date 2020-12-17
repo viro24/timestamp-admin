@@ -1,0 +1,175 @@
+{
+	"authentication": {
+		"url": "/api/authentication"
+	},
+
+	"minInitTime": 400,
+
+	"notificationDisplayTime": 8000,
+	"notificationFadeDuration": 800,
+
+	"someRandomConfigParam": 42,
+	"exampleData": {
+		"AppModule": {
+			"ConfigDisplayComponent": {
+				"settings": {
+					"fitSize": true,
+					"margin": true
+				}
+			},
+			"UiTestComponent": {
+				"settings": {
+					"fitSize": true
+				}
+			}
+		},
+		"CommonComponentsModule": {
+			"MarkedStringComponent": {
+				"properties": {
+					"haystack": "Dies ist ein zauberhafter String.",
+					"needles": "zauberhaft"
+				}
+			},
+			"ComboBoxComponent": {
+				"properties": {
+					"items": [
+						{ "name": "Alpha", "letter": "α", "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Alpha_uc_lc.svg/96px-Alpha_uc_lc.svg.png" },
+						{ "name": "Beta", "letter": "β", "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Greek_letter_beta_serif%2Bsans.svg/150px-Greek_letter_beta_serif%2Bsans.svg.png" },
+						{ "name": "Gamma", "letter": "γ" },
+						{ "name": "Delta", "letter": "δ" },
+						{ "name": "Epsilon", "letter": "ε" },
+						{ "name": "Zeta", "letter": "ζ" },
+						{ "name": "Eta", "letter": "η" },
+						{ "name": "Theta", "letter": "θ" }
+					],
+					"value": { "name": "Epsilon", "letter": "ε" }
+				},
+				"settings": {
+					"width": "16em"
+				}
+			},
+			"TableComponent": {
+				"properties": {
+					"data": [
+						{ "id": "1", "firstname": "Alexander", "lastname": "Vornam", "birthday": "1988-04-02", "active": true, "comment": "Softwareentwickler" },
+						{ "id": "2", "firstname": "Horst-Egon", "lastname": "Schwülweiler", "birthday": "1955-11-05", "active": false }
+					],
+					"propertyOrder": [
+						"firstname",
+						"lastname",
+						"birthday",
+						"active",
+						"comment"
+					],
+					"propertyMetaData": {
+						"active": { "type": "Boolean", "width": "0" },
+						"birthday": { "type": "Date" },
+						"comment": { "width": "100%" }
+					},
+					"autoBind": true,
+					"highlightIds": [1]
+				}
+			},
+			"ListDetailDisplayComponent": {
+				"properties": {
+					"data": [
+						{ "firstname": "Alexander", "lastname": "Vornam", "birthday": "1988-04-02", "comment": "Softwareentwickler" },
+						{ "firstname": "Horst-Egon", "lastname": "Schwülweiler", "birthday": "1955-11-05" }
+					],
+					"title": "Mitarbeiterübersicht",
+					"titleDetails": "Mitarbeiterdetails",
+					"captionProperty": "lastname",
+					"linkedItemSets": [
+						{
+							"caption": "Skills",
+							"data": [
+								{ "name": "HTML" },
+								{ "name": "CSS" },
+								{ "name": "JavaScript" },
+								{ "name": "Java" },
+								{ "name": "Bier trinken" }
+							]
+						}
+					]
+				}
+			},
+			"PageHeaderComponent": {
+				"properties": {
+					"title": "Überschrift"
+				}
+			},
+			"ButtonComponent": {
+				"properties": {
+					"caption": "Button"
+				},
+				"presets": [
+					{ "name": "Confirm", "properties": { "caption": "Confirm", "icon": "check" } },
+					{ "name": "Cancel", "properties": { "caption": "Cancel", "icon": "cross" } },
+					{ "name": "Like", "properties": { "caption": "Like", "icon": "heart" } },
+					{ "name": "Edit", "properties": { "caption": "Edit", "icon": "pencil" } },
+					{ "name": "Search", "properties": { "caption": "Search", "icon": "search" } },
+					{ "name": "Favorite", "properties": { "caption": "Favorite", "icon": "star" } },
+					{ "name": "Delete", "properties": { "caption": "Delete", "icon": "trash" } },
+					{ "name": "Expand", "properties": { "caption": "Expand", "icon": "down" } },
+					{ "name": "Collapse", "properties": { "caption": "Collapse", "icon": "up" } },
+					{ "name": "Next", "properties": { "caption": "Next", "icon": "right" } },
+					{ "name": "Previous", "properties": { "caption": "Previous", "icon": "left" } }
+				]
+			},
+			"IconComponent": {
+				"properties": {
+					"icon": "key"
+				},
+				"settings": {
+					"scale": 200,
+					"margin": true
+				},
+				"presets": [
+					{ "name": "Check Mark", "properties": { "icon": "check" } },
+					{ "name": "Cross", "properties": { "icon": "cross" } },
+					{ "name": "Heart", "properties": { "icon": "heart" } },
+					{ "name": "Pencil", "properties": { "icon": "pencil" } },
+					{ "name": "Search", "properties": { "icon": "search" } },
+					{ "name": "Star", "properties": { "icon": "star" } },
+					{ "name": "Trash", "properties": { "icon": "trash" } },
+					{ "name": "Down", "properties": { "icon": "down" } },
+					{ "name": "Up", "properties": { "icon": "up" } },
+					{ "name": "Right", "properties": { "icon": "right" } },
+					{ "name": "Left", "properties": { "icon": "left" } }
+				]
+			},
+			"NavigationComponent": {
+				"properties": {
+					"navigationItems": [
+						{ "caption": "dashboard", "icon": "dashboard", "value": "dashboard" },
+						{ "caption": "article", "icon": "article", "value": "article" }
+					]
+				}
+			},
+			"TreeComponent": {
+				"properties": {
+					"rootElements": [
+						{
+							"caption": "root",
+							"children": [
+								{
+									"caption": "subtree",
+									"children": [
+										{ "caption": "child 3", "value": 3 }
+									]
+								},
+								{ "caption": "child 1", "value": 1 },
+								{ "caption": "child 2", "value": 2 }
+							]
+						}
+					]
+				}
+			},
+			"ProgressBarComponent": {
+				"properties": {
+					"progress": 0.75
+				}
+			}
+		}
+	}
+}

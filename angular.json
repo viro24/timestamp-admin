@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "timestamp-admin"
+    }
+  },
+  "defaultProject": "timestamp-admin",
+  "cli": {
+    "analytics": false
+  }
 }

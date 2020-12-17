@@ -1,0 +1,68 @@
+@import '~@angular/material/theming';
+
+@import 'variables';
+
+@import "components/form-field";
+@import "components/button";
+@import "components/checkbox";
+@import "components/radio-button";
+
+@import "components/card";
+@import "components/divider";
+
+@import "components/table";
+@import "components/paginator";
+
+@import "components/progress-bar";
+
+@import "components/badge";
+
+@include mat-core();
+
+@include angular-material-theme($superus-theme);
+@include angular-material-typography($superus-typography);
+
+
+body {
+	margin: 0;
+	padding: $basic-spacing * 2;
+	background-color: #dedede;
+
+	/* General styles */
+
+		/* Akzentfarbe für Überschriften */
+		.mat-h1, .mat-headline, h1,
+		.mat-h2, .mat-title, h2,
+		.mat-h3, .mat-subheading-2, h3,
+		.mat-h4, .mat-subheading-1, h4 {
+			color: mat-color($palette-accent);
+			margin: $basic-spacing;
+		}
+
+		.mat-form-field-wrapper,
+		.mat-button-base,
+		.mat-checkbox,
+		.mat-radio-button,
+		.mat-slide-toggle,
+		.mat-spinner,
+		.mat-progress-spinner,
+		.mat-progress-bar
+		{
+			margin: $basic-spacing;
+		}
+
+	@include superus-form-field;
+	@include superus-button;
+	@include superus-checkbox;
+	@include superus-radio-button;
+
+	@include superus-card;
+	@include superus-divider;
+
+	@include superus-table;
+	@include superus-paginator;
+
+	@include superus-progress-bar;
+
+	@include superus-badge;
+}

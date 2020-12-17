@@ -1,0 +1,21 @@
+{
+	"welcome": "Willkommen",
+	"welcomeText": "Diese Anwendung wurde erstellt, um bei Entwicklung und Testung von Angular-Komponenten zu helfen.\n\nBitte wählen Sie eine Komponente aus der Auswahl auf der linken Seite.",
+	"pageLoaded": "Seite geladen",
+	"fontScale": "Schriftskalierung",
+	"margin": "Abstand",
+	"width": "Breite",
+	"height": "Höhe",
+	"fitSize": "Einpassen",
+
+	"firstname": "Vorname",
+	"lastname": "Nachname",
+
+	"test_form": "Formular-Test",
+	"test_form_contextMenuText": "Ich habe ein Kontextmenü.",
+	"test_message": "Mitteilungen-Test",
+	"test_config": "Konfiguration",
+
+	"user_role_CALENDAR_READER": "Schichtkalender lesen",
+	"user_role_CALENDAR_WRITER": "Schichtkalender bearbeiten"
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="128" height="128" version="1.1" viewBox="0 0 33.867 33.867" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -263.13)">
+  <g transform="translate(1.0583 2.1167)">
+   <path d="m2.1167 274.77 16.933-5.2917v12.7l-16.933 5.2917z" fill="#bec1c3" style="paint-order:markers stroke fill"/>
+   <path d="m19.05 269.48 10.583 5.2917 3.175 4.2333-10.583-5.2917z" fill="#848586" style="paint-order:markers stroke fill"/>
+   <path d="m19.05 269.48 10.583 5.2917v12.7l-10.583-5.2917z" fill="#848586" style="paint-order:markers stroke fill"/>
+   <path d="m12.7 280.07 16.933-5.2917v12.7l-16.933 5.2917z" fill="#fff" style="paint-order:markers stroke fill"/>
+   <path d="m2.1167 274.77 10.583 5.2917v12.7l-10.583-5.2917z" fill="#848586" style="paint-order:markers stroke fill"/>
+   <path d="m2.1167 274.77 16.933-5.2917-3.175-5.8208-16.933 5.2917z" fill="#fff" style="paint-order:markers stroke fill"/>
+   <path transform="matrix(.26458 0 0 .26458 -1.0583 261.02)" d="m116 52-64 20 6 26 58-18.125z" fill="#efefef" style="paint-order:markers stroke fill"/>
+   <path d="m12.7 280.07 16.933-5.2917 2.1167 6.35-16.933 5.2917z" fill="#fff" style="paint-order:markers stroke fill"/>
+   <path transform="matrix(.26458 0 0 .26458 -1.0583 261.02)" d="m12 52v30l28 14 12-24z" fill="#494949" style="paint-order:markers stroke fill"/>
+   <path d="m2.1167 274.77 10.583 5.2917-3.175 5.2917-10.583-5.2917z" fill="#fff" style="paint-order:markers stroke fill"/>
+   <g transform="matrix(2 0 0 2 -127.75 171.84)">
+    <circle cx="76.043" cy="58.347" r="3.175" fill="#d05844" style="paint-order:stroke markers fill"/>
+    <rect x="73.962" y="57.685" width="4.1623" height="1.3229" fill="#fff" style="paint-order:stroke markers fill"/>
+   </g>
+  </g>
+ </g>
+</svg>

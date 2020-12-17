@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" version="1.1" viewBox="0 0 21.167 21.167" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <clipPath id="clipPath910">
+   <g display="none">
+    <path d="m367.21 79.758a4.2338 4.2338 0 0 0-4.127 4.2324v7.4082h-21.168a4.2338 4.2338 0 0 0-4.2324 4.2324v10.584a4.2338 4.2338 0 0 0 4.2324 4.2324h21.168v7.4082a4.2338 4.2338 0 0 0 6.5801 3.5234l25.4-16.934a4.2338 4.2338 0 0 0 0-7.0449l-25.4-16.934a4.2338 4.2338 0 0 0-2.4531-0.70898zm4.3398 12.143 13.535 9.0215-13.535 9.0234v-3.7305a4.2338 4.2338 0 0 0-4.2344-4.2344h-21.166v-2.1152h21.166a4.2338 4.2338 0 0 0 4.2344-4.2344z" color="#000000" color-rendering="auto" display="inline" dominant-baseline="auto" fill="#fff" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stop-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;paint-order:markers stroke fill;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+    <path d="m367.32 83.99v11.642h-25.4v10.583h25.4v11.642l25.4-16.933z" color="#000000" color-rendering="auto" display="inline" dominant-baseline="auto" fill="#65b56a" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stop-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;paint-order:markers stroke fill;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+   </g>
+   <path class="powerclip" d="m341.15 62.056h94.667v77.733h-94.667zm26.061 17.701a4.2338 4.2338 0 0 0-4.127 4.2324v7.4082h-21.168a4.2338 4.2338 0 0 0-4.2324 4.2324v10.584a4.2338 4.2338 0 0 0 4.2324 4.2324h21.168v7.4082a4.2338 4.2338 0 0 0 6.5801 3.5234l25.4-16.934a4.2338 4.2338 0 0 0 0-7.0449l-25.4-16.934a4.2338 4.2338 0 0 0-2.4531-0.70898zm4.3398 12.143v3.7305a4.2338 4.2338 0 0 1-4.2344 4.2344h-21.166v2.1152h21.166a4.2338 4.2338 0 0 1 4.2344 4.2344v3.7305l13.535-9.0234zm-4.234-7.9106v11.642h-25.4v10.583h25.4v11.642l25.4-16.933z"/>
+  </clipPath>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-129.33 -109.91)">
+  <g transform="matrix(.23666 0 0 .23666 48.477 96.613)" fill="#666">
+   <path d="m346.15 67.056v67.733h84.667v-67.733zm8.4667 8.4667h67.733v50.8h-67.733z" clip-path="url(#clipPath910)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9015" style="paint-order:markers stroke fill"/>
+   <path d="m367.32 83.99v11.642h-25.4v10.583h25.4v11.642l25.4-16.933z" style="paint-order:markers stroke fill"/>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,8 @@
+@import "../variables";
+
+@mixin superus-divider {
+	.mat-divider {
+		position: static !important;
+		margin: $basic-spacing * 2 0;
+	}
+}

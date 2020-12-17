@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" version="1.1" viewBox="0 0 21.167 21.167" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-129.33 -109.91)">
+  <g transform="matrix(4.2546 0 0 4.2546 -206.7 -1199.2)">
+   <g transform="translate(1.0583,-5.5563)">
+    <path d="m80.39 313.25a2.4875 2.4875 0 0 0-2.4681 2.4874 2.4875 2.4875 0 0 0 2.4876 2.4876 2.4875 2.4875 0 0 0 2.4875-2.4876 2.4875 2.4875 0 0 0-2.4875-2.4874 2.4875 2.4875 0 0 0-0.01941 0zm1.6411 0.68665-0.02851 0.31754-1.2292 1.3652a0.38268 0.38268 0 0 1 0.01864 0.11805 0.38268 0.38268 0 0 1-0.38266 0.38266 0.38268 0.38268 0 0 1-0.28369-0.12582l-1.1738 0.24942-0.28935-0.13403 0.2098-0.2402 1.1728-0.2493a0.38268 0.38268 0 0 1 0.36424-0.26539 0.38268 0.38268 0 0 1 0.07966 8e-3l1.2291-1.365z" fill="#fff" stroke-width=".24106" style="paint-order:markers stroke fill"/>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .title {
+    text-align: center;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    .name {
+    }
+    .password {
+    }
+  }
+  .button {
+  }
+  .errorMessage {
+    color: #98042a;
+  }
+}

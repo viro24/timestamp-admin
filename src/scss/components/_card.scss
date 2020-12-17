@@ -1,0 +1,44 @@
+@import "../variables";
+
+@mixin superus-card {
+	mat-card {
+		margin: $basic-spacing * 4;
+		padding: $basic-spacing * 4;
+
+		border: 0.1em solid mat-color($palette-accent);
+		border-radius: 0;
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			top: -0.8em;
+			width: 6em;
+			height: 4em;
+			background-image: url('/assets/pattern.png');
+		}
+
+		&:before {
+			left: -1em;
+			width: 1em;
+			height: 4em;
+			background-position: top right;
+		}
+
+		&:after {
+			left: 0em;
+			width: 5em;
+			height: 0.8em;
+			background-position: top left;
+		}
+
+		mat-card {
+			margin: $basic-spacing;
+
+			border-color: mat-color($palette-primary, 200);
+
+			&:before, &:after {
+				display: none;
+			}
+		}
+	}
+}

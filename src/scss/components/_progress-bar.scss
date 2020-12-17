@@ -1,0 +1,11 @@
+@import "../colors";
+
+@mixin superus-progress-bar {
+	.mat-progress-bar {
+		height: 1.5em;
+
+		.mat-progress-bar-buffer {
+			background-color: mat-color($palette-primary, 100);
+		}
+	}
+}
