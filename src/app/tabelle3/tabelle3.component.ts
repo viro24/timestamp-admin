@@ -16,7 +16,7 @@ export class Tabelle3Component implements OnInit {
     private employeeService: EmployeeService,
     private dialog: MatDialog
   ) {}
-  listSelectedEmployees; //list aller ausgewählten Mitarbeiter
+  listSelectedEmployees = []; //list aller ausgewählten Mitarbeiter
   employees; //list aller Mitarbeiter
   dateStart = new Date();
   dateEnd = new Date();
@@ -34,7 +34,7 @@ export class Tabelle3Component implements OnInit {
   ];
   specialDay;
   listDataSource: TabelleEmployee[]; //datasource aller ausgewählten Mitarbeiter
-  range: number;
+  range: number = -1;
   message: string = 'Auswertung für den Zeitraum ';
 
   ngOnInit(): void {
@@ -69,164 +69,181 @@ export class Tabelle3Component implements OnInit {
   }
 
   handleClickFilter() {
-    this.dateEnd = this.employeeService.getStartDate(
-      this.dateStart,
-      this.range
-    );
-    this.listDataSource = [];
-    this.listSelectedEmployees.forEach((e) => {
-      var data: TabelleEmployee;
-      data = {
-        name: e.firstName + ' ' + e.lastName,
-        illness: '0',
-        overtime: '0',
-        vacation: '0',
-        specialDay: '0',
-        bruttoAT: '0',
-        sollAZ: '0',
-        istAZ: '0',
-        sollPause: '0',
-        istPause: '0',
-      };
+    if (this.listSelectedEmployees.length === 0) {
+      this.dialog.open(DialogErrorComponent, {
+        height: '300px',
+        width: '400px',
+        data: {
+          errorStatus: '',
+          action: 'Es sind keine Mitarbeiter ausgewählt.',
+        },
+      });
+    }
+    //if datum oder range fehlt
+    else {
+      this.dateStart = this.employeeService.getStartDate(
+        this.dateEnd,
+        this.range
+      );
+      this.listDataSource = [];
 
-      this.listDataSource.push(data);
+      this.listSelectedEmployees.forEach((e) => {
+        var data: TabelleEmployee;
+        data = {
+          name: e.firstName + ' ' + e.lastName,
+          illness: '0',
+          overtime: '0',
+          vacation: '0',
+          specialDay: '0',
+          bruttoAT: '0',
+          sollAZ: '0',
+          istAZ: '0',
+          sollPause: '0',
+          istPause: '0',
+        };
 
-      this.employeeService
-        .getIllnessByIdAndDate(e.employeeId, this.dateStart, this.range)
-        .subscribe(
-          (dataID) => {
-            data.illness = dataID.illnessDays;
-            console.log(
-              'succeed getting illness',
-              dataID.illnessDays,
-              data.illness
-            );
-          },
-          (errorID) => {
-            console.log('error getting illness days', errorID.status);
-            data.illness = '###';
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                errorStatus: errorID.status,
-                action: 'Getting illness days fehlgeschlagen.',
-              },
-            });
-          }
-        );
-      this.employeeService
-        .getOvertimesByIdAndYear(e.employeeId, this.year)
-        .subscribe(
-          (dataOT) => {
-            data.overtime = dataOT.overtime;
-            console.log('succeed getting overtime', dataOT.overtime);
-          },
-          (errorOT) => {
-            data.overtime = '###';
-            console.log('error getting overtime', errorOT.status);
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                errorStatus: errorOT.status,
-                action: 'Getting overtime fehlgeschlagen.',
-              },
-            });
-          }
-        );
-      this.employeeService
-        .getVacationByIdAndDate(e.employeeId, this.dateStart, this.range)
-        .subscribe(
-          (dataRV) => {
-            data.vacation = dataRV.remainingVacationOfLastYear;
-            console.log(
-              'succeed getting vacation',
-              dataRV.remainingVacationOfLastYear
-            );
-          },
-          (errorRV) => {
-            console.log('error getting vacation', errorRV.status);
-            data.vacation = '###';
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                errorStatus: errorRV.status,
-                action: 'Getting vacation fehlgeschlagen.',
-              },
-            });
-          }
-        );
-      this.employeeService
-        .getSpecialDaysByIdAndDate(e.employeeId, this.dateStart, this.range)
-        .subscribe(
-          (dataSD) => {
-            if (dataSD.length > 0) {
-              const i = dataSD.findIndex(
-                (dsd) => dsd.employeeId === e.employeeId
-              );
+        this.listDataSource.push(data);
+
+        this.employeeService
+          .getIllnessByIdAndDate(e.employeeId, this.dateStart, this.range)
+          .subscribe(
+            (dataID) => {
+              data.illness = dataID.illnessDays;
               console.log(
-                'succeed getting special days',
-                dataSD[i].specialDays
+                'succeed getting illness',
+                dataID.illnessDays,
+                data.illness
               );
-              data.specialDay = dataSD[i].specialDays;
-            } else {
-              console.log('special days ist leer');
-              data.specialDay = '0';
+            },
+            (errorID) => {
+              console.log('error getting illness days', errorID.status);
+              data.illness = '###';
+              this.dialog.open(DialogErrorComponent, {
+                height: '300px',
+                width: '400px',
+                data: {
+                  errorStatus: errorID.status,
+                  action: 'Getting illness days fehlgeschlagen.',
+                },
+              });
             }
-          },
-          (errorSD) => {
-            console.log('error getting special days', errorSD.status);
-            data.specialDay = '###';
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                errorStatus: errorSD.status,
-                action: 'Getting special days fehlgeschlagen.',
-              },
-            });
-          }
-        );
-      this.employeeService
-        .getHourlyAccount(e.employeeId, this.dateStart, this.range)
-        .subscribe(
-          (dataHC) => {
-            console.log('succeed getting bruttoAT', dataHC.grossWorkingDays),
-              console.log('succeed getting sollAZ', dataHC.targetWorkingHours),
-              console.log('succeed getting istAZ', dataHC.actualWorkingHours),
+          );
+        this.employeeService
+          .getOvertimesByIdAndYear(e.employeeId, this.year)
+          .subscribe(
+            (dataOT) => {
+              data.overtime = dataOT.overtime;
+              console.log('succeed getting overtime', dataOT.overtime);
+            },
+            (errorOT) => {
+              data.overtime = '###';
+              console.log('error getting overtime', errorOT.status);
+              this.dialog.open(DialogErrorComponent, {
+                height: '300px',
+                width: '400px',
+                data: {
+                  errorStatus: errorOT.status,
+                  action: 'Getting overtime fehlgeschlagen.',
+                },
+              });
+            }
+          );
+        this.employeeService
+          .getVacationByIdAndDate(e.employeeId, this.dateStart, this.range)
+          .subscribe(
+            (dataRV) => {
+              data.vacation = dataRV.remainingVacationOfLastYear;
               console.log(
-                'succeed getting sollPause',
-                dataHC.legallyRequiredBreakHours
-              ),
-              console.log(
-                'succeed getting istPause',
-                dataHC.effectiveBreakHours
-              ),
-              (data.bruttoAT = dataHC.grossWorkingDays),
-              (data.sollAZ = dataHC.targetWorkingHours),
-              (data.istAZ = dataHC.actualWorkingHours),
-              (data.sollPause = dataHC.legallyRequiredBreakHours),
-              (data.istPause = dataHC.effectiveBreakHours);
-          },
-          (errorHC) => {
-            data.bruttoAT = '###';
-            data.sollAZ = '###';
-            data.istAZ = '###';
-            data.sollPause = '###';
-            data.istPause = '###';
-            console.log('error getting hourly account ', errorHC.status);
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                errorStatus: errorHC.status,
-                action: 'Getting special days fehlgeschlagen.',
-              },
-            });
-          }
-        );
-    });
+                'succeed getting vacation',
+                dataRV.remainingVacationOfLastYear
+              );
+            },
+            (errorRV) => {
+              console.log('error getting vacation', errorRV.status);
+              data.vacation = '###';
+              this.dialog.open(DialogErrorComponent, {
+                height: '300px',
+                width: '400px',
+                data: {
+                  errorStatus: errorRV.status,
+                  action: 'Getting vacation fehlgeschlagen.',
+                },
+              });
+            }
+          );
+        this.employeeService
+          .getSpecialDaysByIdAndDate(e.employeeId, this.dateStart, this.range)
+          .subscribe(
+            (dataSD) => {
+              if (dataSD.length > 0) {
+                const i = dataSD.findIndex(
+                  (dsd) => dsd.employeeId === e.employeeId
+                );
+                console.log(
+                  'succeed getting special days',
+                  dataSD[i].specialDays
+                );
+                data.specialDay = dataSD[i].specialDays;
+              } else {
+                console.log('special days ist leer');
+                data.specialDay = '0';
+              }
+            },
+            (errorSD) => {
+              console.log('error getting special days', errorSD.status);
+              data.specialDay = '###';
+              this.dialog.open(DialogErrorComponent, {
+                height: '300px',
+                width: '400px',
+                data: {
+                  errorStatus: errorSD.status,
+                  action: 'Getting special days fehlgeschlagen.',
+                },
+              });
+            }
+          );
+        this.employeeService
+          .getHourlyAccount(e.employeeId, this.dateStart, this.range)
+          .subscribe(
+            (dataHC) => {
+              console.log('succeed getting bruttoAT', dataHC.grossWorkingDays),
+                console.log(
+                  'succeed getting sollAZ',
+                  dataHC.targetWorkingHours
+                ),
+                console.log('succeed getting istAZ', dataHC.actualWorkingHours),
+                console.log(
+                  'succeed getting sollPause',
+                  dataHC.legallyRequiredBreakHours
+                ),
+                console.log(
+                  'succeed getting istPause',
+                  dataHC.effectiveBreakHours
+                ),
+                (data.bruttoAT = dataHC.grossWorkingDays),
+                (data.sollAZ = dataHC.targetGrossWorkingHours), //oder targetWorkingHours?
+                (data.istAZ = dataHC.actualWorkingHours),
+                (data.sollPause = dataHC.legallyRequiredBreakHours),
+                (data.istPause = dataHC.effectiveBreakHours);
+            },
+            (errorHC) => {
+              data.bruttoAT = '###';
+              data.sollAZ = '###';
+              data.istAZ = '###';
+              data.sollPause = '###';
+              data.istPause = '###';
+              console.log('error getting hourly account ', errorHC.status);
+              this.dialog.open(DialogErrorComponent, {
+                height: '300px',
+                width: '400px',
+                data: {
+                  errorStatus: errorHC.status,
+                  action: 'Getting special days fehlgeschlagen.',
+                },
+              });
+            }
+          );
+      });
+    }
   }
 }
