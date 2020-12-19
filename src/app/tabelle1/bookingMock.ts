@@ -1,3 +1,19 @@
+export interface bookComplete {
+  datum: any;
+  tag: number;
+  buchung: number;
+  pause: number;
+  type: string;
+  start: Date;
+  end: Date;
+  id: number;
+  sollAZ: string;
+  istAZ: string;
+  sollPause: string;
+  istPause: string;
+  ueberstunden: string;
+}
+
 export default [
   {
     dateOfDetails: '2020-09-01',
