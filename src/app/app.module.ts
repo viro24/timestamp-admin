@@ -22,7 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-import { TreetableModule } from 'ng-material-treetable';
+import { TreetableModule } from './treetable/treetable.module';
 
 import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 import { AppComponent } from './app.component';

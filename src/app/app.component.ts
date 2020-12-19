@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'timestamp-admin';
-  clock;
-  date;
+  clock = new Date();
+  date = new Date();
   ngOnInit() {
     setInterval(() => {
       this.clock = new Date();

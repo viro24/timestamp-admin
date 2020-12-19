@@ -16,10 +16,11 @@ export class Tabelle3Component implements OnInit {
     private employeeService: EmployeeService,
     private dialog: MatDialog
   ) {}
+  showRange: boolean = false;
   listSelectedEmployees = []; //list aller ausgewählten Mitarbeiter
   employees; //list aller Mitarbeiter
-  dateStart = new Date();
-  dateEnd = new Date();
+  dateStart;
+  dateEnd;
   year: string = '2020';
   gruppe: number = 0;
   displayColumns: string[] = [
@@ -69,18 +70,30 @@ export class Tabelle3Component implements OnInit {
   }
 
   handleClickFilter() {
-    if (this.listSelectedEmployees.length === 0) {
+    if (
+      this.listSelectedEmployees.length === 0 ||
+      this.range === -1 ||
+      this.dateEnd === undefined
+    ) {
+      this.showRange = false;
+      var msg = '';
+      if (this.listSelectedEmployees.length === 0)
+        msg = 'Es sind keine Mitarbeiter ausgewählt';
+      else if (this.range === -1)
+        msg = 'Zeitraum ist nicht korrekt eingetragen';
+      else if (this.dateEnd === undefined) msg = 'Datum ist nicht ausgewählt';
       this.dialog.open(DialogErrorComponent, {
         height: '300px',
         width: '400px',
         data: {
           errorStatus: '',
-          action: 'Es sind keine Mitarbeiter ausgewählt.',
+          action: msg,
         },
       });
     }
-    //if datum oder range fehlt
+    //if datum fehlt
     else {
+      this.showRange = true;
       this.dateStart = this.employeeService.getStartDate(
         this.dateEnd,
         this.range

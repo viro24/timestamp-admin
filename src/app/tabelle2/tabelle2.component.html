@@ -1,11 +1,23 @@
 <div class="container">
   <div class="navigation">
-    <button mat-raised-button (click)="handleClickNavi1()">Tabelle 1</button>
-    <button mat-raised-button disabled>Tabelle 2</button>
-    <button mat-raised-button (click)="handleClickNavi3()">Tabelle 3</button>
+    <button mat-raised-button (click)="handleClickNavi1()">
+      Übersichtstabelle
+    </button>
+    <button mat-raised-button disabled>Kontenübersicht</button>
+    <button mat-raised-button (click)="handleClickNavi3()">
+      Tabellen basierte Auswertung
+    </button>
   </div>
   <div class="content">
-    <div class="header-content">
+    <div class="content-title">
+      <span class="title"><h2>Kontenübersicht</h2></span>
+      <span
+        class="subtitle"
+        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+        >für das Jahr {{ year }}</span
+      >
+    </div>
+    <div class="content-header">
       <mat-form-field class="name">
         <mat-label>Mitarbeitername</mat-label>
         <mat-select [(ngModel)]="modelEmployee" multiple>
@@ -61,7 +73,9 @@
         </ng-container>
         <ng-container matColumnDef="overtime">
           <th mat-header-cell *matHeaderCellDef>Gesammelte Überstunden</th>
-          <td mat-cell *matCellDef="let e">{{ e.overtime }} Stunde(n)</td>
+          <td mat-cell *matCellDef="let e">
+            {{ e.overtime | number: "1.2-2" }} Stunde(n)
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>

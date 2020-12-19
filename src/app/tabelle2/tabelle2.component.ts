@@ -13,15 +13,15 @@ import { sharedStylesheetJitUrl } from '@angular/compiler';
 })
 export class Tabelle2Component implements OnInit {
   employees; //Liste der Mitarbeiter
-  modelEmployee; //gezeigte Mitarbeiter
-  selectedEmployee; //ausgewählter Mitarbeiter
-  modelYear: string;
-  year: string;
+  modelEmployee = []; //ausgewählte Mitarbeiter
+  selectedEmployee = []; //gezeigte Mitarbeiter
+  modelYear: string = '2020'; //ausgewähltes Jahr
+  year: string; //gezeigtes Jahr
   overtimes;
   illnessesDays;
   remainingVacations;
   specialDays;
-  showList = false;
+  showRange = false;
   dataSource: Tabelle2Employee[];
   constructor(
     private employeeService: EmployeeService,
@@ -61,18 +61,32 @@ export class Tabelle2Component implements OnInit {
   }
 
   handleClickFilter() {
-    if (parseInt(this.modelYear) > 2000 && parseInt(this.modelYear) < 2030)
+    if (this.modelEmployee.length === 0) {
+      this.showRange = false;
+      this.dialog.open(DialogErrorComponent, {
+        height: '300px',
+        width: '400px',
+        data: {
+          errorStatus: '',
+          action: 'Es sind keine Mitarbeiter ausgewählt',
+        },
+      });
+    } else if (
+      parseInt(this.modelYear) < 2000 ||
+      parseInt(this.modelYear) > 2030
+    ) {
+      this.showRange = false;
+      this.dialog.open(DialogErrorComponent, {
+        height: '300px',
+        width: '400px',
+        data: {
+          errorStatus: '',
+          action: 'Es sind keine Mitarbeiter ausgewählt',
+        },
+      });
+    } else {
       this.updateDataSource();
-    else {
-      this.dialog.open(DialogErrorComponent),
-        {
-          height: '300px',
-          width: '400px',
-          data: {
-            errorStatus: 'Error',
-            action: 'Das eingegebene Jahr ist nicht korrekt',
-          },
-        };
+      this.showRange = true;
     }
   }
 
@@ -82,8 +96,6 @@ export class Tabelle2Component implements OnInit {
     this.year = this.modelYear;
     this.selectedEmployee.forEach((e) => {
       var data: Tabelle2Employee;
-      var id, rv, ot;
-      var sd = 0;
 
       data = {
         name: e.firstName + ' ' + e.lastName,

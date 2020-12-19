@@ -1,11 +1,25 @@
 <div class="container">
   <div class="navigation">
-    <button mat-raised-button (click)="handleClickNavi1()">Tabelle 1</button>
-    <button mat-raised-button (click)="handleClickNavi2()">Tabelle 2</button>
-    <button mat-raised-button disabled>Tabelle 3</button>
+    <button mat-raised-button (click)="handleClickNavi1()">
+      Übersichtstabelle
+    </button>
+    <button mat-raised-button (click)="handleClickNavi2()">
+      Kontenübersicht
+    </button>
+    <button mat-raised-button disabled>Tabellen basierte Auswertung</button>
   </div>
   <div class="content">
-    <div class="header-content">
+    <div class="content-title">
+      <span class="title"><h2>Tabellen basierte Auswertung</h2></span>
+
+      <span
+        class="substitle"
+        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+        >für den Zeitraum {{ this.dateStart | date: "shortDate" }} bis
+        {{ this.dateEnd | date: "shortDate" }}</span
+      >
+    </div>
+    <div class="content-header">
       <mat-form-field class="name">
         <mat-label>Mitarbeitername</mat-label>
         <mat-select [(ngModel)]="listSelectedEmployees" multiple>
@@ -33,10 +47,10 @@
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
       <button mat-raised-button (click)="handleClickFilter()">Filter</button>
-      <div *ngIf="dateStart && dateEnd">
+      <!-- <div *ngIf="dateStart && dateEnd">
         {{ this.message }} {{ this.dateStart | date: "shortDate" }} bis
         {{ this.dateEnd | date: "shortDate" }} range: {{ range }}
-      </div>
+      </div> -->
     </div>
     <div class="content-content">
       <table mat-table [dataSource]="listDataSource">

@@ -1,11 +1,24 @@
 <div class="container">
   <div class="navigation">
-    <button mat-raised-button disabled>Tabelle 1</button>
-    <button mat-raised-button (click)="handleClickNavi2()">Tabelle 2</button>
-    <button mat-raised-button (click)="handleClickNavi3()">Tabelle 3</button>
+    <button mat-raised-button disabled>Übersichtstabelle</button>
+    <button mat-raised-button (click)="handleClickNavi2()">
+      Kontenübersicht
+    </button>
+    <button mat-raised-button (click)="handleClickNavi3()">
+      Tabellen basierte Auswertung
+    </button>
   </div>
   <div class="content">
-    <div class="header-content">
+    <div class="content-title">
+      <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
+      ><span
+        class="substitle"
+        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+        >für den Zeitraum {{ this.dateStart | date: "shortDate" }} bis
+        {{ this.dateEnd | date: "shortDate" }}</span
+      >
+    </div>
+    <div class="content-header">
       <mat-form-field class="name">
         <mat-label>Mitarbeitername</mat-label>
         <mat-select [(ngModel)]="currentEmployeeId">
@@ -36,6 +49,7 @@
       <button mat-raised-button (click)="handleClickFilter()">Filter</button>
     </div>
     <div class="content-content">
+      <!-- <treetable [tree]="treeData"></treetable> -->
       <table mat-table [dataSource]="bookingData">
         <ng-container matColumnDef="datum">
           <th mat-header-cell *matHeaderCellDef>Datum</th>
@@ -44,9 +58,6 @@
             {{ book.dateOfDetails | date: "shortDate" }}
             <mat-card *ngIf="open">
               <mat-list *ngFor="let b of book.bookingsList">
-                <!-- <mat-list-item>Booking 1: 09:00 - 09:30</mat-list-item>
-                <mat-list-item>Booking 1: 09:00 - 09:30</mat-list-item>
-                <mat-list-item>Booking 1: 09:00 - 09:30</mat-list-item> -->
                 <mat-list-item>
                   Buchung {{ book.bookingsList.indexOf(b) + 1 }}
                   {{ b.period.start | date: "HH:mm" }} -
@@ -68,22 +79,6 @@
             </mat-card>
           </td>
         </ng-container>
-        <!-- <ng-container matColumnDef="start">
-          <th mat-header-cell *matHeaderCellDef>Start</th>
-          <td mat-cell *matCellDef="let book">
-            <span *ngIf="book.bookingsList"
-              ><mat-icon (click)="books.hidden = !books.hidden">{{
-                books.hidden ? "keyboard_arrow_right" : "keyboard_arrow_down"
-              }}</mat-icon
-              >{{ book.bookingsList[0].period.start | date: "HH:mm" }}</span
-            >
-            <ul #books [hidden]="true">
-              <li *ngFor="let b of book.bookingsList">
-                {{ b.period.start | date: "HH:mm" }}
-              </li>
-            </ul>
-          </td>
-        </ng-container> -->
 
         <ng-container matColumnDef="start">
           <th mat-header-cell *matHeaderCellDef>Start</th>
@@ -130,7 +125,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="ueberstunde">
-          <th mat-header-cell *matHeaderCellDef>Überstunden</th>
+          <th mat-headcell *matHeaderCellDef>Überstunden</th>
           <td mat-cell *matCellDef="let book">
             {{ dateFormat(book.overtimeInMillis) }}
           </td>
@@ -141,3 +136,4 @@
     </div>
   </div>
 </div>
+{{ bookingData | json }}

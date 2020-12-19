@@ -26,16 +26,40 @@ export class EmployeeService {
     return this.http.get(this.url, { params });
   }
 
-  getBookingbyId(employeeId: string, dateStart: string, dateEnd: string): any {
+  getBookingbyId(employeeId: string, dateStart: Date, dateEnd: Date): any {
+    var datumStart = this.toStringDateAndMonth(dateStart.getDate());
+    var monthStart = this.toStringDateAndMonth(dateStart.getMonth() + 1);
+    var yearStart = this.toStringDateAndMonth(dateStart.getFullYear());
+
+    var datumEnd = this.toStringDateAndMonth(dateEnd.getDate());
+    var monthEnd = this.toStringDateAndMonth(dateEnd.getMonth() + 1);
+    var yearEnd = this.toStringDateAndMonth(dateEnd.getFullYear());
     return this.http.get(
       this.url +
         '/' +
         employeeId +
         '/daily-booking-details/' +
-        dateStart +
+        yearStart +
+        '-' +
+        monthStart +
+        '-' +
+        datumStart +
         '/' +
-        dateEnd
+        yearEnd +
+        '-' +
+        monthEnd +
+        '-' +
+        datumEnd
     );
+    // return this.http.get(
+    //   this.url +
+    //     '/' +
+    //     employeeId +
+    //     '/daily-booking-details/' +
+    //     dateStart +
+    //     '/' +
+    //     dateEnd
+    // );
   }
 
   getIllnessesByIdAndYear(employeeId: string, year: string): any {

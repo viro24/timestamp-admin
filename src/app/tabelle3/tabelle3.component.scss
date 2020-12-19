@@ -7,11 +7,32 @@
   min-height: 750px;
   .navigation {
     background-color: #98042a;
+    button {
+      width: 250px;
+      margin: 10px;
+    }
   }
   .content {
     //border: 1px gray solid;
     margin: 10px;
-    .header-content {
+    .content-title {
+      //border: 1px gray solid;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .title {
+        h2 {
+          margin: 0;
+          font-size: 30px;
+        }
+      }
+      .subtitle {
+        font-size: 7px;
+      }
+    }
+    .content-header {
       background-color: lightgray;
     }
     .content-content {
