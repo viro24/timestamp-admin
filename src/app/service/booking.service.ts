@@ -22,10 +22,14 @@ export class BookingService {
     location
   ): any {
     return this.http.put(this.url + bookingId, {
-      employeeId,
-      dateEnd,
-      location,
-      dateStart,
+      employeeId: employeeId,
+      end: dateEnd,
+      location: location,
+      start: dateStart,
     });
+  }
+
+  deleteBookingByBookingId(bookingId: number): any {
+    return this.http.delete(this.url + bookingId);
   }
 }

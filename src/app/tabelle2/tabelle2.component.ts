@@ -25,8 +25,7 @@ export class Tabelle2Component implements OnInit {
   dataSource: Tabelle2Employee[];
   constructor(
     private employeeService: EmployeeService,
-    public dialog: MatDialog,
-    private router: Router
+    public dialog: MatDialog
   ) {}
   columnsToDisplay: string[] = [
     'name',
@@ -155,12 +154,5 @@ export class Tabelle2Component implements OnInit {
           }
         );
     });
-  }
-
-  handleClickNavi1() {
-    this.router.navigateByUrl('/tabelle-1');
-  }
-  handleClickNavi3() {
-    this.router.navigateByUrl('/tabelle-3');
   }
 }

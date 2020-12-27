@@ -1,13 +1,5 @@
 <div class="container">
-  <div class="navigation">
-    <button mat-raised-button disabled>Übersichtstabelle</button>
-    <button mat-raised-button (click)="handleClickNavi2()">
-      Kontenübersicht
-    </button>
-    <button mat-raised-button (click)="handleClickNavi3()">
-      Tabellen basierte Auswertung
-    </button>
-  </div>
+  <app-navi></app-navi>
   <div class="content">
     <div class="content-title">
       <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
@@ -49,15 +41,19 @@
       <button mat-raised-button (click)="handleClickFilter()">Filter</button>
     </div>
     <div class="content-content">
-      <!-- <treetable [tree]="treeData"></treetable> -->
       <table mat-table [dataSource]="listDisplay">
         <ng-container matColumnDef="datum">
           <th mat-header-cell *matHeaderCellDef>Angabe</th>
           <td mat-cell *matCellDef="let book" (click)="handleClick(book.id)">
-            <span *ngIf="book.type === 'book'">&nbsp; &nbsp;</span>
-            <span *ngIf="book.type === 'break'"
-              >&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span
-            >
+            <!-- <div [ngSwitch]="book.type">
+              <span *ngSwitchCase="'book'"></span>
+            </div> -->
+            <span *ngIf="book.type === 'book'" class="spacer-1"
+              >&nbsp;&nbsp;
+            </span>
+            <span *ngIf="book.type === 'break'" class="spacer-2"
+              >&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+            </span>
             <mat-icon *ngIf="book.type !== 'break'">{{
               isOpen(book.id) ? "keyboard_arrow_down" : "keyboard_arrow_right"
             }}</mat-icon
@@ -69,20 +65,54 @@
               >{{ book.datum }} {{ book.buchung }}</span
             >
             <span *ngIf="book.type === 'break'"
-              >{{ book.datum }} {{ book.pause }}</span
+              >{{ book.datum }} {{ book.buchung }}.{{ book.pause }}</span
             >
           </td>
         </ng-container>
+
         <ng-container matColumnDef="start">
           <th mat-header-cell *matHeaderCellDef>Start</th>
           <td mat-cell *matCellDef="let book">
-            {{ book.start | date: "HH:mm" }}
+            <span *ngIf="!book.editable">{{ book.start | date: "HH:mm" }}</span>
+            <span *ngIf="book.editable">
+              <input
+                mat-input
+                type="time"
+                [(ngModel)]="inputStart"
+                size="5"
+                value="{{ book.start | date: 'HH:mm' }}"
+              />
+            </span>
           </td>
         </ng-container>
         <ng-container matColumnDef="end">
           <th mat-header-cell *matHeaderCellDef>End</th>
           <td mat-cell *matCellDef="let book">
-            {{ book.end | date: "HH:mm" }}
+            <span *ngIf="!book.editable">{{ book.end | date: "HH:mm" }}</span>
+            <span *ngIf="book.editable">
+              <input
+                mat-input
+                type="time"
+                [(ngModel)]="inputEnd"
+                size="5"
+                value="{{ book.end | date: 'HH:mm' }}"
+              />
+            </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let book">
+            <span *ngIf="book.type !== 'day'"
+              ><mat-icon *ngIf="!book.editable" (click)="editItem(book.id)"
+                >edit</mat-icon
+              >
+              <mat-icon *ngIf="book.editable" (click)="doneEdit(book.id)"
+                >done</mat-icon
+              > </span
+            ><mat-icon *ngIf="book.type !== 'day'" (click)="deleteItem(book.id)"
+              >delete</mat-icon
+            >
           </td>
         </ng-container>
         <ng-container matColumnDef="istAZ">
@@ -126,9 +156,14 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-        <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
+        <tr
+          mat-row
+          *matRowDef="let myRowData; columns: displayColumns"
+          [ngClass]="{ dayType: myRowData.type === 'day' }"
+        ></tr>
       </table>
     </div>
   </div>
+  <app-footer class="footer"></app-footer>
 </div>

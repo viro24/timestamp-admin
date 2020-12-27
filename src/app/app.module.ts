@@ -31,6 +31,10 @@ import { Tabelle1Component } from './tabelle1/tabelle1.component';
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 import { Tabelle2Component } from './tabelle2/tabelle2.component';
 import { Tabelle3Component } from './tabelle3/tabelle3.component';
+import { TreeTableComponent } from './tree-table/tree-table.component';
+import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
+import { NaviComponent } from './navi/navi.component';
+import { FooterComponent } from './footer/footer.component';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -42,6 +46,10 @@ registerLocaleData(localeDe);
     DialogErrorComponent,
     Tabelle2Component,
     Tabelle3Component,
+    TreeTableComponent,
+    DialogEditComponent,
+    NaviComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

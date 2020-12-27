@@ -1,0 +1,47 @@
+<div class="navigation">
+  <button
+    mat-raised-button
+    *ngIf="tableNumber !== 'tabelle-1'"
+    (click)="handleClickNavi(1)"
+  >
+    Übersichtstabelle
+  </button>
+  <button
+    class="disabled"
+    mat-raised-button
+    *ngIf="tableNumber === 'tabelle-1'"
+    disabled
+  >
+    Übersichtstabelle
+  </button>
+  <button
+    mat-raised-button
+    *ngIf="tableNumber !== 'tabelle-2'"
+    (click)="handleClickNavi(2)"
+  >
+    Kontenübersicht
+  </button>
+  <button
+    class="disabled"
+    mat-raised-button
+    *ngIf="tableNumber === 'tabelle-2'"
+    disabled
+  >
+    Kontenübersicht
+  </button>
+  <button
+    mat-raised-button
+    *ngIf="tableNumber !== 'tabelle-3'"
+    (click)="handleClickNavi(3)"
+  >
+    Tabellen basierte Auswertung
+  </button>
+  <button
+    class="disabled"
+    mat-raised-button
+    *ngIf="tableNumber === 'tabelle-3'"
+    disabled
+  >
+    Tabellen basierte Auswertung
+  </button>
+</div>

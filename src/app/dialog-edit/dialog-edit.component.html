@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 mat-dialog-title class="title">Buchungszeit(en) Löschen</h2>
+  <mat-dialog-content class="content"
+    >Wollen Sie die
+    <span *ngIf="data.bookType === 'break'"
+      >{{ data.break.pause }}. Pause in der </span
+    >{{ data.book.buchung }}. Buchung am
+    {{ data.day.datum | date: "fullDate" }} löschen?</mat-dialog-content
+  >
+
+  <mat-dialog-actions class="actions">
+    <button mat-raised-button mat-dialog-close>Schließen</button>
+    <button mat-raised-button (click)="handleClickDelete(data.bookingId)">
+      Löschen
+    </button>
+  </mat-dialog-actions>
+</div>

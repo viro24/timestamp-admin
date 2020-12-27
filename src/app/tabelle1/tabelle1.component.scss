@@ -5,16 +5,13 @@
   margin-top: 0;
   background-color: whitesmoke;
   min-height: 750px;
-  .navigation {
-    background-color: #98042a;
-    button {
-      width: 250px;
-      margin: 10px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .content {
     //border: 1px gray solid;
     margin: 10px;
+    min-height: 650px;
     .content-title {
       height: 80px;
       display: flex;
@@ -33,8 +30,11 @@
       background-color: lightgray;
     }
     .content-content {
-      ul {
-        list-style-type: none;
+      overflow: scroll;
+      height: 500px;
+      //border: 1px black solid;
+      .dayType {
+        background-color: lightgrey;
       }
     }
     mat-icon {
@@ -42,6 +42,18 @@
     }
   }
 }
+// $spacer: 25px;
+
+// [class*="-spacer"] {
+//   display: inline-block;
+// }
+
+// @for $i from 1 through 10 {
+//   .spacer-#{$i} {
+//     width: $i * $spacer;
+//   }
+// }
+
 @media (min-width: 1025px) and (max-width: 1280px) {
   .container {
     //border: 2px grey solid;

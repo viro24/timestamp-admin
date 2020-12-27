@@ -1,6 +1,71 @@
 import { Node } from '../models';
 import { book } from './models';
 
+export const mockTree = {
+  value: {
+    details: '2020-09-01',
+    dailyBookingTimeInMillisReal: 32400000,
+    dailyBreakTimeInMillisEffective: 2700000,
+    dailyBreakTimeInMillisReal: 1800000,
+    targetWorkingTimeInMillis: 28080000,
+    overtimeInMillis: 1620000,
+    completePeriod: {
+      start: '2020-09-01T08:30:00',
+      end: '2020-09-01T17:30:00',
+      length: 32400000,
+    },
+    children: [
+      {
+        value: {
+          details: 'Buchung',
+          dailyBookingTimeInMillisReal: 32400000,
+          dailyBreakTimeInMillisEffective: 2700000,
+          dailyBreakTimeInMillisReal: 1800000,
+          targetWorkingTimeInMillis: 28080000,
+          overtimeInMillis: 1620000,
+          completePeriod: {
+            start: '2020-09-01T08:30:00',
+            end: '2020-09-01T17:30:00',
+            length: 32400000,
+          },
+          children: [
+            {
+              value: {
+                details: 'Pause',
+                dailyBookingTimeInMillisReal: 32400000,
+                dailyBreakTimeInMillisEffective: 2700000,
+                dailyBreakTimeInMillisReal: 1800000,
+                targetWorkingTimeInMillis: 28080000,
+                overtimeInMillis: 1620000,
+                completePeriod: {
+                  start: '2020-09-01T13:30:00',
+                  end: '2020-09-01T14:00:00',
+                  length: 1800000,
+                },
+              },
+            },
+            {
+              value: {
+                details: 'Pause',
+                dailyBookingTimeInMillisReal: 32400000,
+                dailyBreakTimeInMillisEffective: 2700000,
+                dailyBreakTimeInMillisReal: 1800000,
+                targetWorkingTimeInMillis: 28080000,
+                overtimeInMillis: 1620000,
+                completePeriod: {
+                  start: '2020-09-01T14:00:00',
+                  end: '2020-09-01T14:05:00',
+                  length: 60000,
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+};
+
 export const mockBookingList: Node<book> = {
   value: {
     id: 'Tag 1', //day1

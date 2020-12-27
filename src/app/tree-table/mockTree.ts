@@ -1,23 +1,53 @@
-export interface BookComplete {
-  datum: any; //für type 'day' ist dateOfDetails, ansonsten ist "Buchung" oder "Pause"
-  tag: number; //Tagsnummer in der Liste
-  buchung: number; // Buchungsnummer an dem dazugehörigen Tag
-  pause: number; //Pausennummer in der dazugehörigen Buchung
-  type: string; //'day', 'book', oder 'break'
+export interface tree {
+  //level: number; //"level" of the element in the tree, in mockData just like type
+  /**id is a list of unique numbers with length l, which is the number of levels in the tree
+   * for example, mockData has 3 levels ("day", "book", "break"), every element of its flatlist
+   * has a unique "tag, buchung, und pause" number. This time we generally store these numbers in a list
+   * of numbers.
+   */
+  id: number[];
+
+  title: string; //what we want in the row to display, in mock it is display
+
+  indexInBigList: number; //index of this element in the original list, in mock it is id
+
+  /**additional info that every child (and parent) has, and we want to display,
+   * in mock they are separately stored in start and date
+   * */
+  allInfos: any[];
+
+  /**parentInfos sind additional info that we want--just for parent--to display.
+   * in mock they are : sollAZ, istAZ, sollPause, istPause, ueberstunden.
+   */
+  parentInfos: any[];
+}
+
+/**
+ * misalnya, kta pake mock list di bawah sbg datasource.
+ * tiap element dari list adalah parent.
+ * if parent, title=dateOfDetails.
+ * kta bakal buat tabel dgn 8 column :
+ * ["datum", "start", "end", "istAZ", "sollAZ", "istPause", "sollPause", "ueberstunde"]
+ * davon ist [datum] --> title
+ * [start, end] --> allInfos
+ * [istAZ, sollAZ, istPause, sollPause, ueberstunde] --> parentInfos
+ */
+
+export interface mockData {
+  datum: any;
+  tag: number;
+  buchung: number;
+  pause: number;
+  type: string;
   start: Date;
   end: Date;
-  id: number; //index in der kompletten Liste
+  id: number;
   sollAZ: string;
   istAZ: string;
   sollPause: string;
   istPause: string;
   ueberstunden: string;
-  bookID: number; // if type day, bookID=-1, otherwise bookID=bookingId from backend
-  breakID: number; //if type break, breakID= breakId from backend, otherwise -1
-  editable: boolean;
 }
-
-export interface tree {}
 
 export default [
   {
@@ -46,7 +76,7 @@ export default [
         location: 'OFFICE',
       },
       {
-        bookingId: 20,
+        bookingId: 30,
         employeeId: '10',
         breakTimeTotal: 1800000,
         period: {
@@ -56,8 +86,8 @@ export default [
         },
         breakList: [
           {
-            breakId: 20,
-            bookingId: 20,
+            breakId: 30,
+            bookingId: 30,
             period: {
               start: '2020-09-01T13:30:00',
               end: '2020-09-01T14:00:00',
@@ -68,7 +98,7 @@ export default [
         location: 'OFFICE',
       },
       {
-        bookingId: 20,
+        bookingId: 40,
         employeeId: '10',
         breakTimeTotal: 1800000,
         period: {
@@ -78,8 +108,8 @@ export default [
         },
         breakList: [
           {
-            breakId: 20,
-            bookingId: 20,
+            breakId: 40,
+            bookingId: 40,
             period: {
               start: '2020-09-01T13:30:00',
               end: '2020-09-01T14:00:00',

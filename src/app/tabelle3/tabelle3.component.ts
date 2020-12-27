@@ -12,11 +12,10 @@ import { TabelleEmployee } from './tabelleEmployee';
 })
 export class Tabelle3Component implements OnInit {
   constructor(
-    private router: Router,
     private employeeService: EmployeeService,
     private dialog: MatDialog
   ) {}
-  showRange: boolean = false;
+  showRange = false;
   listSelectedEmployees = []; //list aller ausgewählten Mitarbeiter
   employees; //list aller Mitarbeiter
   dateStart;
@@ -62,13 +61,6 @@ export class Tabelle3Component implements OnInit {
     );
   }
 
-  handleClickNavi1() {
-    this.router.navigateByUrl('/tabelle-1');
-  }
-  handleClickNavi2() {
-    this.router.navigateByUrl('/tabelle-2');
-  }
-
   handleClickFilter() {
     if (
       this.listSelectedEmployees.length === 0 ||
@@ -76,7 +68,7 @@ export class Tabelle3Component implements OnInit {
       this.dateEnd === undefined
     ) {
       this.showRange = false;
-      var msg = '';
+      let msg = '';
       if (this.listSelectedEmployees.length === 0)
         msg = 'Es sind keine Mitarbeiter ausgewählt';
       else if (this.range === -1)
@@ -101,7 +93,7 @@ export class Tabelle3Component implements OnInit {
       this.listDataSource = [];
 
       this.listSelectedEmployees.forEach((e) => {
-        var data: TabelleEmployee;
+        let data: TabelleEmployee;
         data = {
           name: e.firstName + ' ' + e.lastName,
           illness: '0',

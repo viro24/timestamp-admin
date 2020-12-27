@@ -1,0 +1,11 @@
+.navigation {
+  background-color: #98042a;
+  button {
+    width: 250px;
+    margin: 10px;
+  }
+  .disabled {
+    color: lightslategrey;
+    background-color: lightgray;
+  }
+}
