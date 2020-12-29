@@ -16,6 +16,21 @@
   </button>
   <button
     mat-raised-button
+    *ngIf="tableNumber !== 'overview'"
+    (click)="handleClickNavi(4)"
+  >
+    Übersichtstabelle1
+  </button>
+  <button
+    class="disabled"
+    mat-raised-button
+    *ngIf="tableNumber === 'overview'"
+    disabled
+  >
+    Übersichtstabelle1
+  </button>
+  <button
+    mat-raised-button
     *ngIf="tableNumber !== 'tabelle-2'"
     (click)="handleClickNavi(2)"
   >

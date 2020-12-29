@@ -6,8 +6,9 @@
       ><span
         class="substitle"
         [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
-        >für den Zeitraum {{ this.dateStart | date: "shortDate" }} bis
-        {{ this.dateEnd | date: "shortDate" }}</span
+        *ngIf="this.dateStartDisplay && this.dateEndDisplay"
+        >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
+        {{ this.dateEndDisplay | date: "shortDate" }}</span
       >
     </div>
     <div class="content-header">
@@ -20,23 +21,18 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="date">
-        <mat-label>Startdate</mat-label>
-        <input matInput [matDatepicker]="picker1" [(ngModel)]="dateStart" />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker1"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field class="date">
-        <mat-label>Enddate</mat-label>
-        <input matInput [matDatepicker]="picker2" [(ngModel)]="dateEnd" />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker2"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
+      <mat-form-field>
+        <mat-label>Zeitraum auswählen</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input
+            matStartDate
+            placeholder="Start date"
+            [(ngModel)]="dateStart"
+          />
+          <input matEndDate placeholder="End date" [(ngModel)]="dateEnd" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
       <button mat-raised-button (click)="handleClickFilter()">Filter</button>
     </div>
@@ -110,7 +106,9 @@
               <mat-icon *ngIf="book.editable" (click)="doneEdit(book.id)"
                 >done</mat-icon
               > </span
-            ><mat-icon *ngIf="book.type !== 'day'" (click)="deleteItem(book.id)"
+            ><mat-icon
+              *ngIf="book.type !== 'day'"
+              (click)="dialogDeleteItem(book.id)"
               >delete</mat-icon
             >
           </td>

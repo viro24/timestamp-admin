@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookingService } from '../service/booking.service';
 import { BookComplete } from '../tabelle1/bookingMock';
+import { Tabelle1Component } from '../tabelle1/tabelle1.component';
 @Component({
   selector: 'app-dialog-edit',
   templateUrl: './dialog-edit.component.html',
@@ -15,7 +16,9 @@ export class DialogEditComponent implements OnInit {
       book: BookComplete;
       break: BookComplete;
       bookType: string;
-      bookingId: number;
+      id: number;
+      listComplete;
+      listDisplay;
     },
     private dialogRef: MatDialogRef<DialogEditComponent>,
     private bookingService: BookingService
@@ -24,7 +27,7 @@ export class DialogEditComponent implements OnInit {
   inputBuchung;
   ngOnInit(): void {}
 
-  handleClickDelete(bookingId: number): void {
+  handleClickDelete(id: number): void {
     // this.bookingService.deleteBookingByBookingId(bookingId).subscribe(
     //   (data) => {
     //     console.log(data);

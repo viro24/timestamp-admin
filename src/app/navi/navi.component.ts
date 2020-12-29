@@ -18,6 +18,10 @@ export class NaviComponent implements OnInit {
   }
 
   handleClickNavi(tabelleNummer: number): void {
-    this.router.navigateByUrl('/tabelle-' + tabelleNummer);
+    if (tabelleNummer <= 3) {
+      this.router.navigateByUrl('/tabelle-' + tabelleNummer);
+    } else {
+      this.router.navigateByUrl('/overview');
+    }
   }
 }

@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../service/employee.service';
 import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { mockTree } from '../treetable/mocks/mockTree';
-import { mockTreeAsArrayOfNodes } from '../treetable/mocks/mockTreeAsArrayOfNodes';
-import { mockBookingList } from '../treetable/mocks/mockBookingList';
-import bookingMock, { BookComplete } from './bookingMock';
+import { BookComplete } from './bookingMock';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { BookingService } from '../service/booking.service';
 import { BreakService } from '../service/break.service';
@@ -21,6 +17,8 @@ export class Tabelle1Component implements OnInit {
   currentEmployeeId; //der ausgewählte Mitarbeiter --> wird eingegeben
   dateStart; //der ausgewählte Start(datum) --> wird eingegeben
   dateEnd; //der ausgewählte End(datum) --> wird eingegeben
+  dateStartDisplay;
+  dateEndDisplay;
   showRange = false;
 
   /**die Spalten der Tabelle */
@@ -184,7 +182,8 @@ export class Tabelle1Component implements OnInit {
 
   /**getting bookingData directly from backend,
    * then generate the complete list,
-   * and filter the display list to get to treetable */
+   * and filter the display list to get to treetable
+   */
   getBookingData(): void {
     this.employeeService
       .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
@@ -194,6 +193,17 @@ export class Tabelle1Component implements OnInit {
           this.generateDatasource();
           this.listDisplay = this.listComplete.filter((e) => e.type === 'day');
           console.log('succeed getting bookingData');
+          console.log(this.bookingData);
+          if (this.bookingData.length === 0) {
+            this.dialog.open(DialogErrorComponent, {
+              height: '300px',
+              width: '400px',
+              data: {
+                action:
+                  'Es befindet sich keine Buchungen in dem eingegebenen Zeitraum.',
+              },
+            });
+          }
         },
         (error) => {
           console.log('error getting booking data');
@@ -331,6 +341,8 @@ export class Tabelle1Component implements OnInit {
         },
       });
     } else {
+      this.dateStartDisplay = this.dateStart;
+      this.dateEndDisplay = this.dateEnd;
       this.showRange = true;
       this.getBookingData();
     }
@@ -388,7 +400,12 @@ export class Tabelle1Component implements OnInit {
     }
   }
 
+  /**TREETABLE :
+   * handle every click in item in treetable
+   */
+
   handleClick(id: number): void {
+    this.setEditableFalse();
     let selected = this.listComplete[id];
     if (selected.type === 'day') {
       console.log('day', this.isOpen(id));
@@ -540,6 +557,33 @@ export class Tabelle1Component implements OnInit {
     this.inputEnd = null;
     this.inputStart = null;
     const tempListDisplay = this.listDisplay;
+  }
+
+  dialogDeleteItem(id: number): void {
+    const selectedItem = this.listComplete[id];
+    let selectedId;
+    if (selectedItem.type === 'book') {
+      selectedId = selectedItem.bookID;
+    } else {
+      selectedId = selectedItem.breakID;
+    }
+    const day = this.listComplete.find(
+      (e) => e.tag === selectedItem.tag && e.buchung === 0 && e.pause === 0
+    );
+
+    this.dialog.open(DialogEditComponent, {
+      height: '300px',
+      width: '400px',
+      data: {
+        day: day.datum,
+        book: selectedItem.buchung,
+        break: selectedItem.pause,
+        bookType: selectedItem.type,
+        id: id,
+        listComplete: this.listComplete,
+        listDisplay: this.listDisplay,
+      },
+    });
   }
 
   deleteItem(id: number): void {

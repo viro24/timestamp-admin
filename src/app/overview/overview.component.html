@@ -1,0 +1,196 @@
+<div class="container">
+  <app-navi></app-navi>
+  <div class="content">
+    <div class="content-title">
+      <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
+      ><span
+        class="substitle"
+        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+        *ngIf="this.dateStartDisplay && this.dateEndDisplay"
+        >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
+        {{ this.dateEndDisplay | date: "shortDate" }}</span
+      >
+    </div>
+    <div class="content-header">
+      <mat-form-field class="name">
+        <mat-label>Mitarbeitername</mat-label>
+        <mat-select [(ngModel)]="currentEmployeeId">
+          <mat-option *ngFor="let e of listOfEmployee" [value]="e.employeeId">
+            {{ e.firstName }} {{ e.lastName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Zeitraum auswählen</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input
+            matStartDate
+            placeholder="Start date"
+            [(ngModel)]="dateStart"
+          />
+          <input matEndDate placeholder="End date" [(ngModel)]="dateEnd" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button mat-raised-button (click)="handleClickFilter()">Filter</button>
+    </div>
+    <div class="content-content">
+      <table mat-table [dataSource]="listDisplay">
+        <ng-container matColumnDef="datum">
+          <th mat-header-cell *matHeaderCellDef class="center">Angaben</th>
+          <td
+            mat-cell
+            *matCellDef="let book"
+            (click)="handleClick(book.id)"
+            class="arrow"
+          >
+            <span *ngIf="book.position.book === 0 && book.position.break === 0"
+              ><mat-icon>{{
+                isOpened(book.id)
+                  ? "keyboard_arrow_down"
+                  : "keyboard_arrow_right"
+              }}</mat-icon
+              >{{ book.dateOfDetails | date: "EE" }}
+              {{ book.dateOfDetails | date: "shortDate" }}</span
+            >
+            <span
+              *ngIf="book.position.book !== 0 && book.position.break === 0"
+              class="spacer-book"
+              ><mat-icon>{{
+                isOpened(book.id)
+                  ? "keyboard_arrow_down"
+                  : "keyboard_arrow_right"
+              }}</mat-icon
+              >Buchung {{ book.position.book }}</span
+            >
+            <span *ngIf="book.position.break !== 0" class="spacer-break"
+              >Pause {{ book.position.book }}.{{ book.position.break }}</span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef class="center">Start</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span *ngIf="!book.editable">{{ book.start | date: "HH:mm" }}</span>
+            <span *ngIf="book.editable"
+              ><input
+                mat-input
+                type="time"
+                [(ngModel)]="inputStart"
+                size="5"
+                value="{{ book.start | date: 'HH:mm' }}"
+            /></span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef class="center">End</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span *ngIf="!book.editable">{{ book.end | date: "HH:mm" }}</span>
+            <span *ngIf="book.editable"
+              ><input
+                mat-input
+                type="time"
+                [(ngModel)]="inputEnd"
+                size="5"
+                value="{{ book.start | date: 'HH:mm' }}"
+            /></span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="center">Action</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span *ngIf="book.position.book === 0 && book.position.break === 0"
+              ><mat-icon>add</mat-icon></span
+            >
+            <span
+              *ngIf="
+                book.position.book !== 0 &&
+                book.position.break === 0 &&
+                !book.editable
+              "
+              ><mat-icon>add</mat-icon
+              ><mat-icon (click)="editItem(book.id)">edit</mat-icon
+              ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
+            >
+            <span
+              *ngIf="
+                book.position.book !== 0 &&
+                book.position.break === 0 &&
+                book.editable
+              "
+              ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
+            >
+
+            <span
+              *ngIf="
+                book.position.book !== 0 &&
+                book.position.break !== 0 &&
+                !book.editable
+              "
+              ><mat-icon (click)="editItem(book.id)">edit</mat-icon
+              ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
+            >
+            <span
+              *ngIf="
+                book.position.book !== 0 &&
+                book.position.break !== 0 &&
+                book.editable
+              "
+              ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="istAZ">
+          <th mat-header-cell *matHeaderCellDef class="center">Ist AZ</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span
+              *ngIf="book.position.book === 0 && book.position.break === 0"
+              >{{ dateFormat(book.info.istAZ) }}</span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="sollAZ">
+          <th mat-header-cell *matHeaderCellDef class="center">Soll AZ</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span
+              *ngIf="book.position.book === 0 && book.position.break === 0"
+              >{{ dateFormat(book.info.sollAZ) }}</span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="istPause">
+          <th mat-header-cell *matHeaderCellDef class="center">Ist Pause</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span
+              *ngIf="book.position.book === 0 && book.position.break === 0"
+              >{{ dateFormat(book.info.istPause) }}</span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="sollPause">
+          <th mat-header-cell *matHeaderCellDef class="center">Soll Pause</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span
+              *ngIf="book.position.book === 0 && book.position.break === 0"
+              >{{ dateFormat(book.info.sollPause) }}</span
+            >
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="overtime">
+          <th mat-header-cell *matHeaderCellDef class="center">Überstunden</th>
+          <td mat-cell *matCellDef="let book" class="center">
+            <span
+              *ngIf="book.position.book === 0 && book.position.break === 0"
+              >{{ dateFormat(book.info.ueberstunden) }}</span
+            >
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
+      </table>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

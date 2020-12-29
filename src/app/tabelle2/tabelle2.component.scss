@@ -5,6 +5,9 @@
   margin-top: 0;
   background-color: whitesmoke;
   min-height: 750px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .navigation {
     background-color: #98042a;
     button {
@@ -13,6 +16,8 @@
     }
   }
   .content {
+    margin: 10px;
+    min-height: 650px;
     .content-title {
       height: 80px;
       display: flex;

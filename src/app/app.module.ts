@@ -22,8 +22,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-import { TreetableModule } from './treetable/treetable.module';
-
 import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -31,10 +29,10 @@ import { Tabelle1Component } from './tabelle1/tabelle1.component';
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 import { Tabelle2Component } from './tabelle2/tabelle2.component';
 import { Tabelle3Component } from './tabelle3/tabelle3.component';
-import { TreeTableComponent } from './tree-table/tree-table.component';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { NaviComponent } from './navi/navi.component';
 import { FooterComponent } from './footer/footer.component';
+import { OverviewComponent } from './overview/overview.component';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -46,10 +44,10 @@ registerLocaleData(localeDe);
     DialogErrorComponent,
     Tabelle2Component,
     Tabelle3Component,
-    TreeTableComponent,
     DialogEditComponent,
     NaviComponent,
     FooterComponent,
+    OverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +66,6 @@ registerLocaleData(localeDe);
     MatNativeDateModule,
     MatListModule,
     MatCardModule,
-    TreetableModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de' }, MatDatepickerModule],
   bootstrap: [AppComponent],

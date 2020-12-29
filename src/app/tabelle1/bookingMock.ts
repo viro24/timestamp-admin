@@ -17,6 +17,33 @@ export interface BookComplete {
   editable: boolean;
 }
 
+export interface Book {
+  dateOfDetails: Date;
+  id: number; // index in der kompletten Liste
+  position: Level; //[day, book, break], bsp : [1, 2, 2]
+  start: Date;
+  end: Date;
+  editable: boolean;
+  info: Info;
+}
+
+export interface Info {
+  sollAZ: string;
+  istAZ: string;
+  sollPause: string;
+  istPause: string;
+  ueberstunden: string;
+  bookID: number;
+  breakID: number;
+}
+
+export interface Level {
+  day: number;
+  book: number;
+  break: number;
+  //type day/book/break is davon abhängig
+}
+
 export interface tree {}
 
 export default [
