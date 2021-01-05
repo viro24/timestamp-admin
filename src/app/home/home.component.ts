@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
   currentEmployee: any;
   inputPassword: string;
   inputEmployeeId: string;
-  errorPassword: boolean = false;
-  buttonDisabled: boolean = false;
-  message: string = 'Das eingegebene Kennwort ist nicht korrekt';
+  errorPassword = false;
+  buttonDisabled = false;
+  message = 'Das eingegebene Kennwort ist nicht korrekt';
   constructor(
     private authService: AuthService,
     private employeeService: EmployeeService,
@@ -35,11 +35,11 @@ export class HomeComponent implements OnInit {
     this.date = new Date();
   }
 
-  handleClickLogin() {
+  handleClickLogin(): void {
     this.loginEmployee(this.inputEmployeeId, this.inputPassword);
   }
 
-  getEmployees() {
+  getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (data) => {
         console.log('getting employees succeed');
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
       (data) => {
         console.log('Terminal logout succeed');
         this.authService.logInTerminal().subscribe(
-          (data) => {
+          (dataLogin) => {
             console.log('Terminal login succeed');
             this.getEmployees();
           },
@@ -95,14 +95,14 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  loginEmployee(employeeId: string, password: string) {
+  loginEmployee(employeeId: string, password: string): void {
     this.buttonDisabled = true;
     this.authService.logOutTerminal().subscribe(
       (data) => {
         console.log('logout terminal before login employee succeed');
         this.authService.logInEmployee(employeeId, password).subscribe(
-          (data) => {
-            this.currentEmployee = data;
+          (dataEmployee) => {
+            this.currentEmployee = dataEmployee;
             this.errorPassword = false;
             this.router.navigateByUrl('/tabelle-1');
             console.log('login employee succeed');

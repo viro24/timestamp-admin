@@ -22,7 +22,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { Tabelle1Component } from './tabelle1/tabelle1.component';
@@ -33,13 +32,13 @@ import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { NaviComponent } from './navi/navi.component';
 import { FooterComponent } from './footer/footer.component';
 import { OverviewComponent } from './overview/overview.component';
+import { MillisFormatPipe } from './overview/millisFormatPipe';
 registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DialogLoginComponent,
     Tabelle1Component,
     DialogErrorComponent,
     Tabelle2Component,
@@ -48,6 +47,7 @@ registerLocaleData(localeDe);
     NaviComponent,
     FooterComponent,
     OverviewComponent,
+    MillisFormatPipe,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import bookingMock, { Book } from '../tabelle1/bookingMock';
 import { BookingService } from '../service/booking.service';
 import { BreakService } from '../service/break.service';
+import { getListOfDate } from './functionOverview';
 
 @Component({
   selector: 'app-overview',
@@ -26,11 +27,13 @@ export class OverviewComponent implements OnInit {
   bookingData;
   listComplete: Book[];
   listDisplay: Book[];
+  listOfDate: Date[];
+  listComplete1: Book[];
 
   inputStart;
   inputEnd;
 
-  /**die Spalten der Tabelle */
+  /*die Spalten der Tabelle*/
   displayColumns: string[] = [
     'datum',
     'start',
@@ -51,15 +54,17 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.getEmployees();
-    this.bookingData = bookingMock;
-    this.generateDatasource();
-    this.listDisplay = this.listComplete.filter(
-      (e) => this.getType(e.id) === 1
-    );
+    // this.getEmployees();
+    // this.bookingData = bookingMock;
+    // this.generateDatasource();
+    // console.log(this.listComplete);
+    // this.getListComplete();
+    // this.listDisplay = this.listComplete.filter(
+    //   (e) => this.getType(e.id) === 1
+    // );
   }
 
-  /**get all employees */
+  /*get all employees */
   getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (data) => {
@@ -80,34 +85,46 @@ export class OverviewComponent implements OnInit {
     );
   }
 
-  /**Filter der eingegebenen Inputs */
+  /*Filter der eingegebenen Inputs*/
   handleClickFilter(): void {
-    if (
-      this.currentEmployeeId === undefined ||
-      this.dateStart === undefined ||
-      this.dateEnd === undefined
-    ) {
-      this.showRange = false;
-      let msg = '';
-      if (this.currentEmployeeId === undefined) {
-        msg = 'Bitte wählen Sie einen Mitarbeiter aus.';
-      } else {
-        msg = 'Bitte wählen Sie das Start- und Enddatum.';
-      }
-      this.dialog.open(DialogErrorComponent, {
-        height: '300px',
-        width: '400px',
-        data: {
-          errorStatus: '',
-          action: msg,
-        },
-      });
-    } else {
-      this.dateStartDisplay = this.dateStart;
-      this.dateEndDisplay = this.dateEnd;
-      this.showRange = true;
-      this.getBookingData();
-    }
+    this.listOfDate = getListOfDate(this.dateStart, this.dateEnd);
+    this.getBookingData();
+    this.getListComplete();
+    console.log(this.listComplete);
+    this.listDisplay = this.listComplete.filter(
+      (e) => this.getType(e.id) === 1
+    );
+    // if (
+    //   this.currentEmployeeId === undefined ||
+    //   this.dateStart === undefined ||
+    //   this.dateEnd === undefined
+    // ) {
+    //   this.showRange = false;
+    //   let msg = '';
+    //   if (this.currentEmployeeId === undefined) {
+    //     msg = 'Bitte wählen Sie einen Mitarbeiter aus.';
+    //   } else {
+    //     msg = 'Bitte wählen Sie das Start- und Enddatum.';
+    //   }
+    //   this.dialog.open(DialogErrorComponent, {
+    //     height: '300px',
+    //     width: '400px',
+    //     data: {
+    //       errorStatus: '',
+    //       action: msg,
+    //     },
+    //   });
+    // } else {
+    //   this.dateStartDisplay = this.dateStart;
+    //   this.dateEndDisplay = this.dateEnd;
+    //   this.showRange = true;
+    //   this.listOfDate = getListOfDate(this.dateStart, this.dateEnd);
+    //   this.getBookingData();
+    // this.getListComplete();
+    // this.listDisplay = this.listComplete.filter(
+    //   (e) => this.getType(e.id) === 1
+    // );
+    //}
   }
 
   /**getting bookingData directly from backend,
@@ -115,65 +132,139 @@ export class OverviewComponent implements OnInit {
    * and filter the display list to get to treetable
    */
   getBookingData(): void {
-    this.employeeService
-      .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
-      .subscribe(
-        (data) => {
-          this.bookingData = data;
-          this.generateDatasource();
-          this.listDisplay = this.listComplete.filter(
-            (e) => this.getType(e.id) === 1
-          );
-          //this.listDisplay = this.listComplete;
-          console.log('succeed getting bookingData');
-          console.log(this.listComplete);
-          if (this.bookingData.length === 0) {
-            this.dialog.open(DialogErrorComponent, {
-              height: '300px',
-              width: '400px',
-              data: {
-                action:
-                  'Es befindet sich keine Buchungen in dem eingegebenen Zeitraum.',
-              },
-            });
-          }
+    this.bookingData = bookingMock;
+    // this.employeeService
+    //   .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
+    //   .subscribe(
+    //     (data) => {
+    //       this.bookingData = data;
+    //       this.generateDatasource();
+    //       //this.getListComplete();
+    //       this.listDisplay = this.listComplete.filter(
+    //         (e) => this.getType(e.id) === 1
+    //       );
+    //       if (this.bookingData.length === 0) {
+    //         this.dialog.open(DialogErrorComponent, {
+    //           height: '300px',
+    //           width: '400px',
+    //           data: {
+    //             action:
+    //               'Es befindet sich keine Buchungen in dem eingegebenen Zeitraum.',
+    //           },
+    //         });
+    //       }
+    //     },
+    //     (error) => {
+    //       console.log('error getting booking data');
+    //       this.dialog.open(DialogErrorComponent, {
+    //         height: '300px',
+    //         width: '400px',
+    //         data: {
+    //           errorStatus: error.status,
+    //           action: 'Get bookingdata fehlgeschlagen.',
+    //         },
+    //       });
+    //     }
+    //   );
+  }
+
+  getListComplete(): void {
+    this.listComplete = [];
+    let index = -1;
+    this.listOfDate.forEach((date) => {
+      const bookingDay = this.bookingData.find(
+        (b) =>
+          parseInt(b.dateOfDetails.substring(0, 4), 10) ===
+            date.getFullYear() &&
+          parseInt(b.dateOfDetails.substring(5, 7), 10) ===
+            date.getMonth() + 1 &&
+          parseInt(b.dateOfDetails.substring(8, 10), 10) === date.getDate()
+      );
+      console.log('bookingDay: ', bookingDay);
+      const dataDay: Book = {
+        dateOfDetails: date,
+        id: index + 1,
+        position: { day: -1, book: 0, break: 0 },
+        start: null,
+        end: null,
+        editable: false,
+        info: {
+          sollAZ: null,
+          istAZ: null,
+          sollPause: null,
+          istPause: null,
+          ueberstunden: null,
+          bookID: null,
+          breakID: null,
         },
-        (error) => {
-          console.log('error getting booking data');
-          this.dialog.open(DialogErrorComponent, {
-            height: '300px',
-            width: '400px',
-            data: {
-              errorStatus: error.status,
-              action: 'Get bookingdata fehlgeschlagen.',
-            },
+      };
+      index = index + 1;
+      if (bookingDay !== undefined) {
+        const indexDay = this.bookingData.findIndex((b) => b === bookingDay);
+        console.log('Found!', indexDay);
+        dataDay.position.day = indexDay + 1;
+        dataDay.start = bookingDay.completePeriod.start;
+        dataDay.end = bookingDay.completePeriod.end;
+        dataDay.info.sollAZ = bookingDay.targetWorkingTimeInMillis;
+        dataDay.info.istAZ = bookingDay.dailyBookingTimeInMillisReal;
+        dataDay.info.sollPause = bookingDay.dailyBreakTimeInMillisEffective;
+        dataDay.info.istPause = bookingDay.dailyBreakTimeInMillisReal;
+        dataDay.info.ueberstunden = bookingDay.overtimeInMillis;
+        this.listComplete.push(dataDay);
+        if (bookingDay.bookingsList.length > 0) {
+          bookingDay.bookingsList.forEach((book, indexBook) => {
+            const dataBook: Book = {
+              dateOfDetails: date,
+              id: index + 1,
+              position: { day: indexDay + 1, book: indexBook + 1, break: 0 },
+              start: book.period.start,
+              end: book.period.end,
+              editable: false,
+              info: {
+                sollAZ: null,
+                istAZ: null,
+                sollPause: null,
+                istPause: null,
+                ueberstunden: null,
+                bookID: book.bookingId,
+                breakID: null,
+              },
+            };
+            index = index + 1;
+            this.listComplete.push(dataBook);
+            if (book.breakList.length > 0) {
+              book.breakList.forEach((breaks, indexBreak) => {
+                const dataBreak: Book = {
+                  dateOfDetails: date,
+                  id: index + 1,
+                  position: {
+                    day: indexDay + 1,
+                    book: indexBook + 1,
+                    break: indexBreak + 1,
+                  },
+                  start: breaks.period.start,
+                  end: breaks.period.end,
+                  editable: false,
+                  info: {
+                    sollAZ: null,
+                    istAZ: null,
+                    sollPause: null,
+                    istPause: null,
+                    ueberstunden: null,
+                    bookID: book.bookingId,
+                    breakID: breaks.breakId,
+                  },
+                };
+                index = index + 1;
+                this.listComplete.push(dataBreak);
+              });
+            }
           });
         }
-      );
-  }
-  /**formatting the millisecond
-   * to format HH:mm for column :
-   * istAZ, sollAZ, istPause, sollPause, überstunden
-   */
-  dateFormat(date: string): string {
-    const dateAbs = Math.abs(+date);
-    const dateNum = dateAbs / 1000;
-    const hour = Math.floor(dateNum / 3600);
-    const minute = (dateNum % 3600) / 60;
-    let result = '';
-    if (hour < 10) {
-      result += '0';
-    }
-    result += hour.toString() + ':';
-    if (minute < 10) {
-      result += '0';
-    }
-    result += minute.toString();
-    if (+date >= 0) {
-      return result;
-    } else {
-      return '-' + result;
-    }
+      } else {
+        this.listComplete.push(dataDay);
+      }
+    });
   }
 
   /*
@@ -372,6 +463,7 @@ export class OverviewComponent implements OnInit {
 
   /*EDITTING DATA : KORREKTURFUNKTION */
 
+  /*set editable = false for all elements in listComplete*/
   setEditableFalse(): void {
     this.listComplete.forEach((e) => (e.editable = false));
   }
@@ -415,13 +507,6 @@ export class OverviewComponent implements OnInit {
     const dateEnd = new Date(
       selected.dateOfDetails + ' ' + this.inputEnd + ' ' + 'UTC'
     ).toJSON();
-    // const dateStart1 = new Date(
-    //   this.getDateOfBooking(id) + ' ' + this.inputStart + ' ' + 'UTC'
-    // ).toJSON();
-    // const dateEnd = new Date(
-    //   this.getDateOfBooking(id) + ' ' + this.inputEnd + ' ' + 'UTC'
-    // ).toJSON();
-
     if (this.getType(selected.id) === 2) {
       this.bookingService
         .editBookingByBookingId(
@@ -470,7 +555,7 @@ export class OverviewComponent implements OnInit {
           (error) => console.log('Error deleting booking ', error.status)
         );
     } else {
-      //selectedItem from type break
+      // selectedItem from type break
       console.log(selectedItem.info.breakID);
       this.breakService
         .deleteBreakByBreakId(selectedItem.info.breakID)
@@ -546,17 +631,16 @@ export class OverviewComponent implements OnInit {
    * generate listComplete
    * update listDisplay
    */
-
   updateBookingDataAfterDeleteBook(id: number): void {
     const deletedItem = this.listComplete[id];
-    //filter the book, and all the pause inside it
+    // filter the book, and all the pause inside it
     const temp = this.listDisplay.filter(
       (e) =>
         e.position.day !== deletedItem.position.day ||
         e.position.book !== deletedItem.position.book
     );
     console.log(temp);
-    //this.listDisplay = temp;
+    this.listDisplay = temp;
     this.employeeService
       .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
       .subscribe(

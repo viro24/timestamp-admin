@@ -72,50 +72,50 @@ export default [
         ],
         location: 'OFFICE',
       },
-      {
-        bookingId: 20,
-        employeeId: '10',
-        breakTimeTotal: 1800000,
-        period: {
-          start: '2020-09-01T08:30:00',
-          end: '2020-09-01T17:30:00',
-          length: 32400000,
-        },
-        breakList: [
-          {
-            breakId: 20,
-            bookingId: 20,
-            period: {
-              start: '2020-09-01T13:30:00',
-              end: '2020-09-01T14:00:00',
-              length: 1800000,
-            },
-          },
-        ],
-        location: 'OFFICE',
-      },
-      {
-        bookingId: 20,
-        employeeId: '10',
-        breakTimeTotal: 1800000,
-        period: {
-          start: '2020-09-01T08:30:00',
-          end: '2020-09-01T17:30:00',
-          length: 32400000,
-        },
-        breakList: [
-          {
-            breakId: 20,
-            bookingId: 20,
-            period: {
-              start: '2020-09-01T13:30:00',
-              end: '2020-09-01T14:00:00',
-              length: 1800000,
-            },
-          },
-        ],
-        location: 'OFFICE',
-      },
+      // {
+      //   bookingId: 20,
+      //   employeeId: '10',
+      //   breakTimeTotal: 1800000,
+      //   period: {
+      //     start: '2020-09-01T08:30:00',
+      //     end: '2020-09-01T17:30:00',
+      //     length: 32400000,
+      //   },
+      //   breakList: [
+      //     {
+      //       breakId: 20,
+      //       bookingId: 20,
+      //       period: {
+      //         start: '2020-09-01T13:30:00',
+      //         end: '2020-09-01T14:00:00',
+      //         length: 1800000,
+      //       },
+      //     },
+      //   ],
+      //   location: 'OFFICE',
+      // },
+      // {
+      //   bookingId: 20,
+      //   employeeId: '10',
+      //   breakTimeTotal: 1800000,
+      //   period: {
+      //     start: '2020-09-01T08:30:00',
+      //     end: '2020-09-01T17:30:00',
+      //     length: 32400000,
+      //   },
+      //   breakList: [
+      //     {
+      //       breakId: 20,
+      //       bookingId: 20,
+      //       period: {
+      //         start: '2020-09-01T13:30:00',
+      //         end: '2020-09-01T14:00:00',
+      //         length: 1800000,
+      //       },
+      //     },
+      //   ],
+      //   location: 'OFFICE',
+      // },
     ],
     dailyBookingTimeInMillisReal: 32400000,
     dailyBreakTimeInMillisEffective: 2700000,
