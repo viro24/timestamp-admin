@@ -20,8 +20,10 @@ export class NaviComponent implements OnInit {
   handleClickNavi(tabelleNummer: number): void {
     if (tabelleNummer <= 3) {
       this.router.navigateByUrl('/tabelle-' + tabelleNummer);
-    } else {
+    } else if (tabelleNummer === 4) {
       this.router.navigateByUrl('/overview');
+    } else if (tabelleNummer === 5) {
+      this.router.navigateByUrl('/overview-1');
     }
   }
 }

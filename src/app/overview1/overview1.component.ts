@@ -4,17 +4,18 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { EmployeeService } from '../service/employee.service';
 import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
+import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import bookingMock, { Book } from '../tabelle1/bookingMock';
 import { BookingService } from '../service/booking.service';
 import { BreakService } from '../service/break.service';
-import { getListOfDate } from './functionOverview';
+import { getListOfDate } from '../overview/functionOverview';
 
 @Component({
-  selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  selector: 'app-overview1',
+  templateUrl: './overview1.component.html',
+  styleUrls: ['./overview1.component.scss'],
 })
-export class OverviewComponent implements OnInit {
+export class Overview1Component implements OnInit {
   listOfEmployee;
 
   currentEmployeeId;
@@ -23,12 +24,12 @@ export class OverviewComponent implements OnInit {
   dateStartDisplay;
   dateEndDisplay;
   showRange: boolean;
+  afterDialog = false;
 
   bookingData;
   listComplete: Book[];
   listDisplay: Book[];
   listOfDate: Date[];
-  listComplete1: Book[];
 
   inputStart;
   inputEnd;
@@ -38,7 +39,6 @@ export class OverviewComponent implements OnInit {
     'datum',
     'start',
     'end',
-    'action',
     'istAZ',
     'sollAZ',
     'istPause',
@@ -55,16 +55,6 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
-    this.generateDatasource();
-    //this.bookingData = bookingMock;
-    //this.generateDatasource();
-    //console.log(this.listComplete);
-    // console.log(this.listOfDate);
-    // this.getListComplete();
-    // console.log(this.listComplete);
-    // this.listDisplay = this.listComplete.filter(
-    //   (e) => this.getType(e.id) === 1
-    // );
   }
 
   /*get all employees */
@@ -90,13 +80,6 @@ export class OverviewComponent implements OnInit {
 
   /*Filter der eingegebenen Inputs*/
   handleClickFilter(): void {
-    // this.listOfDate = getListOfDate(this.dateStart, this.dateEnd);
-    // this.getBookingData();
-    // this.getListComplete();
-    // console.log(this.listComplete);
-    // this.listDisplay = this.listComplete.filter(
-    //   (e) => this.getType(e.id) === 1
-    // );
     if (
       this.currentEmployeeId === undefined ||
       this.dateStart === undefined ||
@@ -122,11 +105,20 @@ export class OverviewComponent implements OnInit {
       this.dateEndDisplay = this.dateEnd;
       this.showRange = true;
       this.listOfDate = getListOfDate(this.dateStart, this.dateEnd);
+      console.log(this.listOfDate);
       this.getBookingData();
-      this.getListComplete();
+    }
+  }
+
+  filterListDisplay() {
+    if (!this.afterDialog) {
       this.listDisplay = this.listComplete.filter(
         (e) => this.getType(e.id) === 1
       );
+    } else {
+      let oldDisplay = this.listDisplay;
+      this.afterDialog = false;
+      //TODO : filter setelah dari tutup dialog
     }
   }
 
@@ -135,17 +127,14 @@ export class OverviewComponent implements OnInit {
    * and filter the display list to get to treetable
    */
   getBookingData(): void {
-    //this.bookingData = bookingMock;
     this.employeeService
       .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
       .subscribe(
         (data) => {
           this.bookingData = data;
           this.generateDatasource();
-          //this.getListComplete();
-          this.listDisplay = this.listComplete.filter(
-            (e) => this.getType(e.id) === 1
-          );
+          this.getListComplete();
+          this.filterListDisplay();
           if (this.bookingData.length === 0) {
             this.dialog.open(DialogErrorComponent, {
               height: '300px',
@@ -414,7 +403,6 @@ export class OverviewComponent implements OnInit {
    * in column 'Angabe'
    */
   handleClick(id: number): void {
-    this.setEditableFalse();
     if (this.isOpened(id)) {
       this.close(id);
     } else {
@@ -464,220 +452,36 @@ export class OverviewComponent implements OnInit {
     }
   }
 
-  /*EDITTING DATA : KORREKTURFUNKTION */
+  /**EDITTING DATA 1 : Korrekturfunktion */
 
-  /*set editable = false for all elements in listComplete*/
-  setEditableFalse(): void {
-    this.listComplete.forEach((e) => (e.editable = false));
-  }
-
-  /**edit item : the function that will be called
-   * if one press the edit icon next to one book/break item.
-   * the edit icon will be done (check) icon.
-   * the selected item will be editable,
-   * so the two input boxes are to be seen.
-   */
-  editItem(id: number): void {
-    this.inputStart = this.listComplete[id].start.toString().substr(11, 5);
-    this.inputEnd = this.listComplete[id].end.toString().substr(11, 5);
-    this.setEditableFalse();
-    const list = this.listComplete;
-    list.forEach((elem) => {
-      if (elem.id === id) {
-        elem.editable = true;
-      }
-    });
-    this.listComplete = list;
-  }
-
-  /**done edit : the function that will be called
-   * if one press the done (check) icon.
-   * the start and end time will be updated.
-   * all items will be set not editable,
-   * so no input box is seen.
-   */
-  doneEdit(id: number): void {
-    const bookingId = this.listComplete[id].info.bookID;
-    const selected = this.listComplete[id];
-    let breakId;
-    if (this.getType(selected.id) === 3) {
-      breakId = this.listComplete[id].info.breakID;
-    }
-    this.setEditableFalse();
-    const dateStart = new Date(
-      selected.dateOfDetails + ' ' + this.inputStart + ' ' + 'UTC'
-    ).toJSON();
-    const dateEnd = new Date(
-      selected.dateOfDetails + ' ' + this.inputEnd + ' ' + 'UTC'
-    ).toJSON();
-    if (this.getType(selected.id) === 2) {
-      this.bookingService
-        .editBookingByBookingId(
-          bookingId,
-          this.currentEmployeeId,
-          dateStart,
-          dateEnd,
-          'OFFICE'
-        )
-        .subscribe(
-          (data) => {
-            console.log('Succeed edit book');
-            this.updateBookingDataAfterEdit();
-          },
-          (error) => {
-            console.log('Error edit book ', error.status);
-          }
-        );
-    } else {
-      this.breakService
-        .editBreakByBreakId(breakId, bookingId, dateStart, dateEnd)
-        .subscribe(
-          (data) => {
-            console.log('succeed edit break');
-            this.updateBookingDataAfterEdit();
-          },
-          (error) => {
-            console.log('error edit break ', error.status);
-          }
-        );
-    }
-    this.inputEnd = null;
-    this.inputStart = null;
-  }
-
-  deleteItem(id: number): void {
+  openEditDialog(id: number): void {
+    this.afterDialog = true;
     const selectedItem = this.listComplete[id];
-    if (this.getType(selectedItem.id) === 2) {
-      this.bookingService
-        .deleteBookingByBookingId(selectedItem.info.bookID)
-        .subscribe(
-          (data) => {
-            console.log('succeed deleting booking ');
-            this.updateBookingDataAfterDeleteBook(id);
-          },
-          (error) => console.log('Error deleting booking ', error.status)
-        );
+    if (selectedItem.position.day === -1) {
+      //open dialog to add book
     } else {
-      // selectedItem from type break
-      console.log(selectedItem.info.breakID);
-      this.breakService
-        .deleteBreakByBreakId(selectedItem.info.breakID)
-        .subscribe(
-          (data) => {
-            console.log('succeed deleting break ');
-            this.updateBookingDataAfterDeletePause(id);
+      let dayItems = this.getAllItemInDay(id);
+      this.dialog
+        .open(DialogEditComponent, {
+          height: '55%',
+          width: '50%',
+          data: {
+            list: dayItems,
+            selectedItem: selectedItem,
+            employeeId: this.currentEmployeeId,
           },
-          (error) => console.log('Error deleting break ', error.status)
-        );
+        })
+        .afterClosed()
+        .subscribe(() => this.getBookingData());
     }
   }
 
-  addItem(id: number): void {
+  getAllItemInDay(id: number): any {
     const selectedItem = this.listComplete[id];
-    if (this.getType(id) === 1) {
-      //add Buchung
-    } else if (this.getType(id) === 2) {
-      //addPause
-    }
-  }
-  /* updating booking data after edit (without deleting any element)
-   * then generate the listComplete
-   * then update listDisplay,
-   * exactly like the old listDisplay but with edited data.
-   */
-  updateBookingDataAfterEdit(): void {
-    this.employeeService
-      .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
-      .subscribe(
-        (data) => {
-          const indexOldDisplay = [];
-          this.listDisplay.forEach((e) => indexOldDisplay.push(e.id));
-          console.log('succeed update booking data after editing');
-          this.bookingData = data;
-          this.generateDatasource();
-          this.listDisplay = [];
-          indexOldDisplay.forEach((index) =>
-            this.listDisplay.push(this.listComplete[index])
-          );
-        },
-        (error) => {
-          console.log('error update booking data after editing', error.status);
-        }
-      );
-  }
-
-  /**updating booking data after deleting one pause
-   * then generate listComplete
-   * update listDisplay
-   */
-  updateBookingDataAfterDeletePause(id: number): void {
-    const temp = this.listDisplay.filter((e) => e !== this.listComplete[id]);
-    this.employeeService
-      .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
-      .subscribe(
-        (data) => {
-          console.log('succeed update bookingdata after deleting pause');
-          this.bookingData = data;
-          this.generateDatasource();
-          this.listDisplay = [];
-          temp.forEach((e) => {
-            const displayItem = this.listComplete.find(
-              (item) =>
-                item.info.bookID === e.info.bookID &&
-                item.info.breakID === e.info.breakID &&
-                item.dateOfDetails === e.dateOfDetails
-            );
-            this.listDisplay.push(displayItem);
-          });
-        },
-        (error) => {
-          console.log(
-            'error update bookingdata after deleting pause',
-            error.status
-          );
-        }
-      );
-  }
-
-  /**updating booking data after deleting one book
-   * generate listComplete
-   * update listDisplay
-   */
-  updateBookingDataAfterDeleteBook(id: number): void {
-    const deletedItem = this.listComplete[id];
-    const temp = this.listDisplay.filter(
-      (e) =>
-        e.position.day !== deletedItem.position.day ||
-        e.position.book !== deletedItem.position.book
+    const day = selectedItem.position.day;
+    const result = this.listComplete.filter(
+      (item) => item.position.day === day
     );
-    console.log(temp);
-    this.listDisplay = temp;
-    this.employeeService
-      .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
-      .subscribe(
-        (data) => {
-          console.log('succeed update bookingdata after deleting one book');
-          this.bookingData = data;
-          this.generateDatasource();
-          this.listDisplay = [];
-          temp.forEach((e) => {
-            const displayItem = this.listComplete.find(
-              (item) =>
-                item.info.bookID === e.info.bookID &&
-                item.dateOfDetails === e.dateOfDetails
-            );
-            console.log(displayItem);
-            if (displayItem !== undefined) {
-              this.listDisplay.push(displayItem);
-            }
-          });
-        },
-        (error) => {
-          console.log(
-            'error update bookingdata after deleting one book',
-            error.status
-          );
-        }
-      );
+    return result;
   }
 }

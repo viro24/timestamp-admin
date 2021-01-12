@@ -12,8 +12,15 @@ export class BreakService {
     return this.http.delete(this.url + breakId);
   }
 
-  editBreakByBreakId(breakId, bookId, breakStart, breakEnd): any {
+  editBreakByBreakId(breakId, breakStart, breakEnd): any {
     return this.http.put(this.url + breakId, {
+      breakingEnd: breakEnd,
+      breakingStart: breakStart,
+    });
+  }
+
+  addBreak(bookId, breakStart, breakEnd): any {
+    return this.http.post(this.url, {
       bookingId: bookId,
       breakingEnd: breakEnd,
       breakingStart: breakStart,

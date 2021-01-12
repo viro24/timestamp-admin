@@ -32,4 +32,13 @@ export class BookingService {
   deleteBookingByBookingId(bookingId: number): any {
     return this.http.delete(this.url + bookingId);
   }
+
+  addBooking(employeeId: string, start: any, end: any, location: string): any {
+    return this.http.post(this.url, {
+      employeeId: employeeId,
+      end: end,
+      location: location,
+      start: start,
+    });
+  }
 }

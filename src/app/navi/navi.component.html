@@ -31,6 +31,21 @@
   </button>
   <button
     mat-raised-button
+    *ngIf="tableNumber !== 'overview-1'"
+    (click)="handleClickNavi(5)"
+  >
+    Neu
+  </button>
+  <button
+    class="disabled"
+    mat-raised-button
+    *ngIf="tableNumber === 'overview-1'"
+    disabled
+  >
+    Neu
+  </button>
+  <button
+    mat-raised-button
     *ngIf="tableNumber !== 'tabelle-2'"
     (click)="handleClickNavi(2)"
   >

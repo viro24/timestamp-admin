@@ -1,6 +1,6 @@
 {
     "/api/*": {
-      "target": "http://srv-app-internal.local.superus.de:8080",
+      "target": "http://srv-app-internal.local.superus.de:9090",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true

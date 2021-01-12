@@ -3,9 +3,9 @@ import { EmployeeService } from '../service/employee.service';
 import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BookComplete } from './bookingMock';
-import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { BookingService } from '../service/booking.service';
 import { BreakService } from '../service/break.service';
+import bookingMock, { Book } from '../tabelle1/bookingMock';
 
 @Component({
   selector: 'app-tabelle1',
@@ -26,7 +26,6 @@ export class Tabelle1Component implements OnInit {
     'datum',
     'start',
     'end',
-    'action',
     'istAZ',
     'sollAZ',
     'istPause',
@@ -75,6 +74,36 @@ export class Tabelle1Component implements OnInit {
     );
   }
 
+  /**Filter der eingegebenen Inputs */
+  handleClickFilter(): void {
+    if (
+      this.currentEmployeeId === undefined ||
+      this.dateStart === undefined ||
+      this.dateEnd === undefined
+    ) {
+      this.showRange = false;
+      let msg = '';
+      if (this.currentEmployeeId === undefined) {
+        msg = 'Bitte wählen Sie einen Mitarbeiter aus.';
+      } else {
+        msg = 'Bitte wählen Sie das Start- und Enddatum.';
+      }
+      this.dialog.open(DialogErrorComponent, {
+        height: '300px',
+        width: '400px',
+        data: {
+          errorStatus: '',
+          action: msg,
+        },
+      });
+    } else {
+      this.dateStartDisplay = this.dateStart;
+      this.dateEndDisplay = this.dateEnd;
+      this.showRange = true;
+      this.getBookingData();
+    }
+  }
+
   /** generate the complete list as this.listComplete
    * to get a treetable from backend data
    */
@@ -84,7 +113,7 @@ export class Tabelle1Component implements OnInit {
     this.bookingData.forEach((day, dayIndex) => {
       let dataDay: BookComplete;
       dataDay = {
-        datum: null,
+        datum: day.dateOfDetails,
         type: null,
         start: null,
         end: null,
@@ -102,7 +131,7 @@ export class Tabelle1Component implements OnInit {
         editable: false,
       };
       this.listComplete.push(dataDay);
-      dataDay.datum = day.dateOfDetails;
+      //dataDay.datum = day.dateOfDetails;
       dataDay.type = 'day';
       dataDay.start = day.completePeriod.start;
       dataDay.end = day.completePeriod.end;
@@ -316,36 +345,6 @@ export class Tabelle1Component implements OnInit {
           );
         }
       );
-  }
-
-  /**Filter der eingegebenen Inputs */
-  handleClickFilter(): void {
-    if (
-      this.currentEmployeeId === undefined ||
-      this.dateStart === undefined ||
-      this.dateEnd === undefined
-    ) {
-      this.showRange = false;
-      let msg = '';
-      if (this.currentEmployeeId === undefined) {
-        msg = 'Bitte wählen Sie einen Mitarbeiter aus.';
-      } else {
-        msg = 'Bitte wählen Sie das Start- und Enddatum.';
-      }
-      this.dialog.open(DialogErrorComponent, {
-        height: '300px',
-        width: '400px',
-        data: {
-          errorStatus: '',
-          action: msg,
-        },
-      });
-    } else {
-      this.dateStartDisplay = this.dateStart;
-      this.dateEndDisplay = this.dateEnd;
-      this.showRange = true;
-      this.getBookingData();
-    }
   }
 
   /**formatting the millisecond
@@ -570,20 +569,6 @@ export class Tabelle1Component implements OnInit {
     const day = this.listComplete.find(
       (e) => e.tag === selectedItem.tag && e.buchung === 0 && e.pause === 0
     );
-
-    this.dialog.open(DialogEditComponent, {
-      height: '300px',
-      width: '400px',
-      data: {
-        day: day.datum,
-        book: selectedItem.buchung,
-        break: selectedItem.pause,
-        bookType: selectedItem.type,
-        id: id,
-        listComplete: this.listComplete,
-        listDisplay: this.listDisplay,
-      },
-    });
   }
 
   deleteItem(id: number): void {

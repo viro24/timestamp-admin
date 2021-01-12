@@ -28,11 +28,13 @@ import { Tabelle1Component } from './tabelle1/tabelle1.component';
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 import { Tabelle2Component } from './tabelle2/tabelle2.component';
 import { Tabelle3Component } from './tabelle3/tabelle3.component';
-import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { NaviComponent } from './navi/navi.component';
 import { FooterComponent } from './footer/footer.component';
 import { OverviewComponent } from './overview/overview.component';
 import { MillisFormatPipe } from './overview/millisFormatPipe';
+import { Overview1Component } from './overview1/overview1.component';
+import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
+import { MatTabsModule } from '@angular/material/tabs';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -43,11 +45,12 @@ registerLocaleData(localeDe);
     DialogErrorComponent,
     Tabelle2Component,
     Tabelle3Component,
-    DialogEditComponent,
     NaviComponent,
     FooterComponent,
     OverviewComponent,
     MillisFormatPipe,
+    Overview1Component,
+    DialogEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,8 @@ registerLocaleData(localeDe);
     MatNativeDateModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
+    MatInputModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de' }, MatDatepickerModule],
   bootstrap: [AppComponent],

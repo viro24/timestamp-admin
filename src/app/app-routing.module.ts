@@ -5,6 +5,7 @@ import { Tabelle1Component } from './tabelle1/tabelle1.component';
 import { Tabelle2Component } from './tabelle2/tabelle2.component';
 import { Tabelle3Component } from './tabelle3/tabelle3.component';
 import { OverviewComponent } from './overview/overview.component';
+import { Overview1Component } from './overview1/overview1.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'tabelle-2', component: Tabelle2Component },
   { path: 'tabelle-3', component: Tabelle3Component },
   { path: 'overview', component: OverviewComponent },
+  { path: 'overview-1', component: Overview1Component },
 ];
 
 @NgModule({

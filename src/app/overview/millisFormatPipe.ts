@@ -6,10 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'millisFormat' })
 export class MillisFormatPipe implements PipeTransform {
   transform(date: string): string {
+    if (date === null) {
+      return '--';
+    }
     const dateAbs = Math.abs(+date);
     const dateNum = dateAbs / 1000;
     const hour = Math.floor(dateNum / 3600);
-    const minute = (dateNum % 3600) / 60;
+    const minute = Math.round((dateNum % 3600) / 60);
     let result = '';
     if (hour < 10) {
       result += '0';
