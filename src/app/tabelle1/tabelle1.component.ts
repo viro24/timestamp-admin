@@ -541,7 +541,7 @@ export class Tabelle1Component implements OnInit {
         );
     } else {
       this.breakService
-        .editBreakByBreakId(breakId, bookingId, dateStart, dateEnd)
+        .editBreakByBreakId(breakId, dateStart, dateEnd)
         .subscribe(
           (data) => {
             console.log('succeed edit break');

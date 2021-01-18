@@ -35,6 +35,7 @@ import { MillisFormatPipe } from './overview/millisFormatPipe';
 import { Overview1Component } from './overview1/overview1.component';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TreetableComponent } from './treetable/treetable.component';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -51,6 +52,7 @@ registerLocaleData(localeDe);
     MillisFormatPipe,
     Overview1Component,
     DialogEditComponent,
+    TreetableComponent,
   ],
   imports: [
     BrowserModule,
