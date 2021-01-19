@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AnyARecord } from 'dns';
-import { Level, Item } from './treetable-functions';
 
 @Component({
   selector: 'app-treetable',
@@ -8,120 +6,103 @@ import { Level, Item } from './treetable-functions';
   styleUrls: ['./treetable.component.scss'],
 })
 export class TreetableComponent implements OnInit {
-  /**every element in dataSource contains a list "child" */
   @Input() dataSource;
   @Input() displayedColumns;
-  flatList: Item[];
-  maxType = 2;
-
-  displayList: Item[];
+  flatList = [];
+  displayList = [];
+  maxType = 0;
 
   constructor() {}
 
   ngOnInit(): void {
     this.getFlatList();
-    console.log(this.flatList);
-    this.displayList = this.flatList.filter((elem) => elem.level.type === 0);
+    this.displayList = this.flatList.filter((e) => e.type === 1);
   }
 
-  getFlatList(): void {
-    this.flatList = [];
-    let data = this.dataSource;
+  getFlatList() {
+    this.dataSource.forEach((d) => {
+      this.flatList.push(d);
+      this.recursive(d);
+    });
 
-    this.dataSource.forEach((child, indexP) => {
-      let type = 0;
-      let level: Level = { type: type, id: [indexP + 1, 0, 0] };
-      this.addItemToFlatList(child, level);
-
-      if (Array.isArray(child.child)) {
-        let children = child.child;
-
-        children.forEach((child, indexC) => {
-          let type = 1;
-          let level: Level = { type: type, id: [indexP + 1, indexC + 1, 0] };
-          this.addItemToFlatList(child, level);
-
-          if (Array.isArray(child.child)) {
-            let children = child.child;
-
-            children.forEach((child, indexCC) => {
-              let type = 2;
-              let level: Level = {
-                type: type,
-                id: [indexP + 1, indexC + 1, indexCC + 1],
-              };
-              this.addItemToFlatList(child, level);
-            });
-          }
-        });
+    let max = 0;
+    this.flatList.forEach((i) => {
+      if (i.type > max) {
+        max = i.type;
       }
     });
+    this.maxType = max;
   }
 
-  addItemToFlatList(data, level) {
-    let item: Item = {
-      content: data,
-      level: level,
-    };
-    this.flatList.push(item);
+  recursive(item): void {
+    if (Array.isArray(item.child)) {
+      item.child.forEach((b) => {
+        this.flatList.push(b);
+        this.recursive(b);
+      });
+    }
   }
 
-  isOpen(item: Item): boolean {
+  hasChild(item): boolean {
+    return this.getChild(item).length > 0;
+  }
+
+  getChild(item): any {
+    let index = this.flatList.findIndex((e) => e === item);
+    return this.flatList[index].child;
+  }
+
+  handleClick(item): void {
+    if (this.isOpen(item)) {
+      this.closeTag(item);
+    } else {
+      this.openTag(item);
+    }
+  }
+
+  openTag(item): void {
+    let children = this.getChild(item);
+    if (children.length > 0) {
+      this.displayList = this.flatList.filter(
+        (e) => this.displayList.includes(e) || children.includes(e)
+      );
+    }
+  }
+
+  closeTag(item): void {
+    let children = [];
+    let index = this.flatList.findIndex((e) => e === item);
+    for (let i = index + 1; i < this.flatList.length; i++) {
+      if (this.flatList[i].type > item.type) {
+        children.push(this.flatList[i]);
+      } else {
+        break;
+      }
+    }
+    if (children.length > 0) {
+      this.displayList = this.flatList.filter(
+        (e) => this.displayList.includes(e) && !children.includes(e)
+      );
+    }
+  }
+
+  isOpen(item): boolean {
     if (!this.hasChild(item)) {
       return false;
     } else {
-      //if item has child
       let indexDisplay = this.displayList.findIndex((e) => e === item);
+      let indexFlat = this.flatList.findIndex((e) => e === item);
       if (indexDisplay === this.displayList.length - 1) {
         return false;
       } else {
         if (
-          this.displayList[indexDisplay + 1].level.type ===
-          item.level.type + 1
+          this.displayList[indexDisplay + 1] === this.flatList[indexFlat + 1]
         ) {
           return true;
         } else {
           return false;
         }
       }
-    }
-  }
-
-  hasChild(item: Item): boolean {
-    //if an item has a not empty child list
-    if (item.level.type === this.maxType) {
-      return false;
-    } else {
-      let indexFlat = this.flatList.findIndex((e) => e === item);
-      if (indexFlat === this.flatList.length - 1) {
-        return false;
-      } else {
-        return this.flatList[indexFlat + 1].level.type === item.level.type + 1;
-      }
-    }
-  }
-
-  handleClickItem(item: Item): void {
-    //TODO!!!
-    let type = item.level.type;
-    console.log(this.hasChild(item));
-    if (!this.isOpen(item)) {
-      //open
-      this.displayList = this.flatList.filter(
-        (e) =>
-          this.displayList.includes(e) ||
-          (e.level.id[type] === item.level.id[type] &&
-            //yg bener : dr 0 smpe type, dan type+2 jadi sama semua.
-            e.level.id[type + 2] === item.level.id[type + 2])
-      );
-    } else {
-      //close
-      this.displayList = this.flatList.filter(
-        (e) =>
-          this.displayList.includes(e) &&
-          (e.level.id[type] !== item.level.id[type] ||
-            e.level.id[type + 1] === 0)
-      );
     }
   }
 }

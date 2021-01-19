@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { mockTree } from './treetable/treetable-functions';
+import { tree, tree2 } from './treetable/treetable-functions';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,8 @@ export class AppComponent implements OnInit {
   title = 'timestamp-admin';
   clock = new Date();
   date = new Date();
-  mock = mockTree;
+  tree = tree;
+  tree2 = tree2;
   col = ['datum', 'start', 'end'];
   ngOnInit() {
     setInterval(() => {
