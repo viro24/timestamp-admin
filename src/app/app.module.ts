@@ -21,6 +21,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -36,6 +39,8 @@ import { Overview1Component } from './overview1/overview1.component';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TreetableComponent } from './treetable/treetable.component';
+import { UebersichtComponent } from './uebersicht/uebersicht.component';
+import { TreetableHeaderComponent } from './treetable/treetable-header/treetable-header.component';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -53,6 +58,8 @@ registerLocaleData(localeDe);
     Overview1Component,
     DialogEditComponent,
     TreetableComponent,
+    UebersichtComponent,
+    TreetableHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +80,11 @@ registerLocaleData(localeDe);
     MatCardModule,
     MatTabsModule,
     MatInputModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatSortModule,
   ],
+  exports: [MatSortModule],
   providers: [{ provide: LOCALE_ID, useValue: 'de' }, MatDatepickerModule],
   bootstrap: [AppComponent],
 })

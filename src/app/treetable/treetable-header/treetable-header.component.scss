@@ -1,0 +1,36 @@
+.container {
+    background-color:  #98042a;
+    color: white;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    .content {
+        margin: 20px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .title{
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        .content-content{ 
+            .option{
+             }
+        
+            .search {
+                
+                ::ng-deep .mat-form-field-label{
+                    color: white !important;
+                }
+                ::ng-deep .mat-form-field-underline{
+                    background-color: white !important;
+                }
+            }
+        }
+       
+    }
+    
+}

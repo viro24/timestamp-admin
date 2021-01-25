@@ -1,0 +1,48 @@
+<div class="container">
+  <app-navi></app-navi>
+  <div class="content">
+    <div class="content-title">
+      <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
+      ><span
+        class="substitle"
+        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+        *ngIf="this.dateStartDisplay && this.dateEndDisplay"
+        >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
+        {{ this.dateEndDisplay | date: "shortDate" }}</span
+      >
+    </div>
+    <div class="content-header">
+      <mat-form-field class="name">
+        <mat-label>Mitarbeitername</mat-label>
+        <mat-select [(ngModel)]="currentEmployeeId">
+          <mat-option *ngFor="let e of employees" [value]="e.employeeId">
+            {{ e.firstName }} {{ e.lastName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Zeitraum auswählen</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input
+            matStartDate
+            placeholder="Start date"
+            [(ngModel)]="dateStart"
+          />
+          <input matEndDate placeholder="End date" [(ngModel)]="dateEnd" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button mat-raised-button (click)="handleClickFilter()">Filter</button>
+    </div>
+    <div class="content-content">
+      <app-treetable
+        *ngIf="tree.length > 0"
+        [dataSource]="tree"
+        [displayedColumns]="disCols"
+        [titleT]="title"
+      ></app-treetable>
+    </div>
+  </div>
+</div>

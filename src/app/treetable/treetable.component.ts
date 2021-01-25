@@ -1,22 +1,59 @@
-import { Component, Input, OnInit } from '@angular/core';
-
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { TreeNode } from './treetable-functions';
 @Component({
   selector: 'app-treetable',
   templateUrl: './treetable.component.html',
   styleUrls: ['./treetable.component.scss'],
 })
 export class TreetableComponent implements OnInit {
-  @Input() dataSource;
-  @Input() displayedColumns;
+  @Input() dataSource: TreeNode[];
+  @Input() displayedColumns: string[];
+  @Input() titleT;
+  @ViewChild(MatSort) sort: MatSort;
+
+  ngAfterViewInit() {}
+
   flatList = [];
   displayList = [];
   maxType = 0;
+  tree: TreeNode[] = [];
+  spalten = [];
 
   constructor() {}
 
   ngOnInit(): void {
+    this.displayedColumns.forEach((col) => this.spalten.push(col));
     this.getFlatList();
     this.displayList = this.flatList.filter((e) => e.type === 1);
+    console.log('flatList', this.flatList);
+  }
+
+  addColumn($event): void {
+    this.spalten.push($event);
+    console.log('$event');
+  }
+
+  minColumn($event): void {
+    console.log('min', $event);
+    let index = this.spalten.indexOf($event);
+    console.log(index);
+    if (index !== -1) {
+      this.spalten.splice(index, 1);
+    }
+    console.log(this.spalten);
+  }
+
+  resetColumn(): void {
+    this.spalten = [];
+    this.displayedColumns.forEach((col) => this.spalten.push(col));
   }
 
   getFlatList() {
@@ -24,7 +61,6 @@ export class TreetableComponent implements OnInit {
       this.flatList.push(d);
       this.recursive(d);
     });
-
     let max = 0;
     this.flatList.forEach((i) => {
       if (i.type > max) {

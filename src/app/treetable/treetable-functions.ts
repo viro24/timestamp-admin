@@ -1,10 +1,10 @@
-export interface Node {
+export interface TreeNode {
   value: any[];
-  child: Node[];
+  child: TreeNode[];
   type: number;
 }
 
-export const tree: Node[] = [
+export const tree = [
   {
     type: 1,
     value: [
@@ -227,7 +227,123 @@ export const tree: Node[] = [
   },
 ];
 
-export const tree2 = [
+export const tree0 = [
+  {
+    type: 0,
+    value: {
+      dateOfDetails: '2020-09-04',
+      bookingsList: [
+        {
+          bookingId: 46,
+          employeeId: '20',
+          breakTimeTotal: 0,
+          period: {
+            start: '2020-09-04T08:00:00',
+            end: '2020-09-04T14:00:00',
+            length: 21600000,
+          },
+          breakList: [],
+          location: 'OFFICE',
+        },
+      ],
+      dailyBookingTimeInMillisReal: 21600000,
+      dailyBreakTimeInMillisEffective: 1800000,
+      dailyBreakTimeInMillisReal: 0,
+      targetWorkingTimeInMillis: 28080000,
+      overtimeInMillis: -8280000,
+      completePeriod: {
+        start: '2020-09-04T08:00:00',
+        end: '2020-09-04T14:00:00',
+        length: 21600000,
+      },
+    },
+    child: [],
+  },
+  {
+    type: 0,
+    value: {
+      dateOfDetails: '2020-09-07',
+      bookingsList: [
+        {
+          bookingId: 47,
+          employeeId: '20',
+          breakTimeTotal: 1800000,
+          period: {
+            start: '2020-09-07T08:00:00',
+            end: '2020-09-07T17:00:00',
+            length: 32400000,
+          },
+          breakList: [
+            {
+              breakId: 44,
+              bookingId: 47,
+              period: {
+                start: '2020-09-07T13:00:00',
+                end: '2020-09-07T13:30:00',
+                length: 1800000,
+              },
+            },
+          ],
+          location: 'OFFICE',
+        },
+      ],
+      dailyBookingTimeInMillisReal: 32400000,
+      dailyBreakTimeInMillisEffective: 2700000,
+      dailyBreakTimeInMillisReal: 1800000,
+      targetWorkingTimeInMillis: 28080000,
+      overtimeInMillis: 1620000,
+      completePeriod: {
+        start: '2020-09-07T08:00:00',
+        end: '2020-09-07T17:00:00',
+        length: 32400000,
+      },
+    },
+    child: [],
+  },
+  {
+    type: 0,
+    value: {
+      dateOfDetails: '2020-09-08',
+      bookingsList: [
+        {
+          bookingId: 48,
+          employeeId: '20',
+          breakTimeTotal: 1800000,
+          period: {
+            start: '2020-09-08T08:00:00',
+            end: '2020-09-08T17:00:00',
+            length: 32400000,
+          },
+          breakList: [
+            {
+              breakId: 45,
+              bookingId: 48,
+              period: {
+                start: '2020-09-08T13:00:00',
+                end: '2020-09-08T13:30:00',
+                length: 1800000,
+              },
+            },
+          ],
+          location: 'OFFICE',
+        },
+      ],
+      dailyBookingTimeInMillisReal: 32400000,
+      dailyBreakTimeInMillisEffective: 2700000,
+      dailyBreakTimeInMillisReal: 1800000,
+      targetWorkingTimeInMillis: 28080000,
+      overtimeInMillis: 1620000,
+      completePeriod: {
+        start: '2020-09-08T08:00:00',
+        end: '2020-09-08T17:00:00',
+        length: 32400000,
+      },
+    },
+    child: [],
+  },
+];
+
+export const tree2: TreeNode[] = [
   {
     type: 1,
     value: [

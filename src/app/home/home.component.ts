@@ -104,7 +104,8 @@ export class HomeComponent implements OnInit {
           (dataEmployee) => {
             this.currentEmployee = dataEmployee;
             this.errorPassword = false;
-            this.router.navigateByUrl('/tabelle-1');
+            //this.router.navigateByUrl('/tabelle-1');
+            this.router.navigateByUrl('/hallo');
             console.log('login employee succeed');
           },
           (error) => {
