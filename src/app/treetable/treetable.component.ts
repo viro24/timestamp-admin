@@ -7,6 +7,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { TreeNode } from './treetable-functions';
 @Component({
   selector: 'app-treetable',
@@ -26,6 +27,7 @@ export class TreetableComponent implements OnInit {
   maxType = 0;
   tree: TreeNode[] = [];
   spalten = [];
+  data;
 
   constructor() {}
 
@@ -34,6 +36,12 @@ export class TreetableComponent implements OnInit {
     this.getFlatList();
     this.displayList = this.flatList.filter((e) => e.type === 1);
     console.log('flatList', this.flatList);
+    this.data = new MatTableDataSource(this.flatList);
+    console.log('mattabledatasource', this.data);
+  }
+
+  filter($event) {
+    console.log('tralala', $event.trim().toLocaleLowerCase());
   }
 
   addColumn($event): void {

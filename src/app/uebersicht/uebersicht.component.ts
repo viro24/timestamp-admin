@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from '../service/employee.service';
 import { TreeNode } from '../treetable/treetable-functions';
 
@@ -54,33 +55,20 @@ export class UebersichtComponent implements OnInit {
     return node;
   }
 
+  //TODO : generateTree automatically
   generateTree(): void {
     this.bookingData.forEach((d) => {
-      let node: TreeNode = {
-        type: 1,
-        value: [d],
-        child: [],
-      };
       let nodeD = this.getNode(1, d);
-      this.tree.push(node);
+      this.tree.push(nodeD);
       if (d.bookingsList.length > 0) {
         let books = d.bookingsList;
         books.forEach((b) => {
-          let nodeB: TreeNode = {
-            type: 2,
-            value: [b],
-            child: [],
-          };
-          let node2 = this.getNode(2, b);
-          node.child.push(nodeB);
+          let nodeB = this.getNode(2, b);
+          nodeD.child.push(nodeB);
           if (b.breakList.length > 0) {
             let breaks = b.breakList;
             breaks.forEach((p) => {
-              let nodeP: TreeNode = {
-                type: 3,
-                value: [p],
-                child: [],
-              };
+              let nodeP = this.getNode(3, p);
               nodeB.child.push(nodeP);
             });
           }

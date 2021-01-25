@@ -13,6 +13,7 @@ export class TreetableHeaderComponent implements OnInit {
   @Output() addColumn: EventEmitter<any> = new EventEmitter<any>();
   @Output() minColumn: EventEmitter<any> = new EventEmitter<any>();
   @Output() resetColumn: EventEmitter<any> = new EventEmitter<any>();
+  @Output() filter: EventEmitter<any> = new EventEmitter<any>();
   col = [];
   searched = '';
 
@@ -36,5 +37,9 @@ export class TreetableHeaderComponent implements OnInit {
     this.resetColumn.emit(null);
     this.col = [];
     this.colOpt.forEach((c) => this.col.push(c));
+  }
+
+  doFilter(value): void {
+    this.filter.emit(value);
   }
 }

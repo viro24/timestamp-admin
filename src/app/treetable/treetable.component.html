@@ -4,11 +4,12 @@
   (addColumn)="addColumn($event)"
   (minColumn)="minColumn($event)"
   (resetColumn)="resetColumn()"
+  (filter)="filter($event)"
 ></app-treetable-header>
 <div>
-  <table mat-table [dataSource]="displayList" matSort>
+  <table mat-table [dataSource]="displayList">
     <ng-container matColumnDef="{{ column }}" *ngFor="let column of spalten">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
       <td mat-cell *matCellDef="let item">
         <span *ngIf="column === spalten[0]"
           ><span class="spacer-{{ item.type }}"></span>

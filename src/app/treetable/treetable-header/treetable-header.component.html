@@ -5,7 +5,7 @@
       <span class="search">
         <mat-form-field color="primary" floatLabel="never">
           <mat-label><span class="search-text">Suchen</span></mat-label>
-          <input matInput type="text" [(ngModel)]="searched" />
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" />
         </mat-form-field>
       </span>
       <span class="option"
