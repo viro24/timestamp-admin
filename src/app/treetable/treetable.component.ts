@@ -27,7 +27,6 @@ export class TreetableComponent implements OnInit {
   displayList = [];
   filterList = [];
   maxType = 0;
-  tree: TreeNode[] = [];
   spalten = [];
   data;
   open = true;

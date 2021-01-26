@@ -77,6 +77,15 @@ export class UebersichtComponent implements OnInit {
     });
   }
 
+  recursiveGenerateTree(tree, list, type) {
+    if (list.length > 0) {
+      list.forEach((item) => {
+        let node = this.getNode(type, item);
+        tree.push(node);
+      });
+    }
+  }
+
   handleClickFilter() {
     if (
       this.currentEmployeeId === undefined ||
