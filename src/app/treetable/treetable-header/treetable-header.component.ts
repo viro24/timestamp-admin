@@ -16,16 +16,20 @@ export class TreetableHeaderComponent implements OnInit {
   @Output() clearSearch: EventEmitter<any> = new EventEmitter<any>();
   col = [];
   searched = '';
+  checked = [];
 
   ngOnInit(): void {
     this.reset();
   }
 
   onCheckBoxChanged(event, c: string): void {
+    const index = this.colOpt.indexOf(c);
     if (event.checked) {
+      this.checked[index] = true;
       this.addColumn.emit(c);
     } else {
       this.minColumn.emit(c);
+      this.checked[index] = false;
     }
   }
 
@@ -36,8 +40,10 @@ export class TreetableHeaderComponent implements OnInit {
   reset(): void {
     this.resetColumn.emit(null);
     this.col = [];
-    this.colOpt.forEach((c) => this.col.push(c));
-    console.log('col', this.col);
+    this.colOpt.forEach((c, i) => {
+      this.col.push(c);
+      this.checked[i] = true;
+    });
   }
 
   resetSearch(): void {

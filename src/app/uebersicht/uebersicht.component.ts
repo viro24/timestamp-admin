@@ -37,8 +37,8 @@ export class UebersichtComponent implements OnInit {
           this.bookingData = data;
           //this.generateDatasource();
           this.generateTree();
-          console.log(this.tree);
-          console.log(this.bookingData);
+          console.log('tree', this.tree);
+          console.log('bookingData', this.bookingData);
         },
         (error) => {
           console.log('error getting booking data');
@@ -57,6 +57,7 @@ export class UebersichtComponent implements OnInit {
 
   //TODO : generateTree automatically
   generateTree(): void {
+    this.tree = [];
     this.bookingData.forEach((d) => {
       let nodeD = this.getNode(1, d);
       this.tree.push(nodeD);

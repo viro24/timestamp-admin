@@ -28,13 +28,16 @@
           <button mat-menu-item (click)="reset()">Spalten zurücksetzen</button>
         </mat-menu>
         <mat-menu #spalten="matMenu">
-          <div *ngFor="let c of colOpt" (click)="$event.stopPropagation()">
-            <button mat-menu-item #menu1>
+          <div
+            *ngFor="let c of colOpt; let i = index"
+            (click)="$event.stopPropagation()"
+          >
+            <button *ngIf="i !== 0" mat-menu-item #menu1>
               <mat-checkbox
                 #checkbox
                 [checked]="true"
                 (change)="onCheckBoxChanged($event, c)"
-                (ngModelChange)="includedInCol(c)"
+                [(ngModel)]="checked[i]"
                 >{{ c }}</mat-checkbox
               >
             </button>

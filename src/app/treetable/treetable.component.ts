@@ -18,7 +18,7 @@ export class TreetableComponent implements OnInit {
   maxType = 0;
   spalten = [];
   data;
-  open = false;
+  open = [];
   found = [];
 
   constructor() {}
@@ -45,6 +45,7 @@ export class TreetableComponent implements OnInit {
       if (i.type > max) {
         max = i.type;
       }
+      this.open.push(false);
     });
     this.maxType = max;
   }
@@ -72,14 +73,19 @@ export class TreetableComponent implements OnInit {
 
   /**die Funktion, die aufgerufen wird,
    * wenn man an einem Item in der Tabelle klickt.
-   * Das Item wird, je nach dem wie sein Zustand ist,
+   * Das Item wird je nach Zustand
    * auf- oder zugeklappt.
    */
   handleClick(item): void {
-    if (this.isOpen(item)) {
-      this.closeTag(item);
+    if (this.hasChild(item)) {
+      if (this.isOpen(item)) {
+        this.closeTag(item);
+      } else {
+        this.openTag(item);
+      }
     } else {
-      this.openTag(item);
+      const index = this.flatList.indexOf(item);
+      this.open[index] = !this.open[index];
     }
   }
 
@@ -111,18 +117,10 @@ export class TreetableComponent implements OnInit {
     }
   }
 
-  /**Funktion, die aufgerufen wird, wenn man an einem Item ohne Kinder klickt.
-   * Es wird nichts gemacht, außer dass sich der Pfeile-Icon immer wieder ändert,
-   * damit der User weiß, dass es um ein "kinderloses" Item handelt.
-   */
-  handleClickNoChild() {
-    this.open = !this.open;
-  }
-
   /**gibt zurück, ob ein Item gerade aufgeklappt ist. */
   isOpen(item): boolean {
     if (!this.hasChild(item)) {
-      return false;
+      return this.open[this.flatList.indexOf(item)];
     } else {
       let indexDisplay = this.displayList.findIndex((e) => e === item);
       let indexFlat = this.flatList.findIndex((e) => e === item);
@@ -205,16 +203,16 @@ export class TreetableComponent implements OnInit {
       let s = '';
       if (item.type === 1) {
         s += item.value[0].dateOfDetails;
-        s += item.value[0].completePeriod.start;
-        s += item.value[0].completePeriod.end;
+        s += item.value[0].completePeriod.start.substring(11, 16);
+        s += item.value[0].completePeriod.end.substring(11, 16);
       } else {
         if (item.type === 2) {
           s += 'Buchung';
         } else {
           s += 'Pause';
         }
-        s += item.value[0].period.start;
-        s += item.value[0].period.end;
+        s += item.value[0].period.start.substring(11, 16);
+        s += item.value[0].period.end.substring(11, 16);
       }
       s = s.trim().toLocaleLowerCase();
       this.filterList.push(s);
