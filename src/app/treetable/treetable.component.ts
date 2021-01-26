@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { resourceLimits, threadId } from 'worker_threads';
 import { TreeNode } from './treetable-functions';
 @Component({
   selector: 'app-treetable',
@@ -24,10 +25,12 @@ export class TreetableComponent implements OnInit {
 
   flatList = [];
   displayList = [];
+  filterList = [];
   maxType = 0;
   tree: TreeNode[] = [];
   spalten = [];
   data;
+  open = true;
 
   constructor() {}
 
@@ -35,20 +38,98 @@ export class TreetableComponent implements OnInit {
     this.displayedColumns.forEach((col) => this.spalten.push(col));
     this.getFlatList();
     this.displayList = this.flatList.filter((e) => e.type === 1);
-    console.log('flatList', this.flatList);
-    this.data = new MatTableDataSource(this.flatList);
-    console.log('mattabledatasource', this.data);
+    this.getFilterList();
   }
+
+  /**Funktionen für die Filterfunktion */
 
   filter($event) {
-    console.log('tralala', $event.trim().toLocaleLowerCase());
+    let pattern = $event.trim().toLocaleLowerCase();
+    console.log('pattern', pattern);
+    let index = [];
+    let filtered = this.filterList.filter((item) => item.includes(pattern));
+    filtered.forEach((item) => index.push(this.filterList.indexOf(item)));
+    console.log('index :', index);
+    console.log('filtered :', filtered);
+    this.displayList = [];
+    index.forEach((i) => {
+      let temp = this.getAll(this.flatList[i]);
+      temp.forEach((t) => {
+        if (!this.displayList.includes(t)) {
+          this.displayList.push(t);
+        }
+      });
+    });
   }
 
+  /**alle Items, die sich in obere(n), und auch gleicher Ebene von item aufklappen*/
+  getAll(item): TreeNode[] {
+    let result: TreeNode[] = [];
+    let index = this.flatList.indexOf(item);
+    for (let i = index; i >= 0; i--) {
+      if (this.flatList[i].type === 1) {
+        result.push(this.flatList[i]);
+        break;
+      } else {
+        result.push(this.flatList[i]);
+      }
+    }
+    for (let i = index + 1; i < this.flatList.length; i++) {
+      if (this.flatList[i].type === 1) {
+        break;
+      } else {
+        result.push(this.flatList[i]);
+      }
+    }
+    result = result.filter((i) => i.type <= item.type);
+    result.sort(function (a, b) {
+      if (a.type < b.type) return -1;
+    });
+    return result;
+  }
+
+  /**eine Liste zurückgeben, die für die Filter Funktion verantwortlich ist
+   * die Liste ist vergleichbar mit Flatlist
+   * beinhaltet string von jedem Item in Flatlist, die in Tabelle angezeigt wird
+   * Leerzeichen weg und alle klein geschrieben
+   */
+  getFilterList(): void {
+    this.flatList.forEach((item) => {
+      let s = '';
+      if (item.type === 1) {
+        s += item.value[0].dateOfDetails;
+        s += item.value[0].completePeriod.start;
+        s += item.value[0].completePeriod.end;
+      } else {
+        if (item.type === 2) {
+          s += 'Buchung';
+        } else {
+          s += 'Pause';
+        }
+        s += item.value[0].period.start;
+        s += item.value[0].period.end;
+      }
+      s = s.trim().toLocaleLowerCase();
+      this.filterList.push(s);
+    });
+  }
+
+  /**zurück zum Anfangszustand ohne Suche */
+  clearSearch(): void {
+    this.displayList = this.flatList.filter((item) => item.type === 1);
+  }
+
+  /**------------------------------------------------------------ */
+
+  /**Spaltenauswahl Funktion */
+
+  /** in displayedColumn verfügbare Spalte hinzufügen*/
   addColumn($event): void {
     this.spalten.push($event);
     console.log('$event');
   }
 
+  /**Spalte löschen */
   minColumn($event): void {
     console.log('min', $event);
     let index = this.spalten.indexOf($event);
@@ -59,10 +140,12 @@ export class TreetableComponent implements OnInit {
     console.log(this.spalten);
   }
 
+  /**Spalten wie im Anfangszustand zurücksetzen */
   resetColumn(): void {
     this.spalten = [];
     this.displayedColumns.forEach((col) => this.spalten.push(col));
   }
+  /**-------------------------------------------------------------- */
 
   getFlatList() {
     this.dataSource.forEach((d) => {

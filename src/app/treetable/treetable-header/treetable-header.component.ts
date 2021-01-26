@@ -14,9 +14,10 @@ export class TreetableHeaderComponent implements OnInit {
   @Output() minColumn: EventEmitter<any> = new EventEmitter<any>();
   @Output() resetColumn: EventEmitter<any> = new EventEmitter<any>();
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() clearSearch: EventEmitter<any> = new EventEmitter<any>();
   col = [];
-  searched = '';
 
+  searched = '';
   ngOnInit(): void {
     this.reset();
   }
@@ -37,6 +38,11 @@ export class TreetableHeaderComponent implements OnInit {
     this.resetColumn.emit(null);
     this.col = [];
     this.colOpt.forEach((c) => this.col.push(c));
+  }
+
+  resetSearch(): void {
+    this.clearSearch.emit(null);
+    this.searched = '';
   }
 
   doFilter(value): void {
