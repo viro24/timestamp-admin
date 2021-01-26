@@ -15,21 +15,33 @@
         <span *ngIf="column === 'datum'"
           ><span class="spacer-{{ item.type }}"></span>
           <span class="icon" (click)="handleClick(item)">
-            <mat-icon *ngIf="isOpen(item)">arrow_drop_down</mat-icon
-            ><mat-icon *ngIf="!isOpen(item) && item.type !== maxType"
+            <mat-icon *ngIf="isOpen(item) && item.type > 0"
+              >arrow_drop_down</mat-icon
+            ><mat-icon
+              *ngIf="!isOpen(item) && item.type > 0 && item.type !== maxType"
               >arrow_right</mat-icon
             ><mat-icon *ngIf="item.type === maxType">minimize</mat-icon>
           </span>
           <span *ngIf="item.type === 1">{{ item.value[0].dateOfDetails }}</span
           ><span *ngIf="item.type === 2">Buchung</span
-          ><span *ngIf="item.type === 3">Pause</span></span
-        >
+          ><span *ngIf="item.type === 3">Pause</span>
+          <span *ngIf="item.type === -2"
+            ><button mat-button>
+              <mat-icon>add</mat-icon>Neue Buchung hinzufügen
+            </button></span
+          >
+          <span *ngIf="item.type === -3"
+            ><button mat-button>
+              <mat-icon>add</mat-icon>Neue Pause hinzufügen
+            </button></span
+          >
+        </span>
 
         <span *ngIf="column === 'start'"
           ><span *ngIf="item.type === 1">{{
             item.value[0].completePeriod.start | date: "HH:mm"
           }}</span
-          ><span *ngIf="item.type !== 1">{{
+          ><span *ngIf="item.type !== 1 && item.type > 0">{{
             item.value[0].period.start | date: "HH:mm"
           }}</span></span
         >
@@ -37,9 +49,13 @@
           ><span *ngIf="item.type === 1">{{
             item.value[0].completePeriod.end | date: "HH:mm"
           }}</span
-          ><span *ngIf="item.type !== 1">{{
+          ><span *ngIf="item.type !== 1 && item.type > 0">{{
             item.value[0].period.end | date: "HH:mm"
           }}</span></span
+        >
+        <span *ngIf="column === 'action'"
+          ><mat-icon *ngIf="editable[i]">edit</mat-icon
+          ><mat-icon *ngIf="editable[i]">delete</mat-icon></span
         >
       </td>
     </ng-container>

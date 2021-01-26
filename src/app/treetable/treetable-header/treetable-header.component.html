@@ -3,7 +3,11 @@
     <span class="title">{{ titleH }}</span>
     <div class="content-content">
       <span class="search">
-        <mat-form-field color="primary" floatLabel="never">
+        <mat-form-field
+          color="primary"
+          floatLabel="never"
+          class="search-content"
+        >
           <mat-label><span class="search-text">Suchen</span></mat-label>
           <input
             matInput
@@ -12,9 +16,10 @@
             [(ngModel)]="searched"
           />
         </mat-form-field>
-        <mat-icon (click)="resetSearch()">clear</mat-icon>
       </span>
       <span class="option"
+        ><mat-icon mat-icon-button (click)="resetSearch()" class="button-menu"
+          >clear</mat-icon
         ><mat-icon
           mat-icon-button
           [matMenuTriggerFor]="menu"

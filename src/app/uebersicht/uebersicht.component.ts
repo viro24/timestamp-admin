@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from '../service/employee.service';
 import { TreeNode } from '../treetable/treetable-functions';
 
@@ -21,7 +20,17 @@ export class UebersichtComponent implements OnInit {
   employees;
   tree: TreeNode[] = [];
   title = 'Übersichtstabelle';
-  disCols = ['datum', 'start', 'end'];
+  disCols = [
+    'datum',
+    'start',
+    'end',
+    'action',
+    'istAZ',
+    'sollAZ',
+    'istPause',
+    'sollPause',
+    'ueberstunden',
+  ];
 
   constructor(public employeeService: EmployeeService) {}
 
@@ -55,7 +64,31 @@ export class UebersichtComponent implements OnInit {
     return node;
   }
 
-  //TODO : generateTree automatically
+  /**generate Tree method,
+   * to use if you have a constant dataSource,
+   * where the children are always packed in one particular list
+   * with constant name
+   * (in this case, the 'list')
+   */
+  // recursive(tree, node, type): void {
+  //   if (node.length > 0) {
+  //     node.forEach((n) => {
+  //       let newNode = this.getNode(type, n);
+  //       tree.child.push(newNode);
+  //       this.recursive(newNode, n.list, type + 1);
+  //     });
+  //   }
+  // }
+
+  // generateTree1(): void {
+  //   this.bookingData.forEach((d) => {
+  //     let nodeD = this.getNode(1, d);
+  //     tree.push(nodeD);
+  //     this.recursive(nodeD, d.list, 2);
+  //   });
+  // }
+
+  //TODO : generateTree manually
   generateTree(): void {
     this.tree = [];
     this.bookingData.forEach((d) => {

@@ -20,6 +20,7 @@ export class TreetableComponent implements OnInit {
   data;
   open = [];
   found = [];
+  editable: boolean[] = [];
 
   constructor() {}
 
@@ -46,6 +47,7 @@ export class TreetableComponent implements OnInit {
         max = i.type;
       }
       this.open.push(false);
+      this.editable.push(false);
     });
     this.maxType = max;
   }
@@ -62,11 +64,17 @@ export class TreetableComponent implements OnInit {
 
   /**gibt zurück, ob ein Item (aus flatList/displayList) Kinder hat */
   hasChild(item): boolean {
+    if (item.type < 0) {
+      return null;
+    }
     return this.getChild(item).length > 0;
   }
 
   /**gibt die dazugehörigen Kinder des eingegebenen Items */
   getChild(item): TreeNode[] {
+    if (item.type < 0) {
+      return null;
+    }
     let index = this.flatList.findIndex((e) => e === item);
     return this.flatList[index].child;
   }
@@ -77,15 +85,17 @@ export class TreetableComponent implements OnInit {
    * auf- oder zugeklappt.
    */
   handleClick(item): void {
-    if (this.hasChild(item)) {
-      if (this.isOpen(item)) {
-        this.closeTag(item);
+    if (item.type !== this.maxType) {
+      if (this.hasChild(item)) {
+        if (this.isOpen(item)) {
+          this.closeTag(item);
+        } else {
+          this.openTag(item);
+        }
       } else {
-        this.openTag(item);
+        const index = this.flatList.indexOf(item);
+        this.open[index] = !this.open[index];
       }
-    } else {
-      const index = this.flatList.indexOf(item);
-      this.open[index] = !this.open[index];
     }
   }
 
@@ -96,6 +106,55 @@ export class TreetableComponent implements OnInit {
       this.displayList = this.flatList.filter(
         (e) => this.displayList.includes(e) || children.includes(e)
       );
+    }
+    console.log(this.getIndexForAdd(item));
+    this.addForNewItem(item);
+    this.setEditable(item);
+  }
+
+  getIndexForAdd(item): number {
+    let index;
+    let type = item.type;
+    for (
+      let i = this.displayList.indexOf(item) + 1;
+      i < this.displayList.length;
+      i++
+    ) {
+      if (this.displayList[i].type !== type + 1) {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
+
+  addForNewItem(item): void {
+    const index = item.type + 1;
+    console.log(-index);
+    const node: TreeNode = {
+      type: -index,
+      value: [],
+      child: [],
+    };
+
+    this.displayList.splice(this.getIndexForAdd(item), 0, node);
+    console.log(this.displayList);
+  }
+
+  setEditable(item): void {
+    this.editable = [];
+    this.displayList.forEach((i) => this.editable.push(false));
+    const index = this.displayList.indexOf(item);
+    const type = item.type;
+    for (let i = index + 1; i < this.displayList.length; i++) {
+      if (this.displayList[i].type === type + 1) {
+        this.editable[i] = true;
+      } else {
+        break;
+      }
+    }
+    if (type === 2) {
+      this.editable[index] = true;
     }
   }
 
@@ -115,6 +174,8 @@ export class TreetableComponent implements OnInit {
         (e) => this.displayList.includes(e) && !children.includes(e)
       );
     }
+    this.editable = [];
+    this.displayList.forEach((i) => this.editable.push(false));
   }
 
   /**gibt zurück, ob ein Item gerade aufgeklappt ist. */
@@ -143,6 +204,8 @@ export class TreetableComponent implements OnInit {
   /**Funktionen für die Filterfunktion */
 
   filter($event) {
+    this.editable = [];
+    this.displayList.forEach((e) => this.editable.push(false));
     let pattern = $event.trim().toLocaleLowerCase();
     console.log('pattern', pattern);
     let index = [];
@@ -165,6 +228,8 @@ export class TreetableComponent implements OnInit {
       highlighted.push(h);
     });
     this.found = highlighted;
+    console.log('found!', this.found);
+    console.log('display', this.displayList);
   }
 
   /**alle Items, die sich in obere(n), und auch gleicher Ebene von item aufklappen*/
@@ -232,18 +297,14 @@ export class TreetableComponent implements OnInit {
   /** in displayedColumn verfügbare Spalte hinzufügen*/
   addColumn($event): void {
     this.spalten.push($event);
-    console.log('$event');
   }
 
   /**Spalte löschen */
   minColumn($event): void {
-    console.log('min', $event);
     let index = this.spalten.indexOf($event);
-    console.log(index);
     if (index !== -1) {
       this.spalten.splice(index, 1);
     }
-    console.log(this.spalten);
   }
 
   /**Spalten wie im Anfangszustand zurücksetzen */
