@@ -1,0 +1,28 @@
+<app-treetable-header
+  [colOpt]="displayedColumns"
+  [titleH]="titleT"
+  (addColumn)="addColumn($event)"
+  (minColumn)="minColumn($event)"
+  (resetColumn)="resetColumn()"
+  (filter)="filter($event)"
+  (clearSearch)="clearSearch()"
+></app-treetable-header>
+<div>
+  <table mat-table [dataSource]="displayList">
+    <ng-container matColumnDef="{{ column }}" *ngFor="let column of spalten">
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+      <td mat-cell *matCellDef="let item">
+        <span *ngIf="column === spalten[0]"
+          ><span class="spacer-{{ item.type }}"></span>
+          <span class="icon" (click)="handleClick(item)">
+            <mat-icon *ngIf="isOpen(item)">arrow_drop_down</mat-icon
+            ><mat-icon *ngIf="!isOpen(item) && item.type !== maxType"
+              >arrow_right</mat-icon
+            ><mat-icon *ngIf="item.type === maxType">minimize</mat-icon>
+          </span>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="spalten"></tr>
+    <tr mat-row *matRowDef="let row; columns: spalten"></tr>
+  </table>
+</div>

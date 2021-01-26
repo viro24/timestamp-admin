@@ -6,7 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./treetable-header.component.scss'],
 })
 export class TreetableHeaderComponent implements OnInit {
-  constructor() {}
   @Input() colOpt;
   @Input() titleH;
   @Output() addColumn: EventEmitter<any> = new EventEmitter<any>();
@@ -16,7 +15,6 @@ export class TreetableHeaderComponent implements OnInit {
   @Output() clearSearch: EventEmitter<any> = new EventEmitter<any>();
   col = [];
   searched = '';
-
   ngOnInit(): void {
     this.reset();
   }
@@ -37,7 +35,6 @@ export class TreetableHeaderComponent implements OnInit {
     this.resetColumn.emit(null);
     this.col = [];
     this.colOpt.forEach((c) => this.col.push(c));
-    console.log('col', this.col);
   }
 
   resetSearch(): void {

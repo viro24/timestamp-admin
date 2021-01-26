@@ -6,22 +6,17 @@ import { TreeNode } from './treetable-functions';
   styleUrls: ['./treetable.component.scss'],
 })
 export class TreetableComponent implements OnInit {
-  @Input() dataSource: TreeNode[];
-  @Input() displayedColumns: string[];
-  @Input() titleT;
+  @Input() dataSource: TreeNode[]; //dataSource in Form einer TreeNode (nicht flacher) Liste. Davor muss der Baum generiert werden.
+  @Input() displayedColumns: string[]; //die komplette, angegebene Spalten
+  @Input() titleT; //Title der Tabelle
 
-  ngAfterViewInit() {}
-
-  flatList = [];
-  displayList = [];
-  filterList = [];
+  flatList: TreeNode[] = []; // die komplette, flache Liste, von der die Items für DisplayList bzw. für die Filterfunktion genommen werden.
+  displayList: TreeNode[] = []; // die angezeigte Liste
+  filterList: string[] = []; // Liste aus string Elemente, aus allen Daten, die in der Tabelle anzuzeigen sind.
   maxType = 0;
-  spalten = [];
+  spalten: string[] = []; //angezeigte, auswählbare Spalten
   data;
-  open = false;
-  found = [];
-
-  constructor() {}
+  open = true;
 
   ngOnInit(): void {
     this.displayedColumns.forEach((col) => this.spalten.push(col));
@@ -30,26 +25,17 @@ export class TreetableComponent implements OnInit {
     this.getFilterList();
   }
 
-  /**-------------------------------------------------------------------------------------------- */
-
-  /**Funktionen zum Generieren aller notwendigen Variablen und Funktionen fürs Treetable */
-
-  /** generiert die flache Liste */
-  getFlatList(): void {
+  /**Generieren aller Variablen, die fürs Treetable notwendig sind */
+  /**die flache Liste generieren */
+  getFlatList() {
     this.dataSource.forEach((d) => {
       this.flatList.push(d);
       this.recursive(d);
     });
-    let max = 0;
-    this.flatList.forEach((i) => {
-      if (i.type > max) {
-        max = i.type;
-      }
-    });
-    this.maxType = max;
+    this.getMaxType();
   }
 
-  /**rekursive Funktion für getFlatList() */
+  /**rekursive Funktion fürs Generieren der flachen Liste */
   recursive(item): void {
     if (Array.isArray(item.child)) {
       item.child.forEach((b) => {
@@ -59,21 +45,39 @@ export class TreetableComponent implements OnInit {
     }
   }
 
-  /**gibt zurück, ob ein Item (aus flatList/displayList) Kinder hat */
+  /**die höchste Zahl der Type zurückgeben
+   * items mit type===maxtype bekommen andere Zeichen
+   */
+  getMaxType(): void {
+    let max = 0;
+    this.flatList.forEach((i) => {
+      if (i.type > max) {
+        max = i.type;
+      }
+    });
+    this.maxType = max;
+  }
+
+  /**--------------------------------------------------------------------- */
+
+  /**Treetable Funktionen,
+   * die notwendig sind, damit das Auf- und Zuklappen der Treetable funktionieren.
+   */
+
+  /**überprüfen, ob ein Item Kinder hat */
   hasChild(item): boolean {
     return this.getChild(item).length > 0;
   }
 
-  /**gibt die dazugehörigen Kinder des eingegebenen Items */
+  /**gibt alle direkte(!) Kinder eines Items zurück */
   getChild(item): TreeNode[] {
-    let index = this.flatList.findIndex((e) => e === item);
+    const index = this.flatList.findIndex((e) => e === item);
     return this.flatList[index].child;
   }
 
-  /**die Funktion, die aufgerufen wird,
-   * wenn man an einem Item in der Tabelle klickt.
-   * Das Item wird, je nach dem wie sein Zustand ist,
-   * auf- oder zugeklappt.
+  /**handling Click in jedem angezeigten Item
+   * je nach dem, wie der Zustand des Items ist,
+   * wird dessen Kinder auf- oder zugeklappt.
    */
   handleClick(item): void {
     if (this.isOpen(item)) {
@@ -83,20 +87,18 @@ export class TreetableComponent implements OnInit {
     }
   }
 
-  /**Aufklappen eines Items in der Tabelle */
+  /**Aufklappen Funktion */
   openTag(item): void {
-    let children = this.getChild(item);
+    const children = this.getChild(item);
     if (children.length > 0) {
-      this.displayList = this.flatList.filter(
-        (e) => this.displayList.includes(e) || children.includes(e)
-      );
+      this.displayList = this.flatList.filter((e) => this.displayList.includes(e) || children.includes(e));
     }
   }
 
-  /**Zuklappen eines Items in der Tabelle */
+  /**Zuklappen Funktion */
   closeTag(item): void {
-    let children = [];
-    let index = this.flatList.findIndex((e) => e === item);
+    const children = [];
+    const index = this.flatList.findIndex((e) => e === item);
     for (let i = index + 1; i < this.flatList.length; i++) {
       if (this.flatList[i].type > item.type) {
         children.push(this.flatList[i]);
@@ -105,33 +107,21 @@ export class TreetableComponent implements OnInit {
       }
     }
     if (children.length > 0) {
-      this.displayList = this.flatList.filter(
-        (e) => this.displayList.includes(e) && !children.includes(e)
-      );
+      this.displayList = this.flatList.filter((e) => this.displayList.includes(e) && !children.includes(e));
     }
   }
 
-  /**Funktion, die aufgerufen wird, wenn man an einem Item ohne Kinder klickt.
-   * Es wird nichts gemacht, außer dass sich der Pfeile-Icon immer wieder ändert,
-   * damit der User weiß, dass es um ein "kinderloses" Item handelt.
-   */
-  handleClickNoChild() {
-    this.open = !this.open;
-  }
-
-  /**gibt zurück, ob ein Item gerade aufgeklappt ist. */
+  /**gibt zurück, ob ein Item gerade offen oder nicht ist. */
   isOpen(item): boolean {
     if (!this.hasChild(item)) {
       return false;
     } else {
-      let indexDisplay = this.displayList.findIndex((e) => e === item);
-      let indexFlat = this.flatList.findIndex((e) => e === item);
+      const indexDisplay = this.displayList.findIndex((e) => e === item);
+      const indexFlat = this.flatList.findIndex((e) => e === item);
       if (indexDisplay === this.displayList.length - 1) {
         return false;
       } else {
-        if (
-          this.displayList[indexDisplay + 1] === this.flatList[indexFlat + 1]
-        ) {
+        if (this.displayList[indexDisplay + 1] === this.flatList[indexFlat + 1]) {
           return true;
         } else {
           return false;
@@ -139,40 +129,32 @@ export class TreetableComponent implements OnInit {
       }
     }
   }
-
-  /**------------------------------------------------------------------------------ */
+  /**-------------------------------------------------------------------------------------------------- */
 
   /**Funktionen für die Filterfunktion */
 
+  /**Filterfunktion, die nach der gegebenen Muster filtert */
   filter($event) {
-    let pattern = $event.trim().toLocaleLowerCase();
+    const pattern = $event.trim().toLocaleLowerCase();
     console.log('pattern', pattern);
-    let index = [];
-    let filtered = this.filterList.filter((item) => item.includes(pattern));
+    const index = [];
+    const filtered = this.filterList.filter((item) => item.includes(pattern));
     filtered.forEach((item) => index.push(this.filterList.indexOf(item)));
-    console.log('index :', index);
-    console.log('filtered :', filtered);
     this.displayList = [];
     index.forEach((i) => {
-      let temp = this.getAll(this.flatList[i]);
+      const temp = this.getAll(this.flatList[i]);
       temp.forEach((t) => {
         if (!this.displayList.includes(t)) {
           this.displayList.push(t);
         }
       });
     });
-    let highlighted = [];
-    index.forEach((i) => {
-      let h = this.displayList.indexOf(this.flatList[i]);
-      highlighted.push(h);
-    });
-    this.found = highlighted;
   }
 
   /**alle Items, die sich in obere(n), und auch gleicher Ebene von item aufklappen*/
   getAll(item): TreeNode[] {
     let result: TreeNode[] = [];
-    let index = this.flatList.indexOf(item);
+    const index = this.flatList.indexOf(item);
     for (let i = index; i >= 0; i--) {
       if (this.flatList[i].type === 1) {
         result.push(this.flatList[i]);
@@ -196,35 +178,37 @@ export class TreetableComponent implements OnInit {
   }
 
   /**eine Liste zurückgeben, die für die Filter Funktion verantwortlich ist
-   * die Liste ist vergleichbar mit Flatlist
+   * die Items in der Liste sind vergleichbar mit den in Flatlist,
    * beinhaltet string von jedem Item in Flatlist, die in Tabelle angezeigt wird
    * Leerzeichen weg und alle klein geschrieben
    */
   getFilterList(): void {
-    this.flatList.forEach((item) => {
-      let s = '';
-      if (item.type === 1) {
-        s += item.value[0].dateOfDetails;
-        s += item.value[0].completePeriod.start;
-        s += item.value[0].completePeriod.end;
-      } else {
-        if (item.type === 2) {
-          s += 'Buchung';
-        } else {
-          s += 'Pause';
-        }
-        s += item.value[0].period.start;
-        s += item.value[0].period.end;
-      }
-      s = s.trim().toLocaleLowerCase();
-      this.filterList.push(s);
-    });
+    // this.flatList.forEach((item) => {
+    //   let s = '';
+    //   if (item.type === 1) {
+    //     s += item.value[0].dateOfDetails;
+    //     s += item.value[0].completePeriod.start;
+    //     s += item.value[0].completePeriod.end;
+    //   } else {
+    //     if (item.type === 2) {
+    //       s += 'Buchung';
+    //     } else {
+    //       s += 'Pause';
+    //     }
+    //     s += item.value[0].period.start;
+    //     s += item.value[0].period.end;
+    //   }
+    //   s = s.trim().toLocaleLowerCase();
+    //   this.filterList.push(s);
+    // });
   }
 
-  /**zurück zum Anfangszustand ohne Suche */
+  /**zurück zum Anfangszustand ohne Suche
+   * Inhalt der Funktion soll angepasst werden,
+   * je nach dem wie der Anfangszustand aussieht.
+   */
   clearSearch(): void {
     this.displayList = this.flatList.filter((item) => item.type === 1);
-    this.found = [];
   }
 
   /**------------------------------------------------------------ */
@@ -234,13 +218,12 @@ export class TreetableComponent implements OnInit {
   /** in displayedColumn verfügbare Spalte hinzufügen*/
   addColumn($event): void {
     this.spalten.push($event);
-    console.log('$event');
   }
 
   /**Spalte löschen */
   minColumn($event): void {
     console.log('min', $event);
-    let index = this.spalten.indexOf($event);
+    const index = this.spalten.indexOf($event);
     console.log(index);
     if (index !== -1) {
       this.spalten.splice(index, 1);
@@ -253,5 +236,4 @@ export class TreetableComponent implements OnInit {
     this.spalten = [];
     this.displayedColumns.forEach((col) => this.spalten.push(col));
   }
-  /**-------------------------------------------------------------- */
 }
