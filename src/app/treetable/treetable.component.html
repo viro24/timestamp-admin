@@ -18,7 +18,7 @@
             <mat-icon *ngIf="isOpen(item) && item.type > 0"
               >arrow_drop_down</mat-icon
             ><mat-icon
-              *ngIf="!isOpen(item) && item.type > 0 && item.type !== maxType"
+              *ngIf="!isOpen(item) && item.type !== maxType && item.type > 0"
               >arrow_right</mat-icon
             ><mat-icon *ngIf="item.type === maxType">minimize</mat-icon>
           </span>

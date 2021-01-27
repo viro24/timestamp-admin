@@ -10,8 +10,6 @@ export class TreetableComponent implements OnInit {
   @Input() displayedColumns: string[];
   @Input() titleT;
 
-  ngAfterViewInit() {}
-
   flatList = [];
   displayList = [];
   filterList = [];
@@ -41,13 +39,15 @@ export class TreetableComponent implements OnInit {
       this.flatList.push(d);
       this.recursive(d);
     });
+    this.getMaxType();
+  }
+
+  getMaxType(): void {
     let max = 0;
     this.flatList.forEach((i) => {
       if (i.type > max) {
         max = i.type;
       }
-      this.open.push(false);
-      this.editable.push(false);
     });
     this.maxType = max;
   }
@@ -75,7 +75,7 @@ export class TreetableComponent implements OnInit {
     if (item.type < 0) {
       return null;
     }
-    let index = this.flatList.findIndex((e) => e === item);
+    const index = this.flatList.findIndex((e) => e === item);
     return this.flatList[index].child;
   }
 
@@ -85,23 +85,23 @@ export class TreetableComponent implements OnInit {
    * auf- oder zugeklappt.
    */
   handleClick(item): void {
-    if (item.type !== this.maxType) {
-      if (this.hasChild(item)) {
-        if (this.isOpen(item)) {
-          this.closeTag(item);
-        } else {
-          this.openTag(item);
-        }
+    //if (item.type !== this.maxType) {
+    if (this.hasChild(item)) {
+      if (this.isOpen(item)) {
+        this.closeTag(item);
       } else {
-        const index = this.flatList.indexOf(item);
-        this.open[index] = !this.open[index];
+        this.openTag(item);
       }
+    } else {
+      const index = this.flatList.indexOf(item);
+      this.open[index] = !this.open[index];
     }
+    //}
   }
 
   /**Aufklappen eines Items in der Tabelle */
   openTag(item): void {
-    let children = this.getChild(item);
+    const children = this.getChild(item);
     if (children.length > 0) {
       this.displayList = this.flatList.filter(
         (e) => this.displayList.includes(e) || children.includes(e)
@@ -160,8 +160,8 @@ export class TreetableComponent implements OnInit {
 
   /**Zuklappen eines Items in der Tabelle */
   closeTag(item): void {
-    let children = [];
-    let index = this.flatList.findIndex((e) => e === item);
+    const children = [];
+    const index = this.flatList.findIndex((e) => e === item);
     for (let i = index + 1; i < this.flatList.length; i++) {
       if (this.flatList[i].type > item.type) {
         children.push(this.flatList[i]);
@@ -268,16 +268,17 @@ export class TreetableComponent implements OnInit {
       let s = '';
       if (item.type === 1) {
         s += item.value[0].dateOfDetails;
-        s += item.value[0].completePeriod.start.substring(11, 16);
-        s += item.value[0].completePeriod.end.substring(11, 16);
+        s += item.value[0].completePeriod.start;
+        s += item.value[0].completePeriod.end;
       } else {
         if (item.type === 2) {
           s += 'Buchung';
         } else {
           s += 'Pause';
         }
-        s += item.value[0].period.start.substring(11, 16);
-        s += item.value[0].period.end.substring(11, 16);
+        s += item.value[0].period.start;
+        s += item.value[0].period.end;
+        //substring(11,16)
       }
       s = s.trim().toLocaleLowerCase();
       this.filterList.push(s);

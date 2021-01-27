@@ -1,8 +1,0 @@
-.icon{
-    cursor: pointer;
-}
-@for $type from 1 through 10 {
-.spacer-#{$type}{
-    margin-left:$type * 20px - 20px;
-}
-}
