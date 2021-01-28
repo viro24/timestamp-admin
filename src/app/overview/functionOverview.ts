@@ -7,15 +7,15 @@ export function getListOfDate(start, end): Date[] {
 }
 
 export function getISODate(day: Date, time: string): string {
-  let d = day.toLocaleDateString().split('.');
-  let t = time.split(':');
-  let month = +d[1] - 1;
+  const d = day.toLocaleDateString().split('.');
+  const t = time.split(':');
+  const month = +d[1] - 1;
   let m;
   if (month < 10) {
     m = '0' + month;
   } else {
     m = month.toString();
   }
-  let result = new Date(+d[2], m, +d[0], +t[0] + 1, +t[1]);
+  const result = new Date(+d[2], m, +d[0], +t[0] + 1, +t[1]);
   return result.toISOString();
 }

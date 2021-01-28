@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dialog-error',
@@ -15,16 +15,19 @@ export class DialogErrorComponent implements OnInit {
   //   this.afterIdle();
   // }
 
+  idle: any;
+
   constructor(
     private router: Router,
     @Inject(MAT_DIALOG_DATA)
     public data: { action: string; errorStatus: string },
     private dialogRef: MatDialogRef<DialogErrorComponent>
-  ) {}
+  ) {
+  }
 
-  idle: any;
+  ngOnInit(): void {
+  }
 
-  ngOnInit(): void {}
   // ngOnDestroy(): void {
   //   clearTimeout(this.idle);
   // }

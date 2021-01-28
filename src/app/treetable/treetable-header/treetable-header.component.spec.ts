@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TreetableHeaderComponent } from './treetable-header.component';
+import {TreetableHeaderComponent} from './treetable-header.component';
 
 describe('TreetableHeaderComponent', () => {
   let component: TreetableHeaderComponent;
@@ -8,9 +8,9 @@ describe('TreetableHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TreetableHeaderComponent ]
+      declarations: [TreetableHeaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -5,22 +5,27 @@
   margin-top: 0;
   background-color: whitesmoke;
   min-height: 750px;
+
   .navigation {
     background-color: #98042a;
+
     button {
       width: 250px;
       margin: 10px;
     }
   }
+
   .content {
     margin: 10px;
     min-height: 650px;
+
     .content-title {
       height: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       .title {
         h2 {
           margin: 0;
@@ -28,34 +33,42 @@
         }
       }
     }
+
     //border: 1px gray solid;
     margin: 10px;
+
     .content-header {
       background-color: lightgray;
     }
+
     .content-content {
       //display: flex;
       //align-items: center;
       ::ng-deep mat-card-title {
         font-size: 120px;
       }
+
       .card {
         //width: 700px;
         mat-card-header {
           //border: 1px black solid;
           margin: 20px 0 0 50px;
+
           div {
             border: 1px black solid;
           }
         }
+
         mat-card-content {
           display: flex;
+
           .image {
             border: 1px black solid;
             width: 200px;
             height: 200px;
             margin: 0 0 50px 50px;
           }
+
           .card-content {
             //border: 1px black solid;
             margin-left: 25px;
@@ -65,16 +78,19 @@
     }
   }
 }
+
 @media (min-width: 1025px) and (max-width: 1280px) {
   .container {
     //border: 2px grey solid;
   }
 }
+
 @media (min-width: 800px) and (max-width: 1024px) {
   .container {
     //border: 2px red solid;
   }
 }
+
 @media (max-width: 799px) {
   .container {
     //border: 2px red solid;

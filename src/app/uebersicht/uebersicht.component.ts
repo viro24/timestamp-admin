@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../service/employee.service';
-import { TreeNode } from '../treetable/treetable-functions';
+import {Component, OnInit} from '@angular/core';
+import {EmployeeService} from '../service/employee.service';
+import {TreeNode} from '../treetable/treetable-functions';
 
 @Component({
   selector: 'app-uebersicht',
@@ -8,7 +8,7 @@ import { TreeNode } from '../treetable/treetable-functions';
   styleUrls: ['./uebersicht.component.scss'],
 })
 export class UebersichtComponent implements OnInit {
-  currentEmployeeId: string = '10';
+  currentEmployeeId = '10';
   dateStart;
   dateEnd;
   dateStartDisplay;
@@ -32,7 +32,8 @@ export class UebersichtComponent implements OnInit {
     'ueberstunden',
   ];
 
-  constructor(public employeeService: EmployeeService) {}
+  constructor(public employeeService: EmployeeService) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -44,7 +45,7 @@ export class UebersichtComponent implements OnInit {
       .subscribe(
         (data) => {
           this.bookingData = data;
-          //this.generateDatasource();
+          // this.generateDatasource();
           this.generateTree();
           console.log('tree', this.tree);
           console.log('bookingData', this.bookingData);
@@ -56,8 +57,8 @@ export class UebersichtComponent implements OnInit {
   }
 
   getNode(type: number, value: any): TreeNode {
-    let node: TreeNode = {
-      type: type,
+    const node: TreeNode = {
+      type,
       value: [value],
       child: [],
     };
@@ -88,21 +89,21 @@ export class UebersichtComponent implements OnInit {
   //   });
   // }
 
-  //TODO : generateTree manually
+  // TODO : generateTree manually
   generateTree(): void {
     this.tree = [];
     this.bookingData.forEach((d) => {
-      let nodeD = this.getNode(1, d);
+      const nodeD = this.getNode(1, d);
       this.tree.push(nodeD);
       if (d.bookingsList.length > 0) {
-        let books = d.bookingsList;
+        const books = d.bookingsList;
         books.forEach((b) => {
-          let nodeB = this.getNode(2, b);
+          const nodeB = this.getNode(2, b);
           nodeD.child.push(nodeB);
           if (b.breakList.length > 0) {
-            let breaks = b.breakList;
+            const breaks = b.breakList;
             breaks.forEach((p) => {
-              let nodeP = this.getNode(3, p);
+              const nodeP = this.getNode(3, p);
               nodeB.child.push(nodeP);
             });
           }
@@ -111,10 +112,10 @@ export class UebersichtComponent implements OnInit {
     });
   }
 
-  recursiveGenerateTree(tree, list, type) {
+  recursiveGenerateTree(tree: TreeNode[], list: any[], type: number) {
     if (list.length > 0) {
       list.forEach((item) => {
-        let node = this.getNode(type, item);
+        const node = this.getNode(type, item);
         tree.push(node);
       });
     }

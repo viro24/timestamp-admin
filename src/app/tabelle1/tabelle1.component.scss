@@ -5,16 +5,19 @@
   margin-top: 0;
   background-color: whitesmoke;
   min-height: 750px;
+
   .content {
     //border: 1px gray solid;
     margin: 10px;
     min-height: 650px;
+
     .content-title {
       height: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       .title {
         h2 {
           margin: 0;
@@ -26,6 +29,7 @@
     .content-header {
       background-color: lightgray;
     }
+
     .content-content {
       //overflow: scroll;
       min-height: 500px;
@@ -34,6 +38,7 @@
         background-color: lightgrey;
       }
     }
+
     mat-icon {
       cursor: pointer;
       font-size: 20px;
@@ -46,11 +51,13 @@
     //border: 2px grey solid;
   }
 }
+
 @media (min-width: 800px) and (max-width: 1024px) {
   .container {
     //border: 2px red solid;
   }
 }
+
 @media (max-width: 799px) {
   .container {
     //border: 2px red solid;

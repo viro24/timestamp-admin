@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-treetable-header',
@@ -6,7 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./treetable-header.component.scss'],
 })
 export class TreetableHeaderComponent implements OnInit {
-  constructor() {}
   @Input() colOpt;
   @Input() titleH;
   @Output() addColumn: EventEmitter<any> = new EventEmitter<any>();
@@ -17,6 +16,9 @@ export class TreetableHeaderComponent implements OnInit {
   col = [];
   searched = '';
   checked = [];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.reset();

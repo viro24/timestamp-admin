@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-navi',
@@ -7,11 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navi.component.scss'],
 })
 export class NaviComponent implements OnInit {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
-
   tableNumber: string;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
+
   ngOnInit(): void {
-    //this.tableNumber = 1;
+    // this.tableNumber = 1;
 
     this.tableNumber = this.activatedRoute.snapshot.url[0].path;
     console.log(this.tableNumber);
@@ -24,6 +26,8 @@ export class NaviComponent implements OnInit {
       this.router.navigateByUrl('/overview');
     } else if (tabelleNummer === 5) {
       this.router.navigateByUrl('/overview-1');
+    } else if (tabelleNummer === 6) {
+      this.router.navigate(['hallo']);
     }
   }
 }

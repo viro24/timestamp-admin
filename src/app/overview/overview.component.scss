@@ -5,15 +5,18 @@
   margin-top: 0;
   background-color: whitesmoke;
   min-height: 750px;
+
   .content {
     margin: 10px;
     min-height: 650px;
+
     .content-title {
       height: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       .title {
         h2 {
           margin: 0;
@@ -25,18 +28,22 @@
     .content-header {
       background-color: lightgray;
     }
+
     .content-content {
       .center {
         text-align: center;
       }
+
       .arrow {
         .spacer-book {
           margin-left: 15px;
         }
+
         .spacer-break {
           margin-left: 38px;
         }
       }
+
       .mat-icon {
         font-size: 20px;
         cursor: pointer;

@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BreakService {
   url = '/api/breakings/';
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   deleteBreakByBreakId(breakId: number): any {
     return this.http.delete(this.url + breakId);

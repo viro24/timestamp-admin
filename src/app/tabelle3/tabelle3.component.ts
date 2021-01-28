@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { EmployeeService } from '../service/employee.service';
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { TabelleEmployee } from './tabelleEmployee';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {EmployeeService} from '../service/employee.service';
+import {DialogErrorComponent} from '../dialog-error/dialog-error.component';
+import {TabelleEmployee} from './tabelleEmployee';
 
 @Component({
   selector: 'app-tabelle3',
@@ -11,17 +10,13 @@ import { TabelleEmployee } from './tabelleEmployee';
   styleUrls: ['./tabelle3.component.scss'],
 })
 export class Tabelle3Component implements OnInit {
-  constructor(
-    private employeeService: EmployeeService,
-    private dialog: MatDialog
-  ) {}
   showRange = false;
-  listSelectedEmployees = []; //list aller ausgewählten Mitarbeiter
-  employees; //list aller Mitarbeiter
+  listSelectedEmployees = []; // list aller ausgewählten Mitarbeiter
+  employees; // list aller Mitarbeiter
   dateStart;
   dateEnd;
-  year: string = '2020';
-  gruppe: number = 0;
+  year = '2020';
+  gruppe = 0;
   displayColumns: string[] = [
     'name',
     'bruto-arbeitstage',
@@ -33,9 +28,15 @@ export class Tabelle3Component implements OnInit {
     'gesammelte-ueberstunden',
   ];
   specialDay;
-  listDataSource: TabelleEmployee[]; //datasource aller ausgewählten Mitarbeiter
-  range: number = -1;
-  message: string = 'Auswertung für den Zeitraum ';
+  listDataSource: TabelleEmployee[]; // datasource aller ausgewählten Mitarbeiter
+  range = -1;
+  message = 'Auswertung für den Zeitraum ';
+
+  constructor(
+    private employeeService: EmployeeService,
+    private dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -69,11 +70,13 @@ export class Tabelle3Component implements OnInit {
     ) {
       this.showRange = false;
       let msg = '';
-      if (this.listSelectedEmployees.length === 0)
+      if (this.listSelectedEmployees.length === 0) {
         msg = 'Es sind keine Mitarbeiter ausgewählt';
-      else if (this.range === -1)
+      } else if (this.range === -1) {
         msg = 'Zeitraum ist nicht korrekt eingetragen';
-      else if (this.dateEnd === undefined) msg = 'Datum ist nicht ausgewählt';
+      } else if (this.dateEnd === undefined) {
+        msg = 'Datum ist nicht ausgewählt';
+      }
       this.dialog.open(DialogErrorComponent, {
         height: '300px',
         width: '400px',
@@ -83,7 +86,7 @@ export class Tabelle3Component implements OnInit {
         },
       });
     }
-    //if datum fehlt
+    // if datum fehlt
     else {
       this.showRange = true;
       this.dateStart = this.employeeService.getStartDate(
@@ -226,7 +229,7 @@ export class Tabelle3Component implements OnInit {
                   dataHC.effectiveBreakHours
                 ),
                 (data.bruttoAT = dataHC.grossWorkingDays),
-                (data.sollAZ = dataHC.targetGrossWorkingHours), //oder targetWorkingHours?
+                (data.sollAZ = dataHC.targetGrossWorkingHours), // oder targetWorkingHours?
                 (data.istAZ = dataHC.actualWorkingHours),
                 (data.sollPause = dataHC.legallyRequiredBreakHours),
                 (data.istPause = dataHC.effectiveBreakHours);

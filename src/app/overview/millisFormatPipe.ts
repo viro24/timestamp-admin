@@ -1,9 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
+
 /**
  * transform a millisecond format
  * to HH:mm format
  */
-@Pipe({ name: 'millisFormat' })
+@Pipe({name: 'millisFormat'})
 export class MillisFormatPipe implements PipeTransform {
   transform(date: string): string {
     if (date === null) {
@@ -29,6 +30,7 @@ export class MillisFormatPipe implements PipeTransform {
     }
   }
 }
+
 // @Pipe({ name: 'exponentialStrength' })
 // export class ExponentialStrength implements PipeTransform {
 //   transform(value: number): number {

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../service/employee.service';
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { MatDialog } from '@angular/material/dialog';
-import { BookComplete } from './bookingMock';
-import { BookingService } from '../service/booking.service';
-import { BreakService } from '../service/break.service';
-import bookingMock, { Book } from '../tabelle1/bookingMock';
+import {Component, OnInit} from '@angular/core';
+import {EmployeeService} from '../service/employee.service';
+import {DialogErrorComponent} from '../dialog-error/dialog-error.component';
+import {MatDialog} from '@angular/material/dialog';
+import {BookComplete} from './bookingMock';
+import {BookingService} from '../service/booking.service';
+import {BreakService} from '../service/break.service';
 
 @Component({
   selector: 'app-tabelle1',
@@ -13,10 +12,10 @@ import bookingMock, { Book } from '../tabelle1/bookingMock';
   styleUrls: ['./tabelle1.component.scss'],
 })
 export class Tabelle1Component implements OnInit {
-  employees: any[]; //Die Liste der Mitarbeiter zum Auswählen
-  currentEmployeeId; //der ausgewählte Mitarbeiter --> wird eingegeben
-  dateStart; //der ausgewählte Start(datum) --> wird eingegeben
-  dateEnd; //der ausgewählte End(datum) --> wird eingegeben
+  employees: any[]; // Die Liste der Mitarbeiter zum Auswählen
+  currentEmployeeId; // der ausgewählte Mitarbeiter --> wird eingegeben
+  dateStart; // der ausgewählte Start(datum) --> wird eingegeben
+  dateEnd; // der ausgewählte End(datum) --> wird eingegeben
   dateStartDisplay;
   dateEndDisplay;
   showRange = false;
@@ -33,18 +32,19 @@ export class Tabelle1Component implements OnInit {
     'overtime',
   ];
 
-  bookingData; //die direkte Liste aus Backend
-  listComplete: BookComplete[]; //die komplette, flache liste des Tages bzw. der Buchung bzw. der Pausen
-  listDisplay: BookComplete[]; //die anzuzeigende Liste
-  inputStart = null; //binding to edit start time
-  inputEnd = null; //binding to edit end time
+  bookingData; // die direkte Liste aus Backend
+  listComplete: BookComplete[]; // die komplette, flache liste des Tages bzw. der Buchung bzw. der Pausen
+  listDisplay: BookComplete[]; // die anzuzeigende Liste
+  inputStart = null; // binding to edit start time
+  inputEnd = null; // binding to edit end time
 
   constructor(
     private employeeService: EmployeeService,
     public dialog: MatDialog,
     private bookingService: BookingService,
     private breakService: BreakService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -131,7 +131,7 @@ export class Tabelle1Component implements OnInit {
         editable: false,
       };
       this.listComplete.push(dataDay);
-      //dataDay.datum = day.dateOfDetails;
+      // dataDay.datum = day.dateOfDetails;
       dataDay.type = 'day';
       dataDay.start = day.completePeriod.start;
       dataDay.end = day.completePeriod.end;
@@ -314,12 +314,12 @@ export class Tabelle1Component implements OnInit {
 
   updateBookingDataAfterDeleteBook(id: number): void {
     const deletedItem = this.listComplete[id];
-    //filter the book, and all the pause inside it
+    // filter the book, and all the pause inside it
     const temp = this.listDisplay.filter(
       (e) => e.tag !== deletedItem.tag || e.buchung !== deletedItem.buchung
     );
     console.log(temp);
-    //this.listDisplay = temp;
+    // this.listDisplay = temp;
     this.employeeService
       .getBookingbyId(this.currentEmployeeId, this.dateStart, this.dateEnd)
       .subscribe(
@@ -405,19 +405,27 @@ export class Tabelle1Component implements OnInit {
 
   handleClick(id: number): void {
     this.setEditableFalse();
-    let selected = this.listComplete[id];
+    const selected = this.listComplete[id];
     if (selected.type === 'day') {
       console.log('day', this.isOpen(id));
       if (this.isOpen(id)) {
         console.log('day is open, lets close');
         this.closeDay(id);
-      } else this.openDay(id);
+      } else {
+        this.openDay(id);
+      }
     } else if (selected.type === 'book') {
       console.log('book', this.isOpen(id));
-      if (this.isOpen(id)) this.closeBook(id);
-      else this.openBook(id);
-    } else console.log('pause');
+      if (this.isOpen(id)) {
+        this.closeBook(id);
+      } else {
+        this.openBook(id);
+      }
+    } else {
+      console.log('pause');
+    }
   }
+
   /**TREETABLE :
    *
    * the next 4 methods are used to
@@ -584,7 +592,7 @@ export class Tabelle1Component implements OnInit {
           (error) => console.log('Error deleting booking ', error.status)
         );
     } else {
-      //selectedItem from type break
+      // selectedItem from type break
       console.log(selectedItem.breakID);
       this.breakService.deleteBreakByBreakId(selectedItem.breakID).subscribe(
         (data) => {

@@ -4,12 +4,12 @@
     <div class="content-title">
       <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
       ><span
-        class="substitle"
-        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
-        *ngIf="this.dateStartDisplay && this.dateEndDisplay"
-        >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
-        {{ this.dateEndDisplay | date: "shortDate" }}</span
-      >
+      *ngIf="this.dateStartDisplay && this.dateEndDisplay"
+      [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+      class="substitle"
+    >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
+      {{ this.dateEndDisplay | date: "shortDate" }}</span
+    >
     </div>
     <div class="content-header">
       <mat-form-field class="name">
@@ -25,16 +25,16 @@
         <mat-label>Zeitraum auswählen</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input
+            [(ngModel)]="dateStart"
             matStartDate
             placeholder="Start date"
-            [(ngModel)]="dateStart"
           />
-          <input matEndDate placeholder="End date" [(ngModel)]="dateEnd" />
+          <input [(ngModel)]="dateEnd" matEndDate placeholder="End date"/>
         </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button mat-raised-button (click)="handleClickFilter()">Filter</button>
+      <button (click)="handleClickFilter()" mat-raised-button>Filter</button>
     </div>
     <div class="content-content">
       <app-treetable

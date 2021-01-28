@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TreeNode } from './treetable-functions';
+import {Component, Input, OnInit} from '@angular/core';
+import {TreeNode} from './treetable-functions';
+
 @Component({
   selector: 'app-treetable',
   templateUrl: './treetable.component.html',
@@ -20,7 +21,8 @@ export class TreetableComponent implements OnInit {
   found = [];
   editable: boolean[] = [];
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.displayedColumns.forEach((col) => this.spalten.push(col));
@@ -85,7 +87,7 @@ export class TreetableComponent implements OnInit {
    * auf- oder zugeklappt.
    */
   handleClick(item): void {
-    //if (item.type !== this.maxType) {
+    // if (item.type !== this.maxType) {
     if (this.hasChild(item)) {
       if (this.isOpen(item)) {
         this.closeTag(item);
@@ -96,7 +98,7 @@ export class TreetableComponent implements OnInit {
       const index = this.flatList.indexOf(item);
       this.open[index] = !this.open[index];
     }
-    //}
+    // }
   }
 
   /**Aufklappen eines Items in der Tabelle */
@@ -114,7 +116,7 @@ export class TreetableComponent implements OnInit {
 
   getIndexForAdd(item): number {
     let index;
-    let type = item.type;
+    const type = item.type;
     for (
       let i = this.displayList.indexOf(item) + 1;
       i < this.displayList.length;
@@ -183,8 +185,8 @@ export class TreetableComponent implements OnInit {
     if (!this.hasChild(item)) {
       return this.open[this.flatList.indexOf(item)];
     } else {
-      let indexDisplay = this.displayList.findIndex((e) => e === item);
-      let indexFlat = this.flatList.findIndex((e) => e === item);
+      const indexDisplay = this.displayList.findIndex((e) => e === item);
+      const indexFlat = this.flatList.findIndex((e) => e === item);
       if (indexDisplay === this.displayList.length - 1) {
         return false;
       } else {
@@ -206,25 +208,25 @@ export class TreetableComponent implements OnInit {
   filter($event) {
     this.editable = [];
     this.displayList.forEach((e) => this.editable.push(false));
-    let pattern = $event.trim().toLocaleLowerCase();
+    const pattern = $event.trim().toLocaleLowerCase();
     console.log('pattern', pattern);
-    let index = [];
-    let filtered = this.filterList.filter((item) => item.includes(pattern));
+    const index = [];
+    const filtered = this.filterList.filter((item) => item.includes(pattern));
     filtered.forEach((item) => index.push(this.filterList.indexOf(item)));
     console.log('index :', index);
     console.log('filtered :', filtered);
     this.displayList = [];
     index.forEach((i) => {
-      let temp = this.getAll(this.flatList[i]);
+      const temp = this.getAll(this.flatList[i]);
       temp.forEach((t) => {
         if (!this.displayList.includes(t)) {
           this.displayList.push(t);
         }
       });
     });
-    let highlighted = [];
+    const highlighted = [];
     index.forEach((i) => {
-      let h = this.displayList.indexOf(this.flatList[i]);
+      const h = this.displayList.indexOf(this.flatList[i]);
       highlighted.push(h);
     });
     this.found = highlighted;
@@ -235,7 +237,7 @@ export class TreetableComponent implements OnInit {
   /**alle Items, die sich in obere(n), und auch gleicher Ebene von item aufklappen*/
   getAll(item): TreeNode[] {
     let result: TreeNode[] = [];
-    let index = this.flatList.indexOf(item);
+    const index = this.flatList.indexOf(item);
     for (let i = index; i >= 0; i--) {
       if (this.flatList[i].type === 1) {
         result.push(this.flatList[i]);
@@ -252,8 +254,10 @@ export class TreetableComponent implements OnInit {
       }
     }
     result = result.filter((i) => i.type <= item.type);
-    result.sort(function (a, b) {
-      if (a.type < b.type) return -1;
+    result.sort(function(a, b) {
+      if (a.type < b.type) {
+        return -1;
+      }
     });
     return result;
   }
@@ -278,7 +282,7 @@ export class TreetableComponent implements OnInit {
         }
         s += item.value[0].period.start;
         s += item.value[0].period.end;
-        //substring(11,16)
+        // substring(11,16)
       }
       s = s.trim().toLocaleLowerCase();
       this.filterList.push(s);
@@ -302,7 +306,7 @@ export class TreetableComponent implements OnInit {
 
   /**Spalte löschen */
   minColumn($event): void {
-    let index = this.spalten.indexOf($event);
+    const index = this.spalten.indexOf($event);
     if (index !== -1) {
       this.spalten.splice(index, 1);
     }
@@ -313,5 +317,6 @@ export class TreetableComponent implements OnInit {
     this.spalten = [];
     this.displayedColumns.forEach((col) => this.spalten.push(col));
   }
+
   /**-------------------------------------------------------------- */
 }

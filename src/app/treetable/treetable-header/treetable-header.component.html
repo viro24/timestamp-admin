@@ -4,46 +4,46 @@
     <div class="content-content">
       <span class="search">
         <mat-form-field
+          class="search-content"
           color="primary"
           floatLabel="never"
-          class="search-content"
         >
           <mat-label><span class="search-text">Suchen</span></mat-label>
           <input
-            matInput
-            type="text"
             (keyup)="doFilter($event.target.value)"
             [(ngModel)]="searched"
+            matInput
+            type="text"
           />
         </mat-form-field>
       </span>
       <span class="option"
-        ><mat-icon mat-icon-button (click)="resetSearch()" class="button-menu"
-          >clear</mat-icon
-        ><mat-icon
-          mat-icon-button
-          [matMenuTriggerFor]="menu"
-          class="button-menu"
-          >more_vert</mat-icon
-        >
+      ><mat-icon (click)="resetSearch()" class="button-menu" mat-icon-button
+      >clear</mat-icon
+      ><mat-icon
+        [matMenuTriggerFor]="menu"
+        class="button-menu"
+        mat-icon-button
+      >more_vert</mat-icon
+      >
         <mat-menu #menu="matMenu" class="menu">
-          <button mat-menu-item [matMenuTriggerFor]="spalten">
+          <button [matMenuTriggerFor]="spalten" mat-menu-item>
             Spaltenfilter
           </button>
-          <button mat-menu-item (click)="reset()">Spalten zurücksetzen</button>
+          <button (click)="reset()" mat-menu-item>Spalten zurücksetzen</button>
         </mat-menu>
         <mat-menu #spalten="matMenu">
           <div
-            *ngFor="let c of colOpt; let i = index"
             (click)="$event.stopPropagation()"
+            *ngFor="let c of colOpt; let i = index"
           >
-            <button *ngIf="i !== 0" mat-menu-item #menu1>
+            <button #menu1 *ngIf="i !== 0" mat-menu-item>
               <mat-checkbox
                 #checkbox
-                [checked]="true"
                 (change)="onCheckBoxChanged($event, c)"
                 [(ngModel)]="checked[i]"
-                >{{ c }}</mat-checkbox
+                [checked]="true"
+              >{{ c }}</mat-checkbox
               >
             </button>
           </div>

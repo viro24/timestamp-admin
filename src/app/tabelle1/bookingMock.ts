@@ -1,26 +1,26 @@
 export interface BookComplete {
-  datum: any; //für type 'day' ist dateOfDetails, ansonsten ist "Buchung" oder "Pause"
-  tag: number; //Tagsnummer in der Liste
+  datum: any; // für type 'day' ist dateOfDetails, ansonsten ist "Buchung" oder "Pause"
+  tag: number; // Tagsnummer in der Liste
   buchung: number; // Buchungsnummer an dem dazugehörigen Tag
-  pause: number; //Pausennummer in der dazugehörigen Buchung
-  type: string; //'day', 'book', oder 'break'
+  pause: number; // Pausennummer in der dazugehörigen Buchung
+  type: string; // 'day', 'book', oder 'break'
   start: Date;
   end: Date;
-  id: number; //index in der kompletten Liste
+  id: number; // index in der kompletten Liste
   sollAZ: string;
   istAZ: string;
   sollPause: string;
   istPause: string;
   ueberstunden: string;
   bookID: number; // if type day, bookID=-1, otherwise bookID=bookingId from backend
-  breakID: number; //if type break, breakID= breakId from backend, otherwise -1
+  breakID: number; // if type break, breakID= breakId from backend, otherwise -1
   editable: boolean;
 }
 
 export interface Book {
   dateOfDetails: Date;
   id: number; // index in der kompletten Liste
-  position: Level; //[day, book, break], bsp : [1, 2, 2]
+  position: Level; // [day, book, break], bsp : [1, 2, 2]
   start: Date;
   end: Date;
   editable: boolean;
@@ -41,10 +41,11 @@ export interface Level {
   day: number;
   book: number;
   break: number;
-  //type day/book/break is davon abhängig
+  // type day/book/break is davon abhängig
 }
 
-export interface tree {}
+export interface tree {
+}
 
 export default [
   {

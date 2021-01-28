@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { tree, tree2 } from './treetable/treetable-functions';
+import {Component, OnInit} from '@angular/core';
+import {tree, tree2} from './treetable/treetable-functions';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   tree = tree;
   tree2 = tree2;
   col = ['datum', 'start', 'end'];
+
   ngOnInit() {
     setInterval(() => {
       this.clock = new Date();

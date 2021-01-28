@@ -3,12 +3,15 @@
     text-align: center;
     margin: 10px;
   }
+
   .mat-icon {
     font-size: 20px;
   }
+
   .break-spacer {
     margin-left: 15px;
   }
+
   .center {
     text-align: center;
   }
@@ -17,29 +20,36 @@
     margin: 50px;
     padding: 20px;
     background-color: whitesmoke;
+
     .input-time {
       margin: 20px;
+
       .input-starttime {
         position: relative;
         left: 50px;
       }
+
       .input-endtime {
         position: relative;
         left: 56px;
       }
+
       .starttime {
         position: relative;
         left: 10px;
       }
+
       .endtime {
         position: relative;
         left: 17px;
       }
     }
   }
+
   .action-button {
     display: flex;
     justify-content: flex-end;
+
     .button {
       background-color: #98042a;
       color: white;

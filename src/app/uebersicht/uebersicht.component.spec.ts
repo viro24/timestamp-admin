@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UebersichtComponent } from './uebersicht.component';
+import {UebersichtComponent} from './uebersicht.component';
 
 describe('UebersichtComponent', () => {
   let component: UebersichtComponent;
@@ -8,9 +8,9 @@ describe('UebersichtComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UebersichtComponent ]
+      declarations: [UebersichtComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

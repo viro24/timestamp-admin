@@ -1,19 +1,21 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   url = '/api';
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   logInTerminal(): any {
     const params = new HttpParams()
       .set('username', 'terminal')
       .set('password', '%trmnl%');
 
-    return this.http.post(this.url + '/login', null, { params });
+    return this.http.post(this.url + '/login', null, {params});
   }
 
   logOutTerminal(): any {
@@ -24,6 +26,6 @@ export class AuthService {
     const params = new HttpParams()
       .set('username', name)
       .set('password', password);
-    return this.http.post(this.url + '/login', {}, { params });
+    return this.http.post(this.url + '/login', {}, {params});
   }
 }

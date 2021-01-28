@@ -1,14 +1,15 @@
 <div class="container">
-  <h1 mat-dialog-title class="title">
+  <h1 class="title" mat-dialog-title>
     {{ day.dateOfDetails | date: "fullDate" }}
   </h1>
   <div mat-dialog-content>
     <mat-tab-group>
       <mat-tab label="Übersicht"
-        ><table mat-table [dataSource]="listComplete">
+      >
+        <table [dataSource]="listComplete" mat-table>
           <ng-container matColumnDef="angabe">
-            <th mat-header-cell *matHeaderCellDef>Angabe</th>
-            <td mat-cell *matCellDef="let item">
+            <th *matHeaderCellDef mat-header-cell>Angabe</th>
+            <td *matCellDef="let item" mat-cell>
               <span
                 *ngIf="item.position.break !== 0"
                 class="break-spacer"
@@ -17,37 +18,38 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="start">
-            <th mat-header-cell *matHeaderCellDef class="center">Start</th>
-            <td mat-cell *matCellDef="let item" class="center">
+            <th *matHeaderCellDef class="center" mat-header-cell>Start</th>
+            <td *matCellDef="let item" class="center" mat-cell>
               <span *ngIf="!item.editable">{{
                 item.start | date: "HH:mm"
-              }}</span>
+                }}</span>
               <span *ngIf="item.editable"
-                ><input
-                  type="time"
-                  [(ngModel)]="inputStart"
-                  value="{{ item.start | date: 'HH:mm' }}"
+              ><input
+                [(ngModel)]="inputStart"
+                type="time"
+                value="{{ item.start | date: 'HH:mm' }}"
               /></span>
             </td>
           </ng-container>
           <ng-container matColumnDef="end">
-            <th mat-header-cell *matHeaderCellDef class="center">End</th>
-            <td mat-cell *matCellDef="let item" class="center">
+            <th *matHeaderCellDef class="center" mat-header-cell>End</th>
+            <td *matCellDef="let item" class="center" mat-cell>
               <span *ngIf="!item.editable">{{ item.end | date: "HH:mm" }}</span>
               <span *ngIf="item.editable"
-                ><input
-                  type="time"
-                  [(ngModel)]="inputEnd"
-                  value="{{ item.end | date: 'HH:mm' }}"
+              ><input
+                [(ngModel)]="inputEnd"
+                type="time"
+                value="{{ item.end | date: 'HH:mm' }}"
               /></span>
             </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="column"></tr>
-          <tr mat-row *matRowDef="let row; columns: column"></tr>
+          <tr *matHeaderRowDef="column" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: column" mat-row></tr>
         </table>
         <div class="action-button">
-          <button mat-button class="button" mat-dialog-close>Abbrechen</button>
-        </div></mat-tab
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
+        </div>
+      </mat-tab
       >
 
       <mat-tab
@@ -60,22 +62,22 @@
           <div class="input-time">
             Startzeit der hinzuzufügenden Buchung :
             <input
+              [(ngModel)]="inputStart"
               class="input-starttime"
               mat-input
-              type="time"
-              [(ngModel)]="inputStart"
               size="5"
+              type="time"
               value="{{ inputStart }}"
             />
           </div>
           <div class="input-time">
             Endzeit der hinzuzufügenden Buchung :
             <input
+              [(ngModel)]="inputEnd"
               class="input-endtime"
               mat-input
-              type="time"
-              [(ngModel)]="inputEnd"
               size="5"
+              type="time"
               value="{{ inputEnd }}"
             />
           </div>
@@ -91,9 +93,11 @@
           </div>
         </div>
         <div class="action-button">
-          <button mat-button class="button" (click)="addBooking()">
-            Buchung hinzufügen</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="addBooking()" class="button" mat-button>
+            Buchung hinzufügen
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
       <mat-tab
@@ -106,30 +110,32 @@
           <div class="input-time">
             Startzeit der zu bearbeitenden Buchung :
             <input
+              [(ngModel)]="inputStart"
               class="input-starttime"
               mat-input
-              type="time"
-              [(ngModel)]="inputStart"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
           <div class="input-time">
             Endzeit der zu bearbeitenden Buchung :
             <input
+              [(ngModel)]="inputEnd"
               class="input-endtime"
               mat-input
-              type="time"
-              [(ngModel)]="inputEnd"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
         </div>
         <div class="action-button">
-          <button mat-button class="button" (click)="editItem()">
-            Buchung bearbeiten</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="editItem()" class="button" mat-button>
+            Buchung bearbeiten
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
       <mat-tab
@@ -154,9 +160,11 @@
         </div>
 
         <div class="action-button">
-          <button mat-button class="button" (click)="deleteItem()">
-            Buchung löschen</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="deleteItem()" class="button" mat-button>
+            Buchung löschen
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
       <mat-tab
@@ -169,30 +177,32 @@
           <div class="input-time">
             Startzeit der hinzuzufügenden Pause :
             <input
+              [(ngModel)]="inputStart"
               class="input-starttime"
               mat-input
-              type="time"
-              [(ngModel)]="inputStart"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
           <div class="input-time">
             Endzeit der hinzuzufügenden Pause :
             <input
+              [(ngModel)]="inputEnd"
               class="input-endtime"
               mat-input
-              type="time"
-              [(ngModel)]="inputEnd"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
         </div>
         <div class="action-button">
-          <button mat-button class="button" (click)="addBooking()">
-            Pause hinzufügen</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="addBooking()" class="button" mat-button>
+            Pause hinzufügen
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
       <mat-tab
@@ -203,30 +213,32 @@
           <div class="input-time">
             Startzeit der zu bearbeitenden Pause :
             <input
+              [(ngModel)]="inputStart"
               class="input-starttime"
               mat-input
-              type="time"
-              [(ngModel)]="inputStart"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
           <div class="input-time">
             Endzeit der zu bearbeitenden Pause :
             <input
+              [(ngModel)]="inputEnd"
               class="input-endtime"
               mat-input
-              type="time"
-              [(ngModel)]="inputEnd"
               size="5"
+              type="time"
               value="{{ selectedItem.start | date: 'HH:mm' }}"
             />
           </div>
         </div>
         <div class="action-button">
-          <button mat-button class="button" (click)="editItem()">
-            Pause bearbeiten</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="editItem()" class="button" mat-button>
+            Pause bearbeiten
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
       <mat-tab *ngIf="selectedItem.position.break !== 0" label="Pause Löschen">
@@ -246,9 +258,11 @@
         </div>
 
         <div class="action-button">
-          <button mat-button class="button" (click)="deleteItem()">
-            Pause löschen</button
-          ><button mat-button class="button" mat-dialog-close>Abbrechen</button>
+          <button (click)="deleteItem()" class="button" mat-button>
+            Pause löschen
+          </button
+          >
+          <button class="button" mat-button mat-dialog-close>Abbrechen</button>
         </div>
       </mat-tab>
     </mat-tab-group>

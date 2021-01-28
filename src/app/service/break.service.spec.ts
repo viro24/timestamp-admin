@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BreakService } from './break.service';
+import {BreakService} from './break.service';
 
 describe('BreakService', () => {
   let service: BreakService;

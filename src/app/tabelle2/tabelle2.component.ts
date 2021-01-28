@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { EmployeeService } from '../service/employee.service';
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { Router } from '@angular/router';
-import { Tabelle2Employee } from './tabelle2Employee';
-import { sharedStylesheetJitUrl } from '@angular/compiler';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {EmployeeService} from '../service/employee.service';
+import {DialogErrorComponent} from '../dialog-error/dialog-error.component';
+import {Tabelle2Employee} from './tabelle2Employee';
 
 @Component({
   selector: 'app-tabelle2',
@@ -12,21 +10,17 @@ import { sharedStylesheetJitUrl } from '@angular/compiler';
   styleUrls: ['./tabelle2.component.scss'],
 })
 export class Tabelle2Component implements OnInit {
-  employees; //Liste der Mitarbeiter
-  modelEmployee = []; //ausgewählte Mitarbeiter
-  selectedEmployee = []; //gezeigte Mitarbeiter
-  modelYear: string = '2020'; //ausgewähltes Jahr
-  year: string; //gezeigtes Jahr
+  employees; // Liste der Mitarbeiter
+  modelEmployee = []; // ausgewählte Mitarbeiter
+  selectedEmployee = []; // gezeigte Mitarbeiter
+  modelYear = '2020'; // ausgewähltes Jahr
+  year: string; // gezeigtes Jahr
   overtimes;
   illnessesDays;
   remainingVacations;
   specialDays;
   showRange = false;
   dataSource: Tabelle2Employee[];
-  constructor(
-    private employeeService: EmployeeService,
-    public dialog: MatDialog
-  ) {}
   columnsToDisplay: string[] = [
     'name',
     'overtime',
@@ -34,6 +28,12 @@ export class Tabelle2Component implements OnInit {
     'vacation',
     'specialdays',
   ];
+
+  constructor(
+    private employeeService: EmployeeService,
+    public dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -94,7 +94,7 @@ export class Tabelle2Component implements OnInit {
     this.selectedEmployee = this.modelEmployee;
     this.year = this.modelYear;
     this.selectedEmployee.forEach((e) => {
-      var data: Tabelle2Employee;
+      let data: Tabelle2Employee;
 
       data = {
         name: e.firstName + ' ' + e.lastName,

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
   handleClickLogout(): void {
     this.router.navigateByUrl('/');
   }

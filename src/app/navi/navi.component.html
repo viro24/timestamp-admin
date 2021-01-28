@@ -1,77 +1,85 @@
 <div class="navigation">
   <button
-    mat-raised-button
-    *ngIf="tableNumber !== 'tabelle-1'"
     (click)="handleClickNavi(1)"
+    *ngIf="tableNumber !== 'tabelle-1'"
+    mat-raised-button
   >
     Übersichtstabelle
   </button>
   <button
-    class="disabled"
-    mat-raised-button
     *ngIf="tableNumber === 'tabelle-1'"
+    class="disabled"
     disabled
+    mat-raised-button
   >
     Übersichtstabelle
   </button>
   <button
-    mat-raised-button
-    *ngIf="tableNumber !== 'overview'"
     (click)="handleClickNavi(4)"
+    *ngIf="tableNumber !== 'overview'"
+    mat-raised-button
   >
     Übersichtstabelle1
   </button>
   <button
-    class="disabled"
-    mat-raised-button
     *ngIf="tableNumber === 'overview'"
+    class="disabled"
     disabled
+    mat-raised-button
   >
     Übersichtstabelle1
   </button>
   <button
-    mat-raised-button
-    *ngIf="tableNumber !== 'overview-1'"
     (click)="handleClickNavi(5)"
+    *ngIf="tableNumber !== 'overview-1'"
+    mat-raised-button
   >
     Neu
   </button>
   <button
-    class="disabled"
-    mat-raised-button
     *ngIf="tableNumber === 'overview-1'"
+    class="disabled"
     disabled
+    mat-raised-button
   >
     Neu
   </button>
   <button
-    mat-raised-button
-    *ngIf="tableNumber !== 'tabelle-2'"
     (click)="handleClickNavi(2)"
+    *ngIf="tableNumber !== 'tabelle-2'"
+    mat-raised-button
   >
     Kontenübersicht
   </button>
   <button
-    class="disabled"
-    mat-raised-button
     *ngIf="tableNumber === 'tabelle-2'"
+    class="disabled"
     disabled
+    mat-raised-button
   >
     Kontenübersicht
   </button>
   <button
-    mat-raised-button
-    *ngIf="tableNumber !== 'tabelle-3'"
     (click)="handleClickNavi(3)"
+    *ngIf="tableNumber !== 'tabelle-3'"
+    mat-raised-button
   >
     Tabellen basierte Auswertung
   </button>
   <button
-    class="disabled"
-    mat-raised-button
     *ngIf="tableNumber === 'tabelle-3'"
+    class="disabled"
     disabled
+    mat-raised-button
   >
     Tabellen basierte Auswertung
+  </button>
+  <button
+    (click)="handleClickNavi(6)"
+    [disabled]="tableNumber === 'hallo'"
+    [ngClass]="tableNumber === 'hallo' ? 'disabled' : ''"
+    mat-raised-button
+  >
+    TreeTableÜbersicht
   </button>
 </div>

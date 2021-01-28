@@ -14,27 +14,28 @@
       </mat-form-field>
       <mat-form-field class="password">
         <input
-          matInput
+          (keydown.enter)="handleClickLogin()"
           [(ngModel)]="inputPassword"
+          matInput
           placeholder="Kennwort eingeben"
           type="password"
         />
       </mat-form-field>
       <button
-        mat-raised-button
-        class="button"
-        *ngIf="!buttonDisabled"
         (click)="handleClickLogin()"
+        *ngIf="!buttonDisabled"
+        class="button"
+        mat-raised-button
       >
         Anmelden
       </button>
-      <button mat-button class="button" *ngIf="buttonDisabled" disabled>
+      <button *ngIf="buttonDisabled" class="button" disabled mat-button>
         Anmelden
       </button>
       <span
-        class="errorMessage"
         [style]="{ visibility: errorPassword === true ? 'visible' : 'hidden' }"
-        >{{ message }}</span
+        class="errorMessage"
+      >{{ message }}</span
       >
     </div>
   </div>

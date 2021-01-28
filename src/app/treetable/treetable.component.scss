@@ -1,12 +1,13 @@
-.icon{
-    cursor: pointer;
+.icon {
+  cursor: pointer;
 }
+
 @for $type from 1 through 10 {
-.spacer-#{$type}{
-    margin-left:$type * 20px - 20px;
-}
+  .spacer-#{$type} {
+    margin-left: $type * 20px - 20px;
+  }
 }
 
 .highlighted {
-    background-color: rgb(235, 235, 235);
+  background-color: rgb(235, 235, 235);
 }

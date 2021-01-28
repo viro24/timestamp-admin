@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { BookingService } from '../service/booking.service';
-import { Book } from '../tabelle1/bookingMock';
-import { getISODate } from '../overview/functionOverview';
-import { BreakService } from '../service/break.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {BookingService} from '../service/booking.service';
+import {Book} from '../tabelle1/bookingMock';
+import {getISODate} from '../overview/functionOverview';
+import {BreakService} from '../service/break.service';
 
 @Component({
   selector: 'app-dialog-edit',
@@ -17,7 +17,7 @@ export class DialogEditComponent implements OnInit {
   );
   day = this.data.list.find(
     (e) => e.position.book === 0 && e.position.break === 0
-  ); //der dazugehörige Tag der aktuellen Buchung(/Pause/Tag)
+  ); // der dazugehörige Tag der aktuellen Buchung(/Pause/Tag)
   inputStart: string;
   inputEnd: string;
   inputLocation = 'OFFICE';
@@ -33,9 +33,11 @@ export class DialogEditComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogEditComponent>,
     private bookingService: BookingService,
     private breakService: BreakService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   getTitle(book: Book): string {
     if (book.position.break === 0) {
@@ -46,13 +48,13 @@ export class DialogEditComponent implements OnInit {
   }
 
   addBooking(): void {
-    let bookingStart = getISODate(this.day.dateOfDetails, this.inputStart);
-    let bookingEnd = getISODate(this.day.dateOfDetails, this.inputEnd);
+    const bookingStart = getISODate(this.day.dateOfDetails, this.inputStart);
+    const bookingEnd = getISODate(this.day.dateOfDetails, this.inputEnd);
     if (
       this.selectedItem.position.break === 0 &&
       this.selectedItem.position.book === 0
     ) {
-      //add Buchung
+      // add Buchung
       this.bookingService
         .addBooking(
           this.employeeId,
@@ -73,7 +75,7 @@ export class DialogEditComponent implements OnInit {
       this.selectedItem.position.book !== 0 &&
       this.selectedItem.position.break === 0
     ) {
-      //add Pause
+      // add Pause
       this.breakService
         .addBreak(this.selectedItem.info.bookID, bookingStart, bookingEnd)
         .subscribe(
@@ -93,8 +95,8 @@ export class DialogEditComponent implements OnInit {
       this.selectedItem.position.book !== 0 &&
       this.selectedItem.position.break === 0
     ) {
-      //delete book
-      let bookId = this.selectedItem.info.bookID;
+      // delete book
+      const bookId = this.selectedItem.info.bookID;
       this.bookingService.deleteBookingByBookingId(bookId).subscribe(
         (data) => {
           console.log('Delete book succeed');
@@ -108,8 +110,8 @@ export class DialogEditComponent implements OnInit {
       this.selectedItem.position.book !== 0 &&
       this.selectedItem.position.break !== 0
     ) {
-      //delete break
-      let breakId = this.selectedItem.info.breakID;
+      // delete break
+      const breakId = this.selectedItem.info.breakID;
       this.breakService.deleteBreakByBreakId(breakId).subscribe(
         (data) => {
           console.log('Delete break succeed');
@@ -123,14 +125,14 @@ export class DialogEditComponent implements OnInit {
   }
 
   editItem(): void {
-    let bookingStart = getISODate(this.day.dateOfDetails, this.inputStart);
-    let bookingEnd = getISODate(this.day.dateOfDetails, this.inputEnd);
+    const bookingStart = getISODate(this.day.dateOfDetails, this.inputStart);
+    const bookingEnd = getISODate(this.day.dateOfDetails, this.inputEnd);
     if (
       this.selectedItem.position.book !== 0 &&
       this.selectedItem.position.break === 0
     ) {
-      //edit book
-      let bookId = this.selectedItem.info.bookID;
+      // edit book
+      const bookId = this.selectedItem.info.bookID;
       this.bookingService
         .editBookingByBookingId(
           bookId,
@@ -152,8 +154,8 @@ export class DialogEditComponent implements OnInit {
       this.selectedItem.position.book !== 0 &&
       this.selectedItem.position.break !== 0
     ) {
-      //edit break
-      let breakId = this.selectedItem.info.breakID;
+      // edit break
+      const breakId = this.selectedItem.info.breakID;
       this.breakService
         .editBreakByBreakId(breakId, bookingStart, bookingEnd)
         .subscribe(

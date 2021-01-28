@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogErrorComponent } from './dialog-error.component';
+import {DialogErrorComponent} from './dialog-error.component';
 
 describe('DialogErrorComponent', () => {
   let component: DialogErrorComponent;
@@ -8,9 +8,9 @@ describe('DialogErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogErrorComponent ]
+      declarations: [DialogErrorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

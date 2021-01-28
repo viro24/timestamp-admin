@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
-import { EmployeeService } from '../service/employee.service';
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
-import bookingMock, { Book } from '../tabelle1/bookingMock';
-import { BookingService } from '../service/booking.service';
-import { BreakService } from '../service/break.service';
-import { getListOfDate } from '../overview/functionOverview';
+import {EmployeeService} from '../service/employee.service';
+import {DialogErrorComponent} from '../dialog-error/dialog-error.component';
+import {DialogEditComponent} from '../dialog-edit/dialog-edit.component';
+import {Book} from '../tabelle1/bookingMock';
+import {BookingService} from '../service/booking.service';
+import {BreakService} from '../service/break.service';
+import {getListOfDate} from '../overview/functionOverview';
 
 @Component({
   selector: 'app-overview1',
@@ -51,7 +51,8 @@ export class Overview1Component implements OnInit {
     public dialog: MatDialog,
     private bookingService: BookingService,
     private breakService: BreakService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -116,9 +117,9 @@ export class Overview1Component implements OnInit {
         (e) => this.getType(e.id) === 1
       );
     } else {
-      let oldDisplay = this.listDisplay;
+      const oldDisplay = this.listDisplay;
       this.afterDialog = false;
-      //TODO : filter setelah dari tutup dialog
+      // TODO : filter setelah dari tutup dialog
     }
   }
 
@@ -167,16 +168,16 @@ export class Overview1Component implements OnInit {
       const bookingDay = this.bookingData.find(
         (b) =>
           parseInt(b.dateOfDetails.substring(0, 4), 10) ===
-            date.getFullYear() &&
+          date.getFullYear() &&
           parseInt(b.dateOfDetails.substring(5, 7), 10) ===
-            date.getMonth() + 1 &&
+          date.getMonth() + 1 &&
           parseInt(b.dateOfDetails.substring(8, 10), 10) === date.getDate()
       );
       console.log('bookingDay: ', bookingDay);
       const dataDay: Book = {
         dateOfDetails: date,
         id: index + 1,
-        position: { day: -1, book: 0, break: 0 },
+        position: {day: -1, book: 0, break: 0},
         start: null,
         end: null,
         editable: false,
@@ -208,7 +209,7 @@ export class Overview1Component implements OnInit {
             const dataBook: Book = {
               dateOfDetails: date,
               id: index + 1,
-              position: { day: indexDay + 1, book: indexBook + 1, break: 0 },
+              position: {day: indexDay + 1, book: indexBook + 1, break: 0},
               start: book.period.start,
               end: book.period.end,
               editable: false,
@@ -275,7 +276,7 @@ export class Overview1Component implements OnInit {
       dataDay = {
         dateOfDetails: data.dateOfDetails,
         id: itemID + 1,
-        position: { day: index + 1, book: 0, break: 0 },
+        position: {day: index + 1, book: 0, break: 0},
         start: data.completePeriod.start,
         end: data.completePeriod.end,
         editable: false,
@@ -458,16 +459,16 @@ export class Overview1Component implements OnInit {
     this.afterDialog = true;
     const selectedItem = this.listComplete[id];
     if (selectedItem.position.day === -1) {
-      //open dialog to add book
+      // open dialog to add book
     } else {
-      let dayItems = this.getAllItemInDay(id);
+      const dayItems = this.getAllItemInDay(id);
       this.dialog
         .open(DialogEditComponent, {
           height: '55%',
           width: '50%',
           data: {
             list: dayItems,
-            selectedItem: selectedItem,
+            selectedItem,
             employeeId: this.currentEmployeeId,
           },
         })

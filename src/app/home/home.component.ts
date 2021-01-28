@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
-import { EmployeeService } from '../service/employee.service';
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { MatDialog } from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../service/auth.service';
+import {EmployeeService} from '../service/employee.service';
+import {DialogErrorComponent} from '../dialog-error/dialog-error.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -20,12 +20,14 @@ export class HomeComponent implements OnInit {
   errorPassword = false;
   buttonDisabled = false;
   message = 'Das eingegebene Kennwort ist nicht korrekt';
+
   constructor(
     private authService: AuthService,
     private employeeService: EmployeeService,
     private router: Router,
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.loginTerminal();
@@ -104,7 +106,7 @@ export class HomeComponent implements OnInit {
           (dataEmployee) => {
             this.currentEmployee = dataEmployee;
             this.errorPassword = false;
-            //this.router.navigateByUrl('/tabelle-1');
+            // this.router.navigateByUrl('/tabelle-1');
             this.router.navigateByUrl('/hallo');
             console.log('login employee succeed');
           },

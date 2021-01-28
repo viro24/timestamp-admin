@@ -4,12 +4,12 @@
     <div class="content-title">
       <span class="title"><h2>Übersichtstabelle mit Korrekturfunktion</h2></span
       ><span
-        class="substitle"
-        [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
-        *ngIf="this.dateStartDisplay && this.dateEndDisplay"
-        >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
-        {{ this.dateEndDisplay | date: "shortDate" }}</span
-      >
+      *ngIf="this.dateStartDisplay && this.dateEndDisplay"
+      [style]="{ visibility: showRange ? 'visible' : 'hidden' }"
+      class="substitle"
+    >für den Zeitraum {{ this.dateStartDisplay | date: "shortDate" }} bis
+      {{ this.dateEndDisplay | date: "shortDate" }}</span
+    >
     </div>
     <div class="content-header">
       <mat-form-field class="name">
@@ -25,84 +25,85 @@
         <mat-label>Zeitraum auswählen</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input
+            [(ngModel)]="dateStart"
             matStartDate
             placeholder="Start date"
-            [(ngModel)]="dateStart"
           />
-          <input matEndDate placeholder="End date" [(ngModel)]="dateEnd" />
+          <input [(ngModel)]="dateEnd" matEndDate placeholder="End date"/>
         </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button mat-raised-button (click)="handleClickFilter()">Filter</button>
+      <button (click)="handleClickFilter()" mat-raised-button>Filter</button>
     </div>
     <div class="content-content">
-      <table mat-table [dataSource]="listDisplay">
+      <table [dataSource]="listDisplay" mat-table>
         <ng-container matColumnDef="datum">
-          <th mat-header-cell *matHeaderCellDef>Angaben</th>
+          <th *matHeaderCellDef mat-header-cell>Angaben</th>
           <td
-            mat-cell
-            *matCellDef="let book"
             (click)="handleClick(book.id)"
+            *matCellDef="let book"
             class="arrow"
+            mat-cell
           >
             <span *ngIf="book.position.book === 0 && book.position.break === 0"
-              ><mat-icon>{{
-                isOpened(book.id)
-                  ? "keyboard_arrow_down"
-                  : "keyboard_arrow_right"
+            ><mat-icon>{{
+              isOpened(book.id)
+                ? "keyboard_arrow_down"
+                : "keyboard_arrow_right"
               }}</mat-icon
-              >{{ book.dateOfDetails | date: "EE" }}
+            >
+              {{ book.dateOfDetails | date: "EE" }}
               {{ book.dateOfDetails | date: "shortDate" }}</span
             >
             <span
               *ngIf="book.position.book !== 0 && book.position.break === 0"
               class="spacer-book"
-              ><mat-icon>{{
-                isOpened(book.id)
-                  ? "keyboard_arrow_down"
-                  : "keyboard_arrow_right"
+            ><mat-icon>{{
+              isOpened(book.id)
+                ? "keyboard_arrow_down"
+                : "keyboard_arrow_right"
               }}</mat-icon
-              >Buchung {{ book.position.book }}</span
+            >Buchung {{ book.position.book }}</span
             >
             <span *ngIf="book.position.break !== 0" class="spacer-break"
-              >Pause {{ book.position.book }}.{{ book.position.break }}</span
+            >Pause {{ book.position.book }}.{{ book.position.break }}</span
             >
           </td>
         </ng-container>
         <ng-container matColumnDef="start">
-          <th mat-header-cell *matHeaderCellDef class="center">Start</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Start</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="!book.editable">{{ book.start | date: "HH:mm" }}</span>
             <span *ngIf="book.editable"
-              ><input
-                mat-input
-                type="time"
-                [(ngModel)]="inputStart"
-                size="5"
-                value="{{ book.start | date: 'HH:mm' }}"
+            ><input
+              [(ngModel)]="inputStart"
+              mat-input
+              size="5"
+              type="time"
+              value="{{ book.start | date: 'HH:mm' }}"
             /></span>
           </td>
         </ng-container>
         <ng-container matColumnDef="end">
-          <th mat-header-cell *matHeaderCellDef class="center">End</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>End</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="!book.editable">{{ book.end | date: "HH:mm" }}</span>
             <span *ngIf="book.editable"
-              ><input
-                mat-input
-                type="time"
-                [(ngModel)]="inputEnd"
-                size="5"
-                value="{{ book.start | date: 'HH:mm' }}"
+            ><input
+              [(ngModel)]="inputEnd"
+              mat-input
+              size="5"
+              type="time"
+              value="{{ book.start | date: 'HH:mm' }}"
             /></span>
           </td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef class="center">Action</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Action</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.position.book === 0 && book.position.break === 0"
-              ><mat-icon>add</mat-icon></span
+            ><mat-icon>add</mat-icon></span
             >
             <span
               *ngIf="
@@ -110,9 +111,9 @@
                 book.position.break === 0 &&
                 !book.editable
               "
-              ><mat-icon (click)="addItem(book.id)">add</mat-icon
-              ><mat-icon (click)="editItem(book.id)">edit</mat-icon
-              ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
+            ><mat-icon (click)="addItem(book.id)">add</mat-icon
+            ><mat-icon (click)="editItem(book.id)">edit</mat-icon
+            ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
             >
             <span
               *ngIf="
@@ -120,7 +121,7 @@
                 book.position.break === 0 &&
                 book.editable
               "
-              ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
+            ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
             >
 
             <span
@@ -129,8 +130,8 @@
                 book.position.break !== 0 &&
                 !book.editable
               "
-              ><mat-icon (click)="editItem(book.id)">edit</mat-icon
-              ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
+            ><mat-icon (click)="editItem(book.id)">edit</mat-icon
+            ><mat-icon (click)="deleteItem(book.id)">delete</mat-icon></span
             >
             <span
               *ngIf="
@@ -138,52 +139,52 @@
                 book.position.break !== 0 &&
                 book.editable
               "
-              ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
+            ><mat-icon (click)="doneEdit(book.id)">done</mat-icon></span
             >
           </td>
         </ng-container>
         <ng-container matColumnDef="istAZ">
-          <th mat-header-cell *matHeaderCellDef class="center">Ist AZ</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Ist AZ</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.info.istAZ">{{
               book.info.istAZ | millisFormat
-            }}</span>
+              }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="sollAZ">
-          <th mat-header-cell *matHeaderCellDef class="center">Soll AZ</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Soll AZ</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.info.sollAZ">
               {{ book.info.sollAZ | millisFormat }}</span
             >
           </td>
         </ng-container>
         <ng-container matColumnDef="istPause">
-          <th mat-header-cell *matHeaderCellDef class="center">Ist Pause</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Ist Pause</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.info.istPause > 0">{{
               book.info.istPause | millisFormat
-            }}</span>
+              }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="sollPause">
-          <th mat-header-cell *matHeaderCellDef class="center">Soll Pause</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Soll Pause</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.info.sollPause">{{
               book.info.sollPause | millisFormat
-            }}</span>
+              }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="overtime">
-          <th mat-header-cell *matHeaderCellDef class="center">Überstunden</th>
-          <td mat-cell *matCellDef="let book" class="center">
+          <th *matHeaderCellDef class="center" mat-header-cell>Überstunden</th>
+          <td *matCellDef="let book" class="center" mat-cell>
             <span *ngIf="book.info.ueberstunden">{{
               book.info.ueberstunden | millisFormat
-            }}</span>
+              }}</span>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let myRowData; columns: displayColumns"></tr>
+        <tr *matHeaderRowDef="displayColumns; sticky: true" mat-header-row></tr>
+        <tr *matRowDef="let myRowData; columns: displayColumns" mat-row></tr>
       </table>
     </div>
   </div>
